@@ -17,6 +17,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from Wander import views
+#from django.views.generic import TemplateView
+
 
 
 urlpatterns = [
@@ -24,4 +26,12 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('login/', views.login, name='login'),
     path('signup/', views.signup, name='signup'),
+    path('about/', views.about, name='about'), 
+    path('service/', views.service, name='service'), 
+    path('appointment/', views.appointment, name='appointment'),
+    path('be_a_guide/', views.be_a_guide, name='be_a_guide'),
+    path('feature/', views.feature, name='feature'),
+    path('testimonial/', views.testimonial, name='testimonial'),
+    path( 'contact/', views.contact, name='contact'),
+    #path('contact.html', TemplateView.as_view(template_name='contact.html'), name='contact'),
 ]

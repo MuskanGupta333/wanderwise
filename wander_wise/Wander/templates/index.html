@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,30 +19,31 @@
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
-        <!-- Libraries Stylesheet -->
-        <link href="/wanderwise/wander_wise/Wander/static/lib/animate/animate.min.css" rel="stylesheet">
-        <link href="/wanderwise/wander_wise/Wander/static/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+       
+    <!-- Libraries Stylesheet -->
+    <link href="{% static 'lib/animate/animate.min.css' %}" rel="stylesheet">
+    <link href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
 
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
 
-        <!-- Customized Bootstrap Stylesheet -->
-        <link href="/wanderwise/wander_wise/Wander/static/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Template Stylesheet -->
+    <link href="../../static/css/style.css" rel="stylesheet">
 
-        <!-- Template Stylesheet -->
-        <link href="/wanderwise/wander_wise/Wander/static/css/style.css" rel="stylesheet">
 
         <style>
             .img-fluid {
                   height:100%;
             }
             .appointment {
-                  background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url(img/bg1.jpg);
+                  background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)),url("{% static 'img/bg1.jpg' %}");
             
                  background-repeat: no-repeat;
                  background-size: cover;
                 background-attachment: fixed;
             }
             .testimonial {
-    background: linear-gradient(rgba(21, 185, 217, 0.9), rgba(21, 185, 217, 0.9)), url(img/bg2.jpg);
+    background: linear-gradient(rgba(21, 185, 217, 0.9), rgba(21, 185, 217, 0.9)), url("{% static 'img/bg2.jpg' %}");
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -92,7 +95,7 @@
         <!-- Navbar & Hero Start -->
         <div class="container-fluid position-relative p-0">
             <nav class="navbar navbar-expand-lg navbar-light bg-white px-4 px-lg-5 py-3 py-lg-0">
-                <a href="index.html" class="navbar-brand p-0">
+                <a href="{%url 'index'%}" class="navbar-brand p-0">
                     <h1 class="text-primary m-0"><i class="fas fa-star-of-life me-3"></i>Wander Wise</h1>
                     <!-- <img src="img/logo.png" alt="Logo"> -->
                 </a>
@@ -101,24 +104,26 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav ms-auto py-0">
-                        <a href="index.html" class="nav-item nav-link active">Home</a>
-                        <a href="about.html" class="nav-item nav-link">About</a>
-                        <a href="service.html" class="nav-item nav-link">Services</a>
+                        <a href="{%url 'index'%}" class="nav-item nav-link active">Home</a>
+                        <a href="{% url 'about' %}" class="nav-item nav-link">About</a>
+                        <a href="{%url 'service'%}" class="nav-item nav-link">Services</a>
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                             <div class="dropdown-menu m-0">
-                                <a href="appointment.html" class="dropdown-item">Book a Guide</a>
-                                <a href="be_a_guide.html" class="dropdown-item">Apply as Guide</a>
-                                <a href="feature.html" class="dropdown-item">Features</a>
-                                <a href="testimonial.html" class="dropdown-item">Testimonial</a>
+                                <a href="{%url 'appointment'%}" class="dropdown-item">Book a Guide</a>
+                                <a href="{%url 'be_a_guide'%}" class="dropdown-item">Apply as Guide</a>
+                                <a href="{%url 'feature'%}" class="dropdown-item">Features</a>
+                                <a href="{%url 'testimonial'%}" class="dropdown-item">Testimonial</a>
                                 
                             </div>
                         </div>
-                        <a href="contact.html" class="nav-item nav-link">Contact Us</a>
+                        <a href="{% url 'contact' %}" class="nav-item nav-link">Contact Us</a>
                     </div>
-                    <a href="Login.html" class="btn btn-primary rounded-pill text-white py-2 px-4 flex-wrap flex-sm-shrink-0">Login </a>
+                 <!---   <a href="Login.html" class="btn btn-primary rounded-pill text-white py-2 px-4 flex-wrap flex-sm-shrink-0">Login </a>-->
+                    <a href="{% url 'login' %}" class="btn btn-primary rounded-pill text-white py-2 px-4 flex-wrap flex-sm-shrink-0">Login</a>
+
                     <p>&ensp;</p>
-                    <a href="Signup.html" class="btn btn-primary rounded-pill text-white py-2 px-4 flex-wrap flex-sm-shrink-0">Signup</a>
+                    <a href="{% url 'signup' %}" class="btn btn-primary rounded-pill text-white py-2 px-4 flex-wrap flex-sm-shrink-0">Signup</a>
                 </div>
             </nav>
 
@@ -126,7 +131,7 @@
             <!-- Carousel Start -->
             <div class="header-carousel owl-carousel">
                 <div class="header-carousel-item">
-                    <img src="/wanderwise/wander_wise/Wander/static/img/barai.jpg" class="img-fluid w-100" alt="Image">
+                    <img src="{% static 'img/barai.jpg' %}" class="img-fluid w-100" alt="Image">
                     <div class="carousel-caption">
                         <div class="carousel-caption-content p-3">
                             <h5 class="text-white text-uppercase fw-bold mb-4" style="letter-spacing: 3px;">Hire a Guide</h5>
@@ -139,7 +144,7 @@
                     </div>
                 </div>
                 <div class="header-carousel-item">
-                    <img src="/wanderwise/wander_wise/Wander/static/img/Chota Imambara.jpg" class="img-fluid w-100" alt="Image">
+                    <img src="{% static 'img/Chota Imambara.jpg' %}" class="img-fluid w-100" alt="Image">
                     <div class="carousel-caption">
                         <div class="carousel-caption-content p-3">
                             <h5 class="text-white text-uppercase fw-bold mb-4" style="letter-spacing: 3px;">Be a Guide</h5>
@@ -161,9 +166,9 @@
                 <div class="row g-5 align-items-center">
                     <div class="col-lg-5 wow fadeInLeft" data-wow-delay="0.2s">
                         <div class="about-img pb-5 ps-5">
-                            <img src="img/barai.jpg" class="img-fluid rounded w-100" style="object-fit: cover;" alt="Image">
+                            <img src="{%static 'img/barai.jpg' %}" class="img-fluid rounded w-100" style="object-fit: cover;" alt="Image">
                             <div class="about-img-inner">
-                                <img src="img/rumi.jpg" class="img-fluid rounded-circle w-100 h-100" alt="Image">
+                                <img src="{%static 'img/rumi.jpg' %}" class="img-fluid rounded-circle w-100 h-100" alt="Image">
                             </div>
                             <div class="about-experience">Gaining experience</div>
                         </div>
@@ -291,7 +296,7 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="video h-100">
-                                        <img src="img/youtube.jpg" class="img-fluid rounded w-100 h-100" style="object-fit: cover;" alt="">
+                                        <img src="{% static 'img/youtube.jpg' %}" class="img-fluid rounded w-100 h-100" style="object-fit: cover;" alt="">
                                         <button type="button" class="btn btn-play" data-bs-toggle="modal" data-src="https://www.youtube.com/watch?v=UCcaPg9p5fQ" data-bs-target="#videoModal">
                                             <span></span>
                                         </button>
@@ -360,7 +365,7 @@
                     <div class="testimonial-item">
                         <div class="testimonial-inner p-5">
                             <div class="testimonial-inner-img mb-4">
-                                <img src="img/cust1.jpg" class="img-fluid rounded-circle" alt="">
+                                <img src="{% static 'img/cust1.jpg' %}" class="img-fluid rounded-circle" alt="">
                             </div>
                             <p class="text-white fs-7">Booking through WanderWise was a game-changer for our trip! Our guide was not only knowledgeable but also incredibly friendly, making our experience unforgettable.
                             </p>
@@ -380,7 +385,7 @@
                     <div class="testimonial-item">
                         <div class="testimonial-inner p-5">
                             <div class="testimonial-inner-img mb-4">
-                                <img src="img/cust2.jpg" class="img-fluid rounded-circle" alt="">
+                                <img src="{% static 'img/cust2.jpg'%}" class="img-fluid rounded-circle" alt="">
                             </div>
                             <p class="text-white fs-7">I can't recommend WanderWise enough! The process was seamless, and our guide went above and beyond to show us hidden gems we would have never discovered on our own.
                             </p>
@@ -400,7 +405,7 @@
                     <div class="testimonial-item">
                         <div class="testimonial-inner p-5">
                             <div class="testimonial-inner-img mb-4">
-                                <img src="img/cust3.jpg" class="img-fluid rounded-circle" alt="">
+                                <img src="{% static 'img/cust3.jpg' %" }class="img-fluid rounded-circle" alt="">
                             </div>
                             <p class="text-white fs-7">Thanks to WanderWise, our family vacation turned into a journey of discovery and cultural immersion. The personalized service and attention to detail were outstanding. We'll definitely be booking again!
                             </p>
@@ -490,17 +495,18 @@
         <a href="#" class="btn btn-primary btn-lg-square back-to-top"><i class="fa fa-arrow-up"></i></a>   
 
         
-        <!-- JavaScript Libraries -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="/wanderwise/wander_wise/Wander/static/lib/wow/wow.min.js"></script>
-        <script src="/wanderwise/wander_wise/Wander/static/lib/easing/easing.min.js"></script>
-        <script src="/wanderwise/wander_wise/Wander/static/lib/waypoints/waypoints.min.js"></script>
-        <script src="/wanderwise/wander_wise/Wander/static/lib/owlcarousel/owl.carousel.min.js"></script>
         
 
+        <!-- JavaScript Libraries -->
+       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+       <script src="../../static/lib/wow/wow.min.js"></script>
+       <script src="../../static/lib/easing/easing.min.js"></script>
+       <script src="../../static/lib/waypoints/waypoints.min.js"></script>
+       <script src="../../static/lib/owlcarousel/owl.carousel.min.js"></script>
+
         <!-- Template Javascript -->
-        <script src="/wanderwise/wander_wise/Wander/static/js/main.js"></script>
+       <script src="../../static/js/main.js"></script>
         
     </body>
 

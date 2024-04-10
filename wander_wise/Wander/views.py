@@ -41,3 +41,18 @@ def signup(request):
             messages.success(request, 'Signed up successfully! Please log in.')
             return redirect('login')
     return render(request, 'signup.html')
+
+def contact(request):
+    return render(request, 'contact.html')
+def about(request):
+    return render(request, 'about.html')
+def service(request):
+    return render(request, 'service.html')
+def appointment(request):
+    return render(request, 'appointment.html')
+def be_a_guide(request):
+    return render(request, 'be_a_guide.html')
+def feature(request):
+    return render(request, 'feature.html')
+def testimonial(request):
+    return render(request, 'testimonial.html')

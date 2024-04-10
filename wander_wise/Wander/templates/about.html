@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,15 +20,15 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
         <!-- Libraries Stylesheet -->
-        <link href="/wanderwise/wander_wise/Wander/static/lib/animate/animate.min.css" rel="stylesheet">
-        <link href="/wanderwise/wander_wise/Wander/static/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-
-
+        <link href="{% static 'lib/animate/animate.min.css' %}" rel="stylesheet">
+        <link href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+    
         <!-- Customized Bootstrap Stylesheet -->
-        <link href="/wanderwise/wander_wise/Wander/static/css/bootstrap.min.css" rel="stylesheet">
-
+        <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    
         <!-- Template Stylesheet -->
-        <link href="/wanderwise/wander_wise/Wander/static/css/style.css" rel="stylesheet">
+        <link href="../../static/css/style.css" rel="stylesheet">
+    
         <style>
             .bg-breadcrumb {
                             background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(img/rumi.jpg);
@@ -81,7 +83,7 @@
         <!-- Navbar & Hero Start -->
         <div class="container-fluid position-relative p-0">
             <nav class="navbar navbar-expand-lg navbar-light bg-white px-4 px-lg-5 py-3 py-lg-0">
-                <a href="index.html" class="navbar-brand p-0">
+                <a href="{%url 'index'%}" class="navbar-brand p-0">
                     <h1 class="text-primary m-0"><i class="fas fa-star-of-life me-3"></i>Wander Wise</h1>
                     <!-- <img src="img/logo.png" alt="Logo"> -->
                 </a>
@@ -90,24 +92,24 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav ms-auto py-0">
-                        <a href="index.html" class="nav-item nav-link">Home</a>
-                        <a href="about.html" class="nav-item nav-link active">About</a>
-                        <a href="service.html" class="nav-item nav-link">Services</a>
+                        <a href="{%url 'index'%}" class="nav-item nav-link">Home</a>
+                        <a href="{% url 'about' %}"class="nav-item nav-link active">About</a>
+                        <a href="{%url 'service'%}" class="nav-item nav-link">Services</a>
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                             <div class="dropdown-menu m-0">
-                                <a href="appointment.html" class="dropdown-item">Book a Guide</a>
-                                <a href="be_a_guide.html" class="dropdown-item">Apply as Guide</a>
-                                <a href="feature.html" class="dropdown-item">Features</a>
-                                <a href="testimonial.html" class="dropdown-item">Testimonial</a>
+                                <a href="{%url 'appointment'%}" class="dropdown-item">Book a Guide</a>
+                                <a href="{%url 'be_a_guide'%}" class="dropdown-item">Apply as Guide</a>
+                                <a href="{%url 'feature'%}"class="dropdown-item">Features</a>
+                                <a href="{%url 'testimonial'%}"  class="dropdown-item">Testimonial</a>
                                
                             </div>
                         </div>
-                        <a href="contact.html" class="nav-item nav-link">Contact Us</a>
+                        <a href="{% url 'contact' %}" class="nav-item nav-link">Contact Us</a>
                     </div>
-                    <a href="Login.html" class="btn btn-primary rounded-pill text-white py-2 px-4 flex-wrap flex-sm-shrink-0">Login </a>
+                    <a href="{% url 'login' %}"class="btn btn-primary rounded-pill text-white py-2 px-4 flex-wrap flex-sm-shrink-0">Login </a>
                     <p>&ensp;</p>
-                    <a href="Signup.html" class="btn btn-primary rounded-pill text-white py-2 px-4 flex-wrap flex-sm-shrink-0">Signup</a>
+                    <a href="{% url 'signup' %}"  class="btn btn-primary rounded-pill text-white py-2 px-4 flex-wrap flex-sm-shrink-0">Signup</a>
                 </div>
             </nav>
         </div>
@@ -305,14 +307,14 @@
         <!-- JavaScript Libraries -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="/wanderwise/wander_wise/Wander/static/lib/wow/wow.min.js"></script>
-        <script src="/wanderwise/wander_wise/Wander/static/lib/easing/easing.min.js"></script>
-        <script src="/wanderwise/wander_wise/Wander/static/lib/waypoints/waypoints.min.js"></script>
-        <script src="/wanderwise/wander_wise/Wander/static/lib/owlcarousel/owl.carousel.min.js"></script>
-        
-
-        <!-- Template Javascript -->
-        <script src="/wanderwise/wander_wise/Wander/static/js/main.js"></script>
+        <script src="../../static/lib/wow/wow.min.js"></script>
+        <script src="../../static/lib/easing/easing.min.js"></script>
+        <script src="../../static/lib/waypoints/waypoints.min.js"></script>
+        <script src="../../static/lib/owlcarousel/owl.carousel.min.js"></script>
+ 
+         <!-- Template Javascript -->
+        <script src="../../static/js/main.js"></script>
+         
         
     </body>
 
