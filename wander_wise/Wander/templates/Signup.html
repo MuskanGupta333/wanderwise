@@ -108,17 +108,7 @@
                         <a href="{%url 'index'%}" class="nav-item nav-link">Home</a>
                         <a href="{% url 'about' %}"class="nav-item nav-link">About</a>
                         <a href="{%url 'service'%} "class="nav-item nav-link">Services</a>
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown">Pages</a>
-                            <div class="dropdown-menu m-0">
-                                <a href="{%url 'appointment'%}" class="dropdown-item active">Book a Guide</a>
-                                <a href="{%url 'be_a_guide'%}"  class="dropdown-item">Apply as Guide</a>
-                                <a href="{%url 'feature'%}" class="dropdown-item">Features</a>
-                  
-                                <a href="{%url 'testimonial'%}"  class="dropdown-item">Testimonial</a>
-                              
-                            </div>
-                        </div>
+                       
                         <a href="{% url 'contact' %}" class="nav-item nav-link">Contact Us</a>
                     </div>
                     <a href="{% url 'login' %}"  class="btn btn-primary rounded-pill text-white py-2 px-4 flex-wrap flex-sm-shrink-0">Login </a>
@@ -185,19 +175,19 @@
                         <form>
                             <div class="row gy-3 gx-4">
                                 <div class="col-xl-6">
-                                    <input type="text" class="form-control py-3 border-primary bg-transparent text-white" placeholder="First Name">
+                                    <input type="text" class="form-control py-3 border-primary bg-transparent text-white" placeholder="First Name" required>
                                 </div>
                                 <div class="col-xl-6">
-                                    <input type="text" class="form-control py-3 border-primary bg-transparent text-white" placeholder="Last Name">
+                                    <input type="text" class="form-control py-3 border-primary bg-transparent text-white" placeholder="Last Name"required>
                                 </div>
                                 <div class="col-xl-6">
-                                    <input type="email" class="form-control py-3 border-primary bg-transparent text-white" placeholder="Email">
+                                    <input type="email" class="form-control py-3 border-primary bg-transparent text-white" placeholder="Email" required>
                                 </div>
                                 <div class="col-xl-6">
-                                    <input type="phone" class="form-control py-3 border-primary bg-transparent" placeholder="Phone">
+                                    <input type="phone" class="form-control py-3 border-primary bg-transparent" placeholder="Phone" required>
                                 </div>
                                 <div class="col-xl-6">
-                                    <select class="form-select py-3 border-primary bg-transparent" aria-label="Default select example">
+                                    <select class="form-select py-3 border-primary bg-transparent" aria-label="Default select example" required>
                                         <option selected>Your Gender</option>
                                         <option value="1">Male</option>
                                         <option value="2">FeMale</option>
@@ -205,30 +195,30 @@
                                     </select>
                                 </div>
                                 <div class="col-xl-6">
-                                    <select class="form-select py-3 border-primary bg-transparent" aria-label="Default select example">
+                                    <select class="form-select py-3 border-primary bg-transparent" aria-label="Default select example" required>
                                         <option selected>User Type</option>
                                         <option value="1">Visiter</option>
                                         <option value="2">Guide</option>
-                                        <option value="2">Admin</option>
+                                        
                                     </select>
                                 </div>
                                 <div class="col-xl-6">
-                                    <input type="text" class="form-control py-3 border-primary bg-transparent text-white" placeholder="Pincode">
+                                    <input type="text" class="form-control py-3 border-primary bg-transparent text-white" placeholder="Pincode" required>
                                 </div>
                                 <div class="col-xl-6">
-                                    <input type="text" class="form-control py-3 border-primary bg-transparent text-white" placeholder="City">
+                                    <input type="text" class="form-control py-3 border-primary bg-transparent text-white" placeholder="City" required>
                                 </div>
                                 <div class="col-xl-6">
-                                    <input type="text" class="form-control py-3 border-primary bg-transparent text-white" placeholder="State">
+                                    <input type="text" class="form-control py-3 border-primary bg-transparent text-white" placeholder="State" required>
                                 </div>
                                 <div class="col-xl-6">
-                                    <input type="text" class="form-control py-3 border-primary bg-transparent text-white" placeholder="Country">
+                                    <input type="text" class="form-control py-3 border-primary bg-transparent text-white" placeholder="Country" required>
                                 </div>
                                 <div class="col-12">
-                                    <textarea class="form-control border-primary bg-transparent text-white" name="text" id="area-text" cols="30" rows="5" placeholder="Address"></textarea>
+                                    <textarea class="form-control border-primary bg-transparent text-white" name="text" id="area-text" cols="30" rows="5" placeholder="Address" required></textarea>
                                 </div>
                                 <div class="col-xl-6" style="width:100%;">
-                                    <input type="password" class="form-control py-3 border-primary bg-transparent text-white" placeholder="Password">
+                                    <input type="password" class="form-control py-3 border-primary bg-transparent text-white" placeholder="Password" required>
                                 </div>
                                 <div class="col-12">
                                     <button type="button" class="btn btn-primary text-white w-100 py-3 px-5">SUBMIT NOW</button>
@@ -293,8 +283,8 @@
                     <div class="col-md-6 col-lg-6 col-xl-3">
                         <div class="footer-item d-flex flex-column">
                             <h4 class="mb-4 text-white">Contact Info</h4>
-                            <a href=""><i class="fa fa-map-marker-alt me-2"></i> Nirala Nagar, Lucknow, Uttar Pradesh, India</a>
-                            <a href=""><i class="fas fa-envelope me-2"></i> info@example.com</a>
+                            <a href="about.html"><i class="fa fa-map-marker-alt me-2"></i> Nirala Nagar, Lucknow, Uttar Pradesh, India</a>
+                            <a href="contact.html"><i class="fas fa-envelope me-2"></i> info@example.com</a>
                             <a href=""><i class="fas fa-envelope me-2"></i> info@example.com</a>
                             <a href=""><i class="fas fa-phone me-2"></i> +91-9876543210</a>
                             <a href="" class="mb-3"><i class="fas fa-print me-2"></i> +91-7654321098</a>
@@ -312,12 +302,7 @@
                     <div class="col-md-6 text-center text-md-start mb-md-0">
                         <span class="text-white"><a href="#"><i class="fas fa-copyright text-light me-2"></i>Wander Wise</a>, All right reserved.</span>
                     </div>
-                    <div class="col-md-6 text-center text-md-end text-white">
-                        <!--/*** This template is free as long as you keep the below author’s credit link/attribution link/backlink. ***/-->
-                        <!--/*** If you'd like to use the template without the below author’s credit link/attribution link/backlink, ***/-->
-                        <!--/*** you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". ***/-->
-                        Designed By <a class="border-bottom" href="https://htmlcodex.com">HTML Codex</a> Distributed By <a class="border-bottom" href="https://themewagon.com">ThemeWagon</a>
-                    </div>
+                   
                 </div>
             </div>
         </div>
