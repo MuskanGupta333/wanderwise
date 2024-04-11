@@ -172,60 +172,61 @@
                     <div class="appointment-form rounded p-5">
                         <p class="fs-4 text-uppercase text-primary">Get Started</p>
                         <h1 class="display-5 mb-4">SignUp</h1>
-                        <form>
+                        <form method="post">
+                            {% csrf_token %}
                             <div class="row gy-3 gx-4">
                                 <div class="col-xl-6">
-                                    <input type="text" class="form-control py-3 border-primary bg-transparent text-white" placeholder="First Name" required>
+                                    <input type="text" name="first_name" class="form-control py-3 border-primary bg-transparent text-white" placeholder="First Name" required>
                                 </div>
                                 <div class="col-xl-6">
-                                    <input type="text" class="form-control py-3 border-primary bg-transparent text-white" placeholder="Last Name"required>
+                                    <input type="text" name="last_name" class="form-control py-3 border-primary bg-transparent text-white" placeholder="Last Name"required>
                                 </div>
                                 <div class="col-xl-6">
-                                    <input type="email" class="form-control py-3 border-primary bg-transparent text-white" placeholder="Email" required>
+                                    <input type="email" name="email" class="form-control py-3 border-primary bg-transparent text-white" placeholder="Email" required>
                                 </div>
                                 <div class="col-xl-6">
-                                    <input type="phone" class="form-control py-3 border-primary bg-transparent" placeholder="Phone" required>
+                                    <input type="phone" name="phone" class="form-control py-3 border-primary bg-transparent" placeholder="Phone" required>
                                 </div>
                                 <div class="col-xl-6">
-                                    <select class="form-select py-3 border-primary bg-transparent" aria-label="Default select example" required>
+                                    <select name="gender" class="form-select py-3 border-primary bg-transparent" aria-label="Default select example" required>
                                         <option selected>Your Gender</option>
-                                        <option value="1">Male</option>
-                                        <option value="2">FeMale</option>
-                                        <option value="3">Others</option>
+                                        <option value="Male">Male</option>
+                                        <option value="FeMale">FeMale</option>
+                                        <option value="Others">Others</option>
                                     </select>
                                 </div>
                                 <div class="col-xl-6">
-                                    <select class="form-select py-3 border-primary bg-transparent" aria-label="Default select example" required>
+                                    <select name="user_type" class="form-select py-3 border-primary bg-transparent" aria-label="Default select example" required>
                                         <option selected>User Type</option>
-                                        <option value="1">Visiter</option>
-                                        <option value="2">Guide</option>
-                                        
+                                        <option value="Visiter">Visiter</option>
+                                        <option value="Guide">Guide</option>
                                     </select>
                                 </div>
                                 <div class="col-xl-6">
-                                    <input type="text" class="form-control py-3 border-primary bg-transparent text-white" placeholder="Pincode" required>
+                                    <input type="text" name="pincode" class="form-control py-3 border-primary bg-transparent text-white" placeholder="Pincode" required>
                                 </div>
                                 <div class="col-xl-6">
-                                    <input type="text" class="form-control py-3 border-primary bg-transparent text-white" placeholder="City" required>
+                                    <input type="text" name="city" class="form-control py-3 border-primary bg-transparent text-white" placeholder="City" required>
                                 </div>
                                 <div class="col-xl-6">
-                                    <input type="text" class="form-control py-3 border-primary bg-transparent text-white" placeholder="State" required>
+                                    <input type="text" name="state" class="form-control py-3 border-primary bg-transparent text-white" placeholder="State" required>
                                 </div>
                                 <div class="col-xl-6">
-                                    <input type="text" class="form-control py-3 border-primary bg-transparent text-white" placeholder="Country" required>
+                                    <input type="text" name="country" class="form-control py-3 border-primary bg-transparent text-white" placeholder="Country" required>
                                 </div>
                                 <div class="col-12">
-                                    <textarea class="form-control border-primary bg-transparent text-white" name="text" id="area-text" cols="30" rows="5" placeholder="Address" required></textarea>
+                                    <textarea name="address" class="form-control border-primary bg-transparent text-white" cols="30" rows="5" placeholder="Address" required></textarea>
                                 </div>
                                 <div class="col-xl-6" style="width:100%;">
-                                    <input type="password" class="form-control py-3 border-primary bg-transparent text-white" placeholder="Password" required>
+                                    <input type="password" name="password" class="form-control py-3 border-primary bg-transparent text-white" placeholder="Password" required>
                                 </div>
                                 <div class="col-12">
-                                    <button type="button" class="btn btn-primary text-white w-100 py-3 px-5">SUBMIT NOW</button>
+                                    <button type="submit" class="btn btn-primary text-white w-100 py-3 px-5">SUBMIT NOW</button>
                                 </div>
                             </div>
                         </form>
-                    </div>
+                        
+                         </div>
                 </div>
             </div>
         </div>
