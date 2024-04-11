@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import User
-from django.contrib.auth.hashers import make_password, check_password
+from django.contrib.auth.hashers import make_password, check_password #make_password
 
 def index(request):
     return render(request, 'index.html')
@@ -45,13 +45,15 @@ def signup(request):
         if User.objects.filter(email=email).exists():
             messages.error(request, 'Email already exists. Please use a different email.')
         else:
+        
+            # Hash the password
+            hashed_password = make_password(password)
             # Create a new user instance
             user = User.objects.create(
                 first_name=first_name,
                 last_name=last_name,
                 email=email,
-                password=password,
-                phone=phone,
+                password=hashed_password,  # Use hashed password                phone=phone,
                 gender=gender,
                 user_type=user_type,
                 pincode=pincode,

@@ -174,21 +174,28 @@
                     <div class="appointment-form rounded p-5">
                         <p class="fs-4 text-uppercase text-primary">Get Started</p>
                         <h1 class="display-5 mb-4">LogIn</h1>
-                        <form method="post" action="{% url 'login' %}">
+                        {% if messages %}
+                        <div class="messages">
+                            {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                                {{ message }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                        <form method="post">
                             {% csrf_token %}
                             <div class="row gy-3 gx-4">
-                                
                                 <div class="col-xl-6">
-                                    <input type="email" class="form-control py-3 border-primary bg-transparent text-white" placeholder="Email">
+                                    <input type="email" name="email" class="form-control py-3 border-primary bg-transparent text-white" placeholder="Email">
                                 </div>
                                 <div class="col-xl-6">
-                                    <input type="password" class="form-control py-3 border-primary bg-transparent" placeholder="Password">
+                                    <input type="password" name="password" class="form-control py-3 border-primary bg-transparent" placeholder="Password">
                                 </div>
-                            
                                 <div class="col-12">
-                                    <button type="button" class="btn btn-primary text-white w-100 py-3 px-5">SUBMIT NOW</button>
+                                    <button type="submit" class="btn btn-primary text-white w-100 py-3 px-5">SUBMIT NOW</button>
                                 </div>
-                            </div>
                         </form>
                     </div>
                 </div>
