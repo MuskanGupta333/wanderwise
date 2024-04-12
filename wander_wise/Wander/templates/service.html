@@ -32,7 +32,7 @@
 
         <style>
             .bg-breadcrumb {
-                            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(img/rumi.jpg);
+                            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("{%static 'img/rumi.jpg'%}");
                             background-position: center center;
                             background-repeat: no-repeat;
                             background-size: cover;
@@ -42,14 +42,14 @@
                   height:100%;
             }
             .testimonial {
-    background: linear-gradient(rgba(21, 185, 217, 0.9), rgba(21, 185, 217, 0.9)), url(img/bg2.jpg);
+    background: linear-gradient(rgba(21, 185, 217, 0.9), rgba(21, 185, 217, 0.9)), url("{% static 'img/bg2.jpg' %}");
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
            }
            .footer {
-    background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)), url(img/bg3.jpg);
+    background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)), url("{% static 'img/bg3.jpg' %}");
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -122,7 +122,7 @@
             <div class="container text-center py-5" style="max-width: 900px;">
                 <h3 class="text-white display-3 mb-4 wow fadeInDown" data-wow-delay="0.1s">Our Services</h1>
                 <ol class="breadcrumb justify-content-center mb-0 wow fadeInDown" data-wow-delay="0.3s">
-                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item"><a href="{%url 'index'%}">Home</a></li>
                    
                     <li class="breadcrumb-item active text-primary">Services</li>
                 </ol>    
@@ -159,7 +159,7 @@
                     <div class="col-md-6 col-lg-4 col-xl-3 wow fadeInUp" data-wow-delay="0.3s">
                         <div class="service-item rounded">
                            <div class="service-img rounded-top">
-                                <img src="img/custom.jpg" class="img-fluid rounded-top w-100" alt="">
+                                <img src="{%static 'img/custom.jpg'%}" class="img-fluid rounded-top w-100" alt="">
                            </div>
                             <div class="service-content rounded-bottom bg-light p-4">
                                 <div class="service-content-inner">
@@ -281,7 +281,7 @@
                     <div class="testimonial-item">
                         <div class="testimonial-inner p-5">
                             <div class="testimonial-inner-img mb-4">
-                                <img src="img/cust1.jpg" class="img-fluid rounded-circle" alt="">
+                                <img src="{% static 'img/cust1.jpg' %}" class="img-fluid rounded-circle" alt="">
                             </div>
                             <p class="text-white fs-7">Booking through WanderWise was a game-changer for our trip! Our guide was not only knowledgeable but also incredibly friendly, making our experience unforgettable.
                             </p>
@@ -301,7 +301,7 @@
                     <div class="testimonial-item">
                         <div class="testimonial-inner p-5">
                             <div class="testimonial-inner-img mb-4">
-                                <img src="img/cust2.jpg" class="img-fluid rounded-circle" alt="">
+                                <img src="{% static 'img/cust2.jpg' %}" class="img-fluid rounded-circle" alt="">
                             </div>
                             <p class="text-white fs-7">I can't recommend WanderWise enough! The process was seamless, and our guide went above and beyond to show us hidden gems we would have never discovered on our own.
                             </p>
@@ -321,7 +321,7 @@
                     <div class="testimonial-item">
                         <div class="testimonial-inner p-5">
                             <div class="testimonial-inner-img mb-4">
-                                <img src="img/cust3.jpg" class="img-fluid rounded-circle" alt="">
+                                <img src="{% static 'img/cust3.jpg' %}" class="img-fluid rounded-circle" alt="">
                             </div>
                             <p class="text-white fs-7">Thanks to WanderWise, our family vacation turned into a journey of discovery and cultural immersion. The personalized service and attention to detail were outstanding. We'll definitely be booking again!
                             </p>
@@ -365,8 +365,8 @@
             <div class="col-md-6 col-lg-6 col-xl-3">
                 <div class="footer-item d-flex flex-column">
                     <h4 class="mb-4 text-white">Quick Links</h4>
-                    <a href="about.html"><i class="fas fa-angle-right me-2"></i> About Us</a>
-                    <a href="contact.html"><i class="fas fa-angle-right me-2"></i> Contact Us</a>
+                    <a href="{% url 'about' %}"><i class="fas fa-angle-right me-2"></i> About Us</a>
+                    <a href="{% url 'contact' %}"><i class="fas fa-angle-right me-2"></i> Contact Us</a>
                     <a href=""><i class="fas fa-angle-right me-2"></i> Privacy Policy</a>
                     <a href=""><i class="fas fa-angle-right me-2"></i> Terms & Conditions</a>
         

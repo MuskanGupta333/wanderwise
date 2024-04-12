@@ -136,9 +136,9 @@
                 <div class="row g-5 align-items-center">
                     <div class="col-lg-5 wow fadeInLeft" data-wow-delay="0.2s">
                         <div class="about-img pb-5 ps-5">
-                            <img src="img/barai.jpg" class="img-fluid rounded w-100" style="object-fit: cover;" alt="Image">
+                            <img src="{%static 'img/barai.jpg' %}" class="img-fluid rounded w-100" style="object-fit: cover;" alt="Image">
                             <div class="about-img-inner">
-                                <img src="img/Chota Imambara.jpg" class="img-fluid rounded-circle w-100 h-100" alt="Image">
+                                <img src="{%static 'img/Chota Imambara.jpg'%}" class="img-fluid rounded-circle w-100 h-100" alt="Image">
                             </div>
                             <div class="about-experience">Gaining experience</div>
                         </div>
@@ -259,8 +259,8 @@
                 <div class="col-md-6 col-lg-6 col-xl-3">
                     <div class="footer-item d-flex flex-column">
                         <h4 class="mb-4 text-white">Quick Links</h4>
-                        <a href="about.html"><i class="fas fa-angle-right me-2"></i> About Us</a>
-                        <a href="contact.html"><i class="fas fa-angle-right me-2"></i> Contact Us</a>
+                        <a href="{% url 'about' %}"><i class="fas fa-angle-right me-2"></i> About Us</a>
+                        <a href="{% url 'contact' %}"><i class="fas fa-angle-right me-2"></i> Contact Us</a>
                         <a href=""><i class="fas fa-angle-right me-2"></i> Privacy Policy</a>
                         <a href=""><i class="fas fa-angle-right me-2"></i> Terms & Conditions</a>
             

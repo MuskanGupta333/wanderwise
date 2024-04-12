@@ -35,14 +35,14 @@
 
         <style>
             .bg-breadcrumb {
-                            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(img/rumi.jpg);
+                            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("{%static 'img/rumi.jpg'%}");
                             background-position: center center;
                             background-repeat: no-repeat;
                             background-size: cover;
                             padding: 160px 0 60px 0;
                           }
                           .appointment {
-                  background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url(img/bg1.jpg);
+                  background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url("{% static 'img/bg1.jpg' %}");
             
                  background-repeat: no-repeat;
                  background-size: cover;
@@ -50,7 +50,7 @@
             }
           
            .footer {
-    background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)), url(img/bg3.jpg);
+    background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)), url("{% static 'img/bg3.jpg' %}");
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -159,7 +159,7 @@
                             </div>
                             <div class="col-sm-6">
                                 <div class="video h-100">
-                                    <img src="img/youtube.jpg" class="img-fluid rounded w-100 h-100" style="object-fit: cover;" alt="">
+                                    <img src="{%static 'img/youtube.jpg'%}" class="img-fluid rounded w-100 h-100" style="object-fit: cover;" alt="">
                                     <button type="button" class="btn btn-play" data-bs-toggle="modal" data-src="https://www.youtube.com/watch?v=UCcaPg9p5fQ" data-bs-target="#videoModal">
                                         <span></span>
                                     </button>
@@ -297,8 +297,8 @@
                     <div class="col-md-6 col-lg-6 col-xl-3">
                         <div class="footer-item d-flex flex-column">
                             <h4 class="mb-4 text-white">Contact Info</h4>
-                            <a href="about.html"><i class="fa fa-map-marker-alt me-2"></i> Nirala Nagar, Lucknow, Uttar Pradesh, India</a>
-                            <a href="contact.html"><i class="fas fa-envelope me-2"></i> info@example.com</a>
+                            <a href="{% url 'about' %}"><i class="fa fa-map-marker-alt me-2"></i> Nirala Nagar, Lucknow, Uttar Pradesh, India</a>
+                            <a href="{% url 'contact' %}"><i class="fas fa-envelope me-2"></i> info@example.com</a>
                             <a href=""><i class="fas fa-envelope me-2"></i> info@example.com</a>
                             <a href=""><i class="fas fa-phone me-2"></i> +91-9876543210</a>
                             <a href="" class="mb-3"><i class="fas fa-print me-2"></i> +91-7654321098</a>
