@@ -33,5 +33,8 @@ urlpatterns = [
     path('feature/', views.feature, name='feature'),
     path('testimonial/', views.testimonial, name='testimonial'),
     path( 'contact/', views.contact, name='contact'),
+    path( 'visitor/', views.visitor, name='visitor'),
+
+
     #path('contact.html', TemplateView.as_view(template_name='contact.html'), name='contact'),
 ]

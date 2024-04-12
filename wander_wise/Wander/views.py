@@ -17,7 +17,7 @@ def login(request):
             if check_password(password, user.password):
                 messages.success(request, 'Logged in successfully!')
                 # Redirect the user to a dashboard or profile page after login
-                return redirect('index')
+                return redirect('visitor')
             else:
                 # Password doesn't match
                 messages.error(request, 'Invalid email or password. Please try again.')
@@ -90,3 +90,6 @@ def feature(request):
 
 def testimonial(request):
     return render(request, 'testimonial.html')
+
+def visitor(request):
+    return render(request, 'visitor.html')
