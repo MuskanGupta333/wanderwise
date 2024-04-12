@@ -31,14 +31,14 @@
     
         <style>
             .bg-breadcrumb {
-                            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(img/rumi.jpg);
+                            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("{% static 'img/rumi.jpg' %}");
                             background-position: center center;
                             background-repeat: no-repeat;
                             background-size: cover;
                             padding: 160px 0 60px 0;
                           }
                           .footer {
-    background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)), url(img/bg3.jpg);
+    background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)), url("{% static 'img/bg3.jpg' %}");
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -121,7 +121,7 @@
             <div class="container text-center py-5" style="max-width: 900px;">
                 <h3 class="text-white display-3 mb-4 wow fadeInDown" data-wow-delay="0.1s">About Us</h1>
                 <ol class="breadcrumb justify-content-center mb-0 wow fadeInDown" data-wow-delay="0.3s">
-                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item"><a href="{%url 'index'%}" >Home</a></li>
                    
                     <li class="breadcrumb-item active text-primary">About</li>
                 </ol>    
