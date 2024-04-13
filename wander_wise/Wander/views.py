@@ -15,16 +15,21 @@ def login(request):
             user = User.objects.get(email=email)
             # Verify the password
             if check_password(password, user.password):
-                messages.success(request, 'Logged in successfully!')
-                # Redirect the user to a dashboard or profile page after login
-                return redirect('visitor')
+                if user.user_type == 'Visiter':
+                    messages.success(request, 'Logged in as visitor!')
+                    return redirect('visitor')  # Redirect to visitor dashboard
+                elif user.user_type == 'Guide':
+                    messages.success(request, 'Logged in as guide!')
+                    return redirect('guideinterface')  # Redirect to guide dashboard
+                else:
+                    messages.error(request, 'Invalid user type.')
             else:
                 # Password doesn't match
                 messages.error(request, 'Invalid email or password. Please try again.')
         except User.DoesNotExist:
-            # User does not exist in the signup table
+            # User does not exist in the User table
             messages.error(request, 'User does not exist. Please sign up first.')
-    return render(request, 'login.html')
+    return render(request, 'login.html')  # Render login page template
 
 def signup(request):
     if request.method == 'POST':
@@ -93,3 +98,5 @@ def testimonial(request):
 
 def visitor(request):
     return render(request, 'visitor.html')
+def guideinterface(request):
+    return render(request, 'guideinterface.html')
