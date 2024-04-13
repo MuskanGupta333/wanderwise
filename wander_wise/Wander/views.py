@@ -58,7 +58,8 @@ def signup(request):
                 first_name=first_name,
                 last_name=last_name,
                 email=email,
-                password=hashed_password,  # Use hashed password                phone=phone,
+                password=hashed_password,  # Use hashed password                
+                phone=phone,
                 gender=gender,
                 user_type=user_type,
                 pincode=pincode,
@@ -98,5 +99,9 @@ def testimonial(request):
 
 def visitor(request):
     return render(request, 'visitor.html')
+
 def guideinterface(request):
     return render(request, 'guideinterface.html')
+
+def exam(request):
+    return render(request, 'exam.html')

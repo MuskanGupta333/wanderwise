@@ -65,6 +65,13 @@
             .card-header {
                   color: black;
             }
+            
+            #heading {
+             font-size: 3.5rem;
+
+                }
+           
+                
         </style>
         
     </head>
@@ -104,11 +111,16 @@
 
 
         <!-- Navbar & Hero Start -->
+        
         <div class="container-fluid position-relative p-0">
-            <nav class="navbar navbar-expand-lg navbar-light bg-white px-4 px-lg-5 py-3 py-lg-0">
+            
+            <nav class="navbar navbar-expand-lg navbar-light bg-white px-4 px-lg-5 py-3 py-lg-0" style="padding-top: 20px  !important;
+            padding-bottom: 20px  !important;">
                 <a href="{%url 'index'%}" class="navbar-brand p-0">
+                    <div id="heading">
                     <h1 class="text-primary m-0"><i class="fas fa-star-of-life me-3"></i>Welcome to Wander Wise</h1>
                     <!-- <img src="img/logo.png" alt="Logo"> -->
+                    </div>
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                     <span class="fa fa-bars"></span>
@@ -120,14 +132,16 @@
                    
                 </div>
             </nav>
+       
         </div>
+    
         <!-- Navbar End -->
         
        <!-- Dashboard-->
-        <div class="container py-5">
-         <div class="row justify-content-center">
+        <div class="container py-5" style="padding-bottom: 1rem !important;">
+         <div class="row justify-content-center" style="padding: inherit;">
         <div class="col-lg-7 text-center">
-            <h1 class="display-4 mb-5">Explore with ease with us!!</h1>
+            <h1 class="display-4 mb-5"  style="margin-bottom: 0rem !important;" >Explore with ease with us!!</h1>
             <!-- Include logout button here -->
             <!--<a href="{% url 'index' %}" class="btn btn-primary btn-lg">Logout</a>-->
         </div>
@@ -144,6 +158,10 @@
                     <div class="mb-5">
                         <h5>Last Visited Place: <span id="lastVisitedPlace">Place Name</span></h5>
                         <h5>Last Visited Time: <span id="lastVisitedTime">Time</span></h5>
+                        <div class="mb-3">
+                            <label for="visit_datetime" class="form-label">Date & Time to Visit:</label>
+                            <input type="datetime-local" class="form-control" id="visit_datetime">
+                        </div>
                     </div>
                     <!-- Include dropdown menu for selecting next places to visit here -->
                     <div class="mb-4">
