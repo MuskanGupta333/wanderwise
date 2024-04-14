@@ -95,6 +95,8 @@
     </form>
     <!--ENd Guide Details-->
 
+    <form id="guideForm" method="POST">
+      {% csrf_token %}
 
     <!-- Test Completion Form -->
     <div class="container">
@@ -206,7 +208,7 @@
               
               <button type="submit" class="submit-btn" style="padding: 10px 20px;display: none; background-color: #007bff; color: #fff; border: none; border-radius: 4px; cursor: pointer;">Submit</button>
     </form>
-
+  </form>
 
             
         </form>
@@ -286,34 +288,33 @@
     <!-- Your existing JavaScript code goes here -->
 
     <script>
-        function completeTest() {
-            // Perform actions to complete the test
-            // Show toaster notification upon completion
-            var myToast = new bootstrap.Toast(document.getElementById('toaster'));
-            myToast.show();
-        }
-
-        document.getElementById('quizForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      let score = 0;
-      const answers = ['A', 'A', 'B', 'B', 'D', 'B', 'D', 'C', 'C', 'D']; // Update with correct answers
-      for (let i = 1; i <= 10; i++) {
-        const selectedOption = document.querySelector(`input[name=q${i}]:checked`);
-        if (selectedOption) {
-          if (selectedOption.value === answers[i - 1]) {
-            score++;
+      document.getElementById('quizForm').addEventListener('submit', function(e) {
+          e.preventDefault();
+  
+          // Check if guide details are filled out
+          const languagesKnown = document.getElementById('languagesKnown').value.trim();
+          const placesKnown = document.getElementById('placesKnown').value.trim();
+          const govtId = document.getElementById('govtId').value.trim();
+  
+          // Check if at least six questions are answered correctly
+          let score = 0;
+          const answers = ['A', 'A', 'B', 'B', 'D', 'B', 'D', 'C', 'C', 'D']; // Correct answers
+          for (let i = 1; i <= 10; i++) {
+              const selectedOption = document.querySelector(`input[name=q${i}]:checked`);
+              if (selectedOption && selectedOption.value === answers[i - 1]) {
+                  score++;
+              }
           }
-        }
-      }
-      if (score >= 6) {
-        document.querySelector('.submit-btn').style.display = 'block';
-        document.getElementById('quizForm').reset(); // Reset the form
-      } else {
-        alert('You need to answer at least 6 questions correctly to submit.');
-      }
-    });
-            
-        
-    </script>
+  
+          // Enable submit button if conditions are met, else display message
+          if (languagesKnown && placesKnown && govtId && score >= 6) {
+              document.querySelector('.submit-btn').style.display = 'block';
+             // document.getElementById('quizForm').reset(); // Reset the form
+          } else {
+              alert('Please fill out guide details and answer at least six questions correctly to submit.');
+          }
+      });
+  </script>
+  
 </body>
 </html>

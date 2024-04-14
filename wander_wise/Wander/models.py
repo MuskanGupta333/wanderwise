@@ -20,3 +20,12 @@ class User(models.Model):
 
 def __str__(self):
         return self.email
+
+class Guide(models.Model):
+        languages_known = models.CharField(max_length=100)
+        places_known = models.CharField(max_length=100)
+        govt_id = models.CharField(max_length=100)
+        quiz_score = models.IntegerField()
+
+        def __str__(self):
+         return f"Guide - {self.id}"
