@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from .models import User
+from .models import User,Guide
 from django.contrib.auth.hashers import make_password, check_password #make_password
 
 def index(request):
@@ -20,7 +20,8 @@ def login(request):
                     return redirect('visitor')  # Redirect to visitor dashboard
                 elif user.user_type == 'Guide':
                     messages.success(request, 'Logged in as guide!')
-                    return redirect('guideinterface')  # Redirect to guide dashboard
+                    
+                    return redirect('exam')  # Redirect to guide dashboard
                 else:
                     messages.error(request, 'Invalid user type.')
             else:
@@ -108,3 +109,43 @@ def exam(request):
 
 def visi(request):
     return render(request, 'visi.html')
+
+def exam(request):
+     if request.method == 'POST':
+        languages_known = request.POST.get('languagesKnown')
+        places_known = request.POST.get('placesKnown')
+        govt_id = request.POST.get('govtId')
+        quiz_score = calculate_quiz_score(request.POST)  # You need to implement this function
+
+        # Create a new Guide instance and save it to the database
+        guide = Guide.objects.create(
+            languages_known=languages_known,
+            places_known=places_known,
+            govt_id=govt_id,
+            quiz_score=quiz_score
+        )
+        # Redirect or render success page
+        
+        return redirect('guideinterface')  # Redirect to a success page
+     else:
+        # Handle GET requests
+        context = {}  # Define an empty context dictionary
+        return render(request, 'exam.html', context)
+
+def calculate_quiz_score(answers):
+    # Define the correct answers
+    correct_answers = ['A', 'A', 'B', 'B', 'D', 'B', 'D', 'C', 'C', 'D']
+
+    # Initialize score
+    score = 0
+
+    # Iterate through each question and check if the answer is correct
+    for i in range(1, 11):
+        # Construct the key for the current question in the answers dictionary
+        answer_key = 'q' + str(i)
+        
+        # Check if the answer exists and if it matches the correct answer
+        if answer_key in answers and answers[answer_key] == correct_answers[i - 1]:
+            score += 1
+
+    return score
