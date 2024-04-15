@@ -105,3 +105,6 @@ def guideinterface(request):
 
 def exam(request):
     return render(request, 'exam.html')
+
+def visi(request):
+    return render(request, 'visi.html')

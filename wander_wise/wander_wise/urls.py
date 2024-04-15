@@ -36,7 +36,7 @@ urlpatterns = [
     path( 'visitor/', views.visitor, name='visitor'),
     path( 'guideinterface/', views.guideinterface, name='guideinterface'),
     path( 'exam/', views.exam, name='exam'),
-
+    path( 'visi', views.visi, name='visi'),
 
     #path('contact.html', TemplateView.as_view(template_name='contact.html'), name='contact'),
 ]
