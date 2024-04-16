@@ -26,6 +26,111 @@
 
     <!-- Template Stylesheet -->
     <link href="../../static/css/style.css" rel="stylesheet">
+
+
+
+<style>
+
+.footer {
+    background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)), url("{% static 'img/bg3.jpg' %}");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+           }
+
+
+.py-lg-0 {
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+}
+
+       .col-lg-12 {   
+    width: 30%;
+            }
+            .card{
+                background-color: #15b9d9;
+            }
+            .card-header {
+                  color: black;
+            }
+            
+            #heading {
+             font-size: 3.5rem;
+
+                }
+           
+              
+        /* Global Styles */
+        .vertical {
+            font-family: Arial, sans-serif;
+            margin-top: 7vh !important;
+           
+            display: flex;
+            min-height: 100vh;
+
+            background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(197, 218, 238, 0.9)), url("{% static 'img/bg3.jpg' %}");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+        }
+        .container {
+            flex-grow: 1;
+            padding: 20px;
+        }
+        .dashboard {
+            width: 250px;
+            color: white;
+            background-color: #15b9d9;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .dashboard h2 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: white;
+        }
+        .dashboard p {
+            margin-bottom: 10px;
+        }
+        .main-content {
+            flex-grow: 1;
+            padding: 20px;
+            align-items: center !important;
+            justify-content: center !important;
+        }
+        .main-content h1{
+            color: white;
+        }
+
+        .guide-form {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        .guide-form label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .guide-form select,
+        .guide-form input[type="datetime-local"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
+        .guide-form button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .guide-form button:hover {
+            background-color: #0056b3;
+        }
+</style>
+
 </head>
 <body>
 
@@ -82,28 +187,38 @@
     <!-- Navbar & Hero End -->
     
     
-
-
-    <!-- Dashboard Content -->
-    <div class="container py-5">
-        <h1 class="display-4 mb-4">Welcome to Your Dashboard</h1>
-        <div>
-            <h2>Last Completed Work</h2>
-            <p>Workplace: [Workplace Name]</p>
-            <p>Date: [Date]</p>
+    <div class="vertical" >
+        <div class="dashboard">
+            <h2>Dashboard</h2>
+            <hr>
+            <p>Last Visited Place: Lucknow Zoo</p>
+            <p>Last Visited Date: April 10, 2024</p>
+            <p>Next Scheduled Visit: May 15, 2024</p>
         </div>
-        <div>
-            <h2>Requests from Visitors</h2>
-            <!-- Display requests here -->
-            <!-- Example request:
-            <div class="request">
-                <p>Visitor: [Visitor Name]</p>
-                <p>Request Details: [Details]</p>
-                <button onclick="approveRequest()">Approve</button>
+        <div class="container">
+            <div class="main-content">
+                <h1>Kindly look into the requests and select your next customer 😊 </h1>
+                <!-- <form class="guide-form" id="guideForm">
+                    <label for="places">Select Place:</label>
+                    <select id="places" name="places">
+                        <option value="">Select Place</option>
+                        <option value="1">Lucknow Zoo</option>
+                        <option value="2">Bara Imambara</option>
+                        <option value="3">Chota Imambara</option>
+                        <option value="4">Rumi Darwaza</option>
+                    </select>
+                    <label for="visitDate">Select Date & Time:</label>
+                    <input type="datetime-local" id="visitDate" name="visitDate">
+                    <button type="submit">Show Available Guides</button>
+                </form>
+                <div id="guideList" style="display: none;">
+                    <h2>Available Guides</h2>
+                    <ul id="guides"></ul>
+                </div> -->
             </div>
-            -->
         </div>
     </div>
+
 
     <!-- Footer Start -->
     <!-- Include your footer content here -->
@@ -112,7 +227,7 @@
             <div class="row g-5">
                 <div class="col-md-6 col-lg-6 col-xl-3">
                     <div class="footer-item d-flex flex-column">
-                        <h4 class="text-white mb-4"><i class="fas fa-star-of-life me-3"></i>Wander Wise</h4>
+                        <img src="{% static 'img/logof.png' %}" alt="WanderWise">
                         <p>At WanderWise, we're passionate about connecting travelers with local guides who bring destinations to life.
                         </p>
                         <div class="d-flex align-items-center">

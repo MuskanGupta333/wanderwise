@@ -33,7 +33,7 @@
 
     <style>
        .footer {
-    background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)), url(img/bg3.jpg);
+    background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)), url("{% static 'img/bg3.jpg' %}");
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -48,47 +48,78 @@
 body {
     font-family: Arial, sans-serif;
     /* margin: 20px; */
+    background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.9)), url("{% static 'img/bg3.jpg' %}");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
   }
-  .question {
-    margin-bottom: 15px;
-  }
-  .options label {
-    display: block;
-    margin-bottom: 5px;
-  }
-  .form-group {
-    margin-bottom: 15px;
-  }
-  .form-group label {
-    display: block;
-    margin-bottom: 5px;
-    /* margin-left:20%; */
-  }
-  .form-group select,
-  .form-group input[type="text"] {
+ 
+  
+  .qcontainer {
+            width: 80%;
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .question {
+            margin-bottom: 20px;
+        }
+
+        .question p {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .options label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .options input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        .submit-btn {
+            display: block;
+            margin: 2px auto;
+            padding: 10px 20px;
+            background-color: #87c1ff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background-color: #0056b3;
+        }
+
+      
+ .fcontainer {
+    display: flex;
+    justify-content: flex-end; /* Align items to the right */
     width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-    /* margin-left:20%;
-    margin-right: 20%; */
+    max-width: 800px; /* Adjust the max-width as needed */
+    /* margin-top: 10 rem !important; */
+    margin: 60px auto !important; /* Add margin to create space between header and form */
+}
+ 
+  .details_card {
+    
+    margin: auto;
+    width: 200vh;
+    max-width: 1000px; /* Adjust the width as needed */
+    background-color:  whitesmoke;
+    border-radius: 30px;
+    padding: 20px;
+    border: 3px solid rgb(0, 0, 170);
   }
-  .submit-btn {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    padding-bottom: 10px;
-    /* display: none; */
-  }
- .details{
-   box-sizing: border-box;
-   margin: auto;
-   padding: auto;
- }
+
 
     </style>
 
@@ -149,13 +180,14 @@ body {
     <!-- Navbar End -->
 
     <!--Guide Details-->
-
-    <h1 style="margin-top: 5rem !important;">Guide Details Form</h1>
+<div class="fcontainer">
+<div class="details_card">
+    <h1 style="text-align: center !important;">Guide Details Form</h1>
     <form id="guideForm" class="details" action="/submit_guide_details" method="POST">
       <div class="form-group">
         <label for="languagesKnown">Languages Known:</label>
         <div class="col-xl-6">
-        <select id="languagesKnown" class="form-select py-3 border-primary bg-transparent" name="languagesKnown" required>
+        <select id="languages_Known" class="form-select py-3 border-primary bg-transparent" name="languagesKnown" required>
           <option value="" disabled selected>Select Language</option>
           <option value="Hindi">Hindi</option>
           <option value="English">English</option>
@@ -165,7 +197,7 @@ body {
       <div class="form-group">
         <label for="placesKnown">Places Known:</label>
         <div class="col-xl-6">
-        <select id="placesKnown "  class="form-select py-3 border-primary bg-transparent" name="placesKnown" required>
+        <select id="places_Known "  class="form-select py-3 border-primary bg-transparent" name="placesKnown" required>
           <option value="" disabled selected>Select Place</option>
           
           <option value="1">Bara Imambara</option>
@@ -192,18 +224,20 @@ body {
       <div class="form-group">
       <div class="col-xl-6"> 
         <label for="govtIdNo">ID Number:</label>
-        <input type="text" class="form-control py-3 border-primary bg-transparent text-white" id="govtIdNo" name="govtIdNo" required>
+        <input type="text" style="color: #8d8d8d !important;" class="form-control py-3 border-primary bg-transparent text-white" id="govt_id" name="govtIdNo" required>
       </div>
       </div>
         
     </form>
+  </div>
+</div>
     <!--ENd Guide Details-->
 
     <form id="guideForm" method="POST">
       {% csrf_token %}
 
     <!-- Test Completion Form -->
-    <div class="container">
+    <div class="qcontainer">
       <form id="quizForm">
        
         <!-- Add questions and options here -->
@@ -300,7 +334,7 @@ body {
           </div>
         </div>
     
-        <button type="submit" class="submit-btn" style="padding: 10px 20px; background-color: #007bff; color: #fff; border: none; border-radius: 4px; cursor: pointer;">Submit</button>
+        <button type="submit" class="submit-btn" style="padding: 10px 20px;  background-color: #007bff; color: #fff; border: none; border-radius: 4px; cursor: pointer;">Submit</button>
     
         <!-- <button type="submit" class="submit-btn">Submit</button> -->
       </form>
@@ -318,10 +352,11 @@ body {
             <div class="row g-5">
                 <div class="col-md-6 col-lg-6 col-xl-3">
                     <div class="footer-item d-flex flex-column">
-                        <h4 class="text-white mb-4"><i class="fas fa-star-of-life me-3"></i>Wander Wise</h4>
+                     <img src="{% static 'img/logof.png' %}" alt="WanderWise">
+                        <!-- <h4 class="text-white mb-4"><i class="fas fa-star-of-life me-3"></i>Wander Wise</h4> -->
                         <p>At WanderWise, we're passionate about connecting travelers with local guides who bring destinations to life.
                         </p>
-                        <div class="d-flex align-items-center">
+                        <div class="d-flex align-items-center"> 
                             <i class="fas fa-share fa-2x text-white me-2"></i>
                             <a class="btn-square btn btn-primary text-white rounded-circle mx-1" href=""><i class="fab fa-facebook-f"></i></a>
                             <a class="btn-square btn btn-primary text-white rounded-circle mx-1" href=""><i class="fab fa-twitter"></i></a>
@@ -391,6 +426,7 @@ body {
             myToast.show();
         }
 
+
         document.getElementById('quizForm').addEventListener('submit', function(e) {
       e.preventDefault();
       let score = 0;
@@ -403,13 +439,16 @@ body {
           }
         }
       }
-      if (score >= 6) {
-        alert('You are eligible to be a guide.');
-        
-      } else {
-        alert('You need to answer at least 6 questions correctly to submit.');
-      }
-    });
+
+    // Check if score is 6 or above
+    if (score >= 6) {
+      // Redirect to the next page
+      window.location.href = '/next_page_url'; // Replace 'next_page_url' with the actual URL
+    } else {
+      // Retry or show a message
+      alert('You need to score 6 or above to proceed. Please retry.');
+    }
+  });
             
         
     </script>

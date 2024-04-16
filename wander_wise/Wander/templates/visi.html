@@ -55,7 +55,7 @@
     background-repeat: no-repeat;
     background-size: cover;
            }
-
+         
            .col-lg-12 {   
     width: 30%;
             }
@@ -79,6 +79,13 @@
            
             display: flex;
             min-height: 100vh;
+        
+            background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(251, 254, 255, 0.9)), url("{% static 'img/bg3.jpg' %}");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+           
         }
         .container {
             flex-grow: 1;
@@ -86,11 +93,13 @@
         }
         .dashboard {
             width: 250px;
-            background-color: #f4f4f4;
+            color: white;
+            background-color: #15b9d9;
             padding: 20px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
         .dashboard h2 {
+            color: white;
             margin-bottom: 20px;
             font-size: 24px;
         }
@@ -103,6 +112,11 @@
             align-items: center !important;
             justify-content: center !important;
         }
+        .main-content h1{
+            color: white;
+            text-align: center !important;
+            margin-bottom: 2rem;
+        }
         /* Guide Selection Form Styles */
         .guide-form {
             max-width: 500px;
@@ -110,6 +124,7 @@
         }
         .guide-form label {
             display: block;
+            color: white;
             margin-bottom: 5px;
         }
         .guide-form select,
@@ -174,8 +189,8 @@
         
         <div class="container-fluid position-relative p-0">
             
-            <nav class="navbar navbar-expand-lg navbar-light bg-white px-4 px-lg-5 py-3 py-lg-0" style="padding-top: 20px  !important;
-            padding-bottom: 20px  !important;">
+            <nav class="navbar navbar-expand-lg navbar-light bg-white px-4 px-lg-5 py-3 py-lg-0" style="padding-top: 0px  !important;
+            padding-bottom: 0px  !important;">
                 <a href="{%url 'index'%}" class="navbar-brand p-0">
                     <div id="heading">
                     <!-- <h1 class="text-primary m-0"><i class="fas fa-star-of-life me-3"></i>Wander Wise</h1> -->
@@ -236,7 +251,7 @@
                 <div class="row g-5">
                     <div class="col-md-6 col-lg-6 col-xl-3">
                         <div class="footer-item d-flex flex-column">
-                            <h4 class="text-white mb-4"><i class="fas fa-star-of-life me-3"></i>Wander Wise</h4>
+                            <img src="{% static 'img/logof.png' %}" alt="WanderWise">
                             <p>At WanderWise, we're passionate about connecting travelers with local guides who bring destinations to life.
                             </p>
                             <div class="d-flex align-items-center">
@@ -328,3 +343,5 @@
     </body>
 
 </html>
+
+

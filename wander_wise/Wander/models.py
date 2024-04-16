@@ -24,6 +24,7 @@ def __str__(self):
 class Guide(models.Model):
         languages_known = models.CharField(max_length=100)
         places_known = models.CharField(max_length=100)
+        
         govt_id = models.CharField(max_length=100)
         quiz_score = models.IntegerField()
 
