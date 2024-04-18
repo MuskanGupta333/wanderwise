@@ -183,6 +183,8 @@ body {
 <div class="fcontainer">
 <div class="details_card">
     <h1 style="text-align: center !important;">Guide Details Form</h1>
+     <h2>Welcome, {{ user.first_name }}</h2>
+
     <form id="guideForm" class="details" action="/submit_guide_details" method="POST">
       <div class="form-group">
         <label for="languagesKnown">Languages Known:</label>

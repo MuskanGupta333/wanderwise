@@ -6,13 +6,12 @@ from django.db.models import Avg
 from .utils import calculate_quiz_score  # Import the function to calculate quiz score
 from .models import Profile,Guide
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login as auth_login  # Renaming the login function
+from django.contrib.auth import authenticate, login as auth_login ,logout as auth_logout # Renaming the login function
 from django.contrib.auth.decorators import login_required
 
 
 def index(request):
     return render(request, 'index.html')
-
 def login(request):
     if request.method == 'POST':
         email = request.POST.get('email').strip()  # Trim whitespace
@@ -24,14 +23,22 @@ def login(request):
         user = authenticate(request, username=email, password=password)
 
         if user is not None:  # User authentication successful
+            print("Authentication successful.")  # Debug print statement
+
             try:
-                profile = Profile.objects.get(user=user)  # Retrieve the profile associated with the user
+                profile = Profile.objects.get(user_id=user.id)  # Retrieve the profile associated with the user ID
                 print("Profile found:", profile)  # Debug print statement
 
-                if profile.user_type == 'Visiter':
+                # Now you have both user and profile, you can use them as needed
+                # For example, you can access user.email, user.first_name, etc.
+                # Similarly, you can access profile attributes like profile.phone, profile.gender, etc.
+                
+                if profile.user_type.lower() == 'visiter':
                     messages.success(request, 'Logged in as visitor!')
+                    auth_login(request, user)  # Log in the user
+
                     return redirect('visitor')  # Redirect to visitor dashboard
-                elif profile.user_type == 'Guide':
+                elif profile.user_type.lower() == 'guide':
                     if hasattr(profile, 'guide'):  # Check if Guide profile exists
                         guide = profile.guide  # Retrieve the associated guide profile
                         if guide.quiz_score >= 6:  # If the user is a guide and already scored 6 or more
@@ -40,9 +47,13 @@ def login(request):
                             return redirect('guideinterface')
                         else:
                             messages.success(request, 'Please complete the exam!')
+                            auth_login(request, user)  # Log in the user
+
                             return redirect('exam')
                     else:
                         messages.success(request, 'Please complete the exam!')
+                        auth_login(request, user)  # Log in the user
+
                         return redirect('exam')
                 else:
                     messages.error(request, 'Invalid user type.')
@@ -52,6 +63,7 @@ def login(request):
             messages.error(request, 'Invalid email or password. Please try again.')
             print("Authentication failed.")  # Debug print statement
     return render(request, 'login.html')
+
 
 def signup(request):
     if request.method == 'POST':
@@ -122,10 +134,23 @@ def feature(request):
 def testimonial(request):
     return render(request, 'testimonial.html')
 
+@login_required
 def visitor(request):
-    return render(request, 'visitor.html')
+    user = request.user
+    if user.is_authenticated:
+        context = {
+            'user': user
+        }
+        return render(request, 'visitor.html', context)
+    else:
+        # Redirect to login page if the user is not authenticated
+        return redirect('login')
+    
+def logout(request):
+    auth_logout(request)  # Logout the user
+    return redirect('index') 
 
-
+@login_required
 def exam(request):
     if request.method == 'POST':
         languages_known = request.POST.get('languagesKnown')
@@ -154,7 +179,6 @@ def exam(request):
 
     # If the user hasn't completed the exam or hasn't scored 6 or more, render the exam page
     return render(request, 'exam.html')
-
 
 def guideinterface(request):
     user = request.user
