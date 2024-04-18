@@ -36,6 +36,8 @@ urlpatterns = [
     path( 'visitor/', views.visitor, name='visitor'),
     path( 'guideinterface/', views.guideinterface, name='guideinterface'),
     path( 'exam/', views.exam, name='exam'),
+    #path('logout/', views.logout, name='logout'),
+
 
 
     #path('contact.html', TemplateView.as_view(template_name='contact.html'), name='contact'),
