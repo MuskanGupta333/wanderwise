@@ -107,6 +107,12 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# Define your authentication backends
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',  # Default authentication backend
+    'django.contrib.auth.backends.AllowAllUsersModelBackend',  # Allow all users to authenticate
+]
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
@@ -132,6 +138,10 @@ STATICFILES_DIRS = [ os.path.join(BASE_DIR, 'Wander',  'static'),
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/accounts/profile/'  # Or any other URL you want to redirect to after login
+
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
