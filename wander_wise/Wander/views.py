@@ -124,7 +124,7 @@ def testimonial(request):
 
 def visitor(request):
     return render(request, 'visitor.html')
-@login_required
+
 
 def exam(request):
     if request.method == 'POST':
@@ -155,7 +155,7 @@ def exam(request):
     # If the user hasn't completed the exam or hasn't scored 6 or more, render the exam page
     return render(request, 'exam.html')
 
-@login_required
+
 def guideinterface(request):
     user = request.user
     if user.is_authenticated and user.profile.user_type == 'Guide':
