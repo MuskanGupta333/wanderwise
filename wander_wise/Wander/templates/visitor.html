@@ -202,7 +202,7 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav ms-auto py-0">
-                        <a href="{% url 'logout' %}" class="btn btn-primary rounded-pill text-white py-2 px-4 flex-wrap flex-sm-shrink-0">LogOut</a>
+                        <a href="{% url 'index' %}" class="btn btn-primary rounded-pill text-white py-2 px-4 flex-wrap flex-sm-shrink-0">LogOut</a>
                     </div>
                    
                 </div>
@@ -212,13 +212,15 @@
     
         <!-- Navbar End -->
         
-       <!-- Dashboard-->
-        <div class="container py-5" style="padding-bottom: 1rem !important;">
-         <div class="row justify-content-center" style="padding: inherit;">
-        <div class="col-lg-7 text-center">
-            <h1 class="display-4 mb-5"  style="margin-bottom: 0rem !important;" >Explore with ease with us!!</h1>
-            <!-- Include logout button here -->
-            <!--<a href="{% url 'index' %}" class="btn btn-primary btn-lg">Logout</a>-->
+    <div class="vertical" >
+        <div class="dashboard">
+            <h2>Dashboard</h2>
+            <h2>Hello, {{ user.first_name }} </h2>
+
+            <hr>
+            <p>Last Visited Place: Lucknow Zoo</p>
+            <p>Last Visited Date: April 10, 2024</p>
+            <p>Next Scheduled Visit: May 15, 2024</p>
         </div>
         <div class="container">
             <div class="main-content">
