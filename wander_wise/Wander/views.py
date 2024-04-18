@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import User,Guide
+from django.http import HttpResponse
+from django.template import loader
 from django.contrib.auth.hashers import make_password, check_password #make_password
 
 def index(request):
@@ -110,6 +112,9 @@ def exam(request):
 def visi(request):
     return render(request, 'visi.html')
 
+def all_users(request):
+    return render(request, 'all_users.html')
+
 def exam(request):
      if request.method == 'POST':
         languages_known = request.POST.get('languagesKnown')
@@ -149,3 +154,12 @@ def calculate_quiz_score(answers):
             score += 1
 
     return score
+
+
+def users(request):
+    myusers = User.objects.all().values()
+    template = loader.get_template('all_users.html')
+    context = {
+        'myusers' : myusers,
+    }
+    return HttpResponse(template.render(context, request))
