@@ -55,7 +55,7 @@
     background-repeat: no-repeat;
     background-size: cover;
            }
-         
+
            .col-lg-12 {   
     width: 30%;
             }
@@ -71,82 +71,7 @@
 
                 }
            
-              
-        /* Global Styles */
-        .vertical {
-            font-family: Arial, sans-serif;
-            margin-top: 10vh !important;
-           
-            display: flex;
-            min-height: 100vh;
-        
-            background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(251, 254, 255, 0.9)), url("{% static 'img/bg3.jpg' %}");
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
-           
-        }
-        .container {
-            flex-grow: 1;
-            padding: 20px;
-        }
-        .dashboard {
-            width: 250px;
-            color: white;
-            background-color: #15b9d9;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        .dashboard h2 {
-            color: white;
-            margin-bottom: 20px;
-            font-size: 24px;
-        }
-        .dashboard p {
-            margin-bottom: 10px;
-        }
-        .main-content {
-            flex-grow: 1;
-            padding: 20px;
-            align-items: center !important;
-            justify-content: center !important;
-        }
-        .main-content h1{
-            color: white;
-            text-align: center !important;
-            margin-bottom: 2rem;
-        }
-        /* Guide Selection Form Styles */
-        .guide-form {
-            max-width: 500px;
-            margin: 0 auto;
-        }
-        .guide-form label {
-            display: block;
-            color: white;
-            margin-bottom: 5px;
-        }
-        .guide-form select,
-        .guide-form input[type="datetime-local"] {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            margin-bottom: 15px;
-        }
-        .guide-form button {
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        .guide-form button:hover {
-            background-color: #0056b3;
-        }
-     
+                
         </style>
         
     </head>
@@ -189,8 +114,8 @@
         
         <div class="container-fluid position-relative p-0">
             
-            <nav class="navbar navbar-expand-lg navbar-light bg-white px-4 px-lg-5 py-3 py-lg-0" style="padding-top: 0px  !important;
-            padding-bottom: 0px  !important;">
+            <nav class="navbar navbar-expand-lg navbar-light bg-white px-4 px-lg-5 py-3 py-lg-0" style="padding-top: 20px  !important;
+            padding-bottom: 20px  !important;">
                 <a href="{%url 'index'%}" class="navbar-brand p-0">
                     <div id="heading">
                     <!-- <h1 class="text-primary m-0"><i class="fas fa-star-of-life me-3"></i>Wander Wise</h1> -->
@@ -212,37 +137,74 @@
     
         <!-- Navbar End -->
         
-    <div class="vertical" >
-        <div class="dashboard">
-            <h2>Dashboard</h2>
-            <hr>
-            <p>Last Visited Place: Lucknow Zoo</p>
-            <p>Last Visited Date: April 10, 2024</p>
-            <p>Next Scheduled Visit: May 15, 2024</p>
+       <!-- Dashboard-->
+        <div class="container py-5" style="padding-bottom: 1rem !important;">
+         <div class="row justify-content-center" style="padding: inherit;">
+        <div class="col-lg-7 text-center">
+            <h1 class="display-4 mb-5"  style="margin-bottom: 0rem !important;" >Explore with ease with us!!</h1>
+            <!-- Include logout button here -->
+            <!--<a href="{% url 'index' %}" class="btn btn-primary btn-lg">Logout</a>-->
         </div>
-        <div class="container">
-            <div class="main-content">
-                <h1>Plan your next visit with us 😊 </h1>
-                <form class="guide-form" id="guideForm">
-                    <label for="places">Select Place:</label>
-                    <select id="places" name="places">
-                        <option value="">Select Place</option>
-                        <option value="1">Lucknow Zoo</option>
-                        <option value="2">Bara Imambara</option>
-                        <option value="3">Chota Imambara</option>
-                        <option value="4">Rumi Darwaza</option>
-                    </select>
-                    <label for="visitDate">Select Date & Time:</label>
-                    <input type="datetime-local" id="visitDate" name="visitDate">
-                    <button type="submit">Show Available Guides</button>
-                </form>
-                <div id="guideList" style="display: none;">
-                    <h2>Available Guides</h2>
-                    <ul id="guides"></ul>
+    </div>
+      </div>
+
+<!-- Dashboard Start -->
+<div class="container-fluid bg-light py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card p-4">
+                    <h2 class="mb-4">Dashboard</h2>
+                    <div class="mb-5">
+                        <h5>hi, {{ User.first_name }}</h5>
+                        <h5>Last Visited Place: <span id="lastVisitedPlace">Place Name</span></h5>
+                        <h5>Last Visited Time: <span id="lastVisitedTime">Time</span></h5>
+                        <div class="mb-3">
+                            <label for="visit_datetime" class="form-label">Date & Time to Visit:</label>
+                            <input type="datetime-local" class="form-control" id="visit_datetime">
+                        </div>
+                    </div>
+                    <!-- Include dropdown menu for selecting next places to visit here -->
+                    <div class="mb-4">
+                        <label for="nextPlaces" class="form-label">Select Next Place to Visit:</label>
+                        <select class="form-select" id="nextPlaces">
+                            <option value="">Select Place</option>
+                            <option value="1">Bara Imambara</option>
+                            <option value="2">Chota Imambara</option>
+                            <option value="3">Lucknow Zoo</option>
+                            <option value="4">Rumi Darwaza</option>
+                            <option value="5">Hazratganj</option>
+                            <!-- Populate options dynamically here -->
+                        </select>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
+<!-- End of Dashboard-->
+
+<!-- Main content-->
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 text-center">
+            <div id="guideInfoContainer" style="display: none;">
+                <h3 class="mb-3">Available Guides</h3>
+                <!-- Guides information will be dynamically populated here -->
+                <p class="text-muted">Guide 1</p>
+                <p class="text-muted">Guide 2</p>
+                <p class="text-muted">Guide 3</p>
+                <!-- Add more guide information here -->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+        <!-- Main content-->
+
+
+
 
 
          <!-- Footer Start -->
@@ -251,7 +213,7 @@
                 <div class="row g-5">
                     <div class="col-md-6 col-lg-6 col-xl-3">
                         <div class="footer-item d-flex flex-column">
-                            <img src="{% static 'img/logof.png' %}" alt="WanderWise">
+                            <h4 class="text-white mb-4"><i class="fas fa-star-of-life me-3"></i>Wander Wise</h4>
                             <p>At WanderWise, we're passionate about connecting travelers with local guides who bring destinations to life.
                             </p>
                             <div class="d-flex align-items-center">
@@ -318,30 +280,25 @@
         <script src="../../static/js/main.js"></script>
          
         <script>
-            document.getElementById('guideForm').addEventListener('submit', function(e) {
-                e.preventDefault();
-                const place = document.getElementById('places').value;
-                const date = document.getElementById('visitDate').value;
-                if (place && date) {
-                    // Simulate fetching available guides (replace with actual data fetching logic)
-                    const guides = ['Guide 1', 'Guide 2', 'Guide 3', 'Guide 4'];
-                    const guideList = document.getElementById('guideList');
-                    const guidesUl = document.getElementById('guides');
-                    guidesUl.innerHTML = ''; // Clear previous list
-                    guides.forEach(guide => {
-                        const li = document.createElement('li');
-                        li.textContent = guide;
-                        guidesUl.appendChild(li);
-                    });
-                    guideList.style.display = 'block'; // Show available guides
-                } else {
-                    alert('Please select both a place and a date.');
-                }
+            document.addEventListener("DOMContentLoaded", function() {
+                const dropdown = document.getElementById('nextPlaces');
+                const guideInfoContainer = document.getElementById('guideInfoContainer');
+        
+                dropdown.addEventListener('change', function() {
+                    const selectedPlace = this.value;
+        
+                    if (selectedPlace) {
+                        guideInfoContainer.style.display = 'block';
+                        // You can populate the guide information dynamically here
+                        // For example, fetch guide information from a database based on the selected place
+                    } else {
+                        guideInfoContainer.style.display = 'none';
+                    }
+                });
             });
         </script>
+        
 
     </body>
 
 </html>
-
-
