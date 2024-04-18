@@ -30,6 +30,99 @@
 
     <!-- Template Stylesheet -->
     <link href="../../static/css/style.css" rel="stylesheet">
+
+    <style>
+       .footer {
+    background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)), url("{% static 'img/bg3.jpg' %}");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+           }
+           .p-0 {
+    padding: 10px !important;
+}
+/* .container{
+  padding-bottom: 10px !important;
+} */
+
+body {
+    font-family: Arial, sans-serif;
+    /* margin: 20px; */
+    background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.9)), url("{% static 'img/bg3.jpg' %}");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+ 
+  
+  .qcontainer {
+            width: 80%;
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .question {
+            margin-bottom: 20px;
+        }
+
+        .question p {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .options label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .options input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        .submit-btn {
+            display: block;
+            margin: 2px auto;
+            padding: 10px 20px;
+            background-color: #87c1ff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background-color: #0056b3;
+        }
+
+      
+ .fcontainer {
+    display: flex;
+    justify-content: flex-end; /* Align items to the right */
+    width: 100%;
+    max-width: 800px; /* Adjust the max-width as needed */
+    /* margin-top: 10 rem !important; */
+    margin: 60px auto !important; /* Add margin to create space between header and form */
+}
+ 
+  .details_card {
+    
+    margin: auto;
+    width: 200vh;
+    max-width: 1000px; /* Adjust the width as needed */
+    background-color:  whitesmoke;
+    border-radius: 30px;
+    padding: 20px;
+    border: 3px solid rgb(0, 0, 170);
+  }
+
+
+    </style>
+
 </head>
 <body>
 
@@ -70,8 +163,8 @@
     <div class="container-fluid position-relative p-0">
         <nav class="navbar navbar-expand-lg navbar-light bg-white px-4 px-lg-5 py-3 py-lg-0">
             <a href="{%url 'index'%}" class="navbar-brand p-0">
-                <h1 class="text-primary m-0"><i class="fas fa-star-of-life me-3"></i>Welcome to Wander Wise</h1>
-                <!-- <img src="img/logo.png" alt="Logo"> -->
+               <!-- <h1 class="text-primary m-0"><i class="fas fa-star-of-life me-3"></i>Wander Wise</h1> -->
+               <img src="{% static 'img/logo.png' %}" alt="WanderWise">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                 <span class="fa fa-bars"></span>
@@ -87,131 +180,168 @@
     <!-- Navbar End -->
 
     <!--Guide Details-->
+<div class="fcontainer">
+<div class="details_card">
+    <h1 style="text-align: center !important;">Guide Details Form</h1>
+    <form id="guideForm" class="details" action="/submit_guide_details" method="POST">
+      <div class="form-group">
+        <label for="languagesKnown">Languages Known:</label>
+        <div class="col-xl-6">
+        <select id="languages_Known" class="form-select py-3 border-primary bg-transparent" name="languagesKnown" required>
+          <option value="" disabled selected>Select Language</option>
+          <option value="Hindi">Hindi</option>
+          <option value="English">English</option>
+        </select>
+      </div>
+      </div>
+      <div class="form-group">
+        <label for="placesKnown">Places Known:</label>
+        <div class="col-xl-6">
+        <select id="places_Known "  class="form-select py-3 border-primary bg-transparent" name="placesKnown" required>
+          <option value="" disabled selected>Select Place</option>
+          
+          <option value="1">Bara Imambara</option>
+          <option value="2">Chota Imambara</option>
+          <option value="3">Lucknow Zoo</option>
+          <option value="4">Rumi Darwaza</option>
+          <option value="5">Hazratganj</option>
+          <!-- Add more options as needed -->
+        </select>
+      </div>
+      </div>
+      <div class="form-group">
+        <label for="govtIdType">Valid Government ID Type:</label>
+        <div class="col-xl-6">
+        <select id="govtIdType " class="form-select py-3 border-primary bg-transparent" name="govtIdType" required>
+          <option value="" disabled selected>Select ID Type</option>
+          <option value="PAN">PAN Card</option>
+          <option value="Aadhar">Aadhar Card</option>
+          <!-- Add more options as needed -->
+        </select>
+      </div>
+      </div>
 
-    <h1>Guide Details Form</h1>
-    <form id="guideForm" action="/submit_guide_details" method="POST">
-        
+      <div class="form-group">
+      <div class="col-xl-6"> 
+        <label for="govtIdNo">ID Number:</label>
+        <input type="text" style="color: #8d8d8d !important;" class="form-control py-3 border-primary bg-transparent text-white" id="govt_id" name="govtIdNo" required>
+      </div>
+      </div>
         
     </form>
+  </div>
+</div>
     <!--ENd Guide Details-->
 
     <form id="guideForm" method="POST">
       {% csrf_token %}
 
     <!-- Test Completion Form -->
-    <div class="container">
-        <form id="quizForm">
-            <div style="margin-bottom: 15px;">
-                <label for="languagesKnown" style="display: block; margin-bottom: 5px;">Languages Known:</label>
-                <input type="text" id="languagesKnown" name="languagesKnown" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;" required>
-            </div>
-            <div style="margin-bottom: 15px;">
-                <label for="placesKnown" style="display: block; margin-bottom: 5px;">Places Known:</label>
-                <input type="text" id="placesKnown" name="placesKnown" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;" required>
-            </div>
-            <div style="margin-bottom: 15px;">
-                <label for="govtId" style="display: block; margin-bottom: 5px;">Valid Government ID:</label>
-                <input type="text" id="govtId" name="govtId" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;" required>
-            </div>
-            <div class="question">
-                <p>1. What is the nickname of Lucknow?</p>
-                <div class="options">
-                  <label><input type="radio" name="q1" value="A"> A) City of Nawabs</label>
-                  <label><input type="radio" name="q1" value="B"> B) City of Lakes</label>
-                  <label><input type="radio" name="q1" value="C"> C) Pink City</label>
-                  <label><input type="radio" name="q1" value="D"> D) City of Gardens</label>
-                </div>
-              </div>
-              <div class="question">
-                <p>2. Which famous monument in Lucknow is also known as the "Palace of Lights"?</p>
-                <div class="options">
-                  <label><input type="radio" name="q2" value="A"> A) Bara Imambara</label>
-                  <label><input type="radio" name="q2" value="B"> B) Rumi Darwaza</label>
-                  <label><input type="radio" name="q2" value="C"> C) Chota Imambara</label>
-                  <label><input type="radio" name="q2" value="D"> D) Residency</label>
-                </div>
-              </div>
-              <!-- Add more questions and options here -->
-              <!-- Question 3 to Question 10 -->
-              <div class="question">
-                <p>3. What is the traditional Lucknowi embroidery called?</p>
-                <div class="options">
-                  <label><input type="radio" name="q3" value="A"> A) Phulkari</label>
-                  <label><input type="radio" name="q3" value="B"> B) Chikankari</label>
-                  <label><input type="radio" name="q3" value="C"> C) Kantha</label>
-                  <label><input type="radio" name="q3" value="D"> D) Zardozi</label>
-                </div>
-              </div>
-              <div class="question">
-                <p>4. Who was the first Nawab of Awadh?</p>
-                <div class="options">
-                  <label><input type="radio" name="q4" value="A"> A) Nawab Wajid Ali Shah</label>
-                  <label><input type="radio" name="q4" value="B"> B) Nawab Asaf-ud-Daula</label>
-                  <label><input type="radio" name="q4" value="C"> C) Nawab Saadat Khan</label>
-                  <label><input type="radio" name="q4" value="D"> D) Nawab Shuja-ud-Daula</label>
-                </div>
-              </div>
-              <div class="question">
-                <p>5. Which river flows through Lucknow?</p>
-                <div class="options">
-                  <label><input type="radio" name="q5" value="A"> A) Yamuna</label>
-                  <label><input type="radio" name="q5" value="B"> B) Ganga</label>
-                  <label><input type="radio" name="q5" value="C"> C) Tapti</label>
-                  <label><input type="radio" name="q5" value="D"> D) Gomti</label>
-                </div>
-              </div>
-              <div class="question">
-                <p>6. What is the famous sweet dish of Lucknow?</p>
-                <div class="options">
-                  <label><input type="radio" name="q6" value="A"> A) Jalebi</label>
-                  <label><input type="radio" name="q6" value="B"> B) Rasgulla</label>
-                  <label><input type="radio" name="q6" value="C"> C) Kulfi</label>
-                  <label><input type="radio" name="q6" value="D"> D) Tunde ke Kabab</label>
-                </div>
-              </div>
-              <div class="question">
-                <p>7. Which British residency in Lucknow was famously besieged during the Indian Rebellion of 1857?</p>
-                <div class="options">
-                  <label><input type="radio" name="q7" value="A"> A) Kaiserbagh Palace</label>
-                  <label><input type="radio" name="q7" value="B"> B) Dilkusha Kothi</label>
-                  <label><input type="radio" name="q7" value="C"> C) Chhattar Manzil</label>
-                  <label><input type="radio" name="q7" value="D"> D) Residency</label>
-                </div>
-              </div>
-              <div class="question">
-                <p>8. Which famous poet was associated with Lucknow's cultural heritage?</p>
-                <div class="options">
-                  <label><input type="radio" name="q8" value="A"> A) Kabir Das</label>
-                  <label><input type="radio" name="q8" value="B"> B) Amir Khusro</label>
-                  <label><input type="radio" name="q8" value="C"> C) Mir Taqi Mir</label>
-                  <label><input type="radio" name="q8" value="D"> D) Mirza Ghalib</label>
-                </div>
-              </div>
-              <div class="question">
-                <p>9. What is the traditional attire for men in Lucknow?</p>
-                <div class="options">
-                  <label><input type="radio" name="q9" value="A"> A) Kurta-Pajama</label>
-                  <label><input type="radio" name="q9" value="B"> B) Dhoti-Kurta</label>
-                  <label><input type="radio" name="q9" value="C"> C) Sherwani</label>
-                  <label><input type="radio" name="q9" value="D"> D) Lungi</label>
-                </div>
-              </div>
-              <div class="question">
-                <p>10. Which festival is celebrated with great enthusiasm in Lucknow, showcasing its vibrant culture?</p>
-                <div class="options">
-                  <label><input type="radio" name="q10" value="A"> A) Diwali</label>
-                  <label><input type="radio" name="q10" value="B"> B) Holi</label>
-                  <label><input type="radio" name="q10" value="C"> C) Eid-ul-Fitr</label>
-                  <label><input type="radio" name="q10" value="D"> D) Lucknow Mahotsav</label>
-                </div>
-              </div>
-              
-              <button type="submit" class="submit-btn" style="padding: 10px 20px;display: none; background-color: #007bff; color: #fff; border: none; border-radius: 4px; cursor: pointer;">Submit</button>
-    </form>
-  </form>
+    <div class="qcontainer">
+      <form id="quizForm">
+       
+        <!-- Add questions and options here -->
+        <div class="question">
+          <p>1. What is the nickname of Lucknow?</p>
+          <div class="options">
+            <label><input type="radio" name="q1" value="A"> A) City of Nawabs</label>
+            <label><input type="radio" name="q1" value="B"> B) City of Lakes</label>
+            <label><input type="radio" name="q1" value="C"> C) Pink City</label>
+            <label><input type="radio" name="q1" value="D"> D) City of Gardens</label>
+          </div>
+        </div>
+        <div class="question">
+          <p>2. Which famous monument in Lucknow is also known as the "Palace of Lights"?</p>
+          <div class="options">
+            <label><input type="radio" name="q2" value="A"> A) Bara Imambara</label>
+            <label><input type="radio" name="q2" value="B"> B) Rumi Darwaza</label>
+            <label><input type="radio" name="q2" value="C"> C) Chota Imambara</label>
+            <label><input type="radio" name="q2" value="D"> D) Residency</label>
+          </div>
+        </div>
+        <!-- Add more questions and options here -->
+        <!-- Question 3 to Question 10 -->
+        <div class="question">
+          <p>3. What is the traditional Lucknowi embroidery called?</p>
+          <div class="options">
+            <label><input type="radio" name="q3" value="A"> A) Phulkari</label>
+            <label><input type="radio" name="q3" value="B"> B) Chikankari</label>
+            <label><input type="radio" name="q3" value="C"> C) Kantha</label>
+            <label><input type="radio" name="q3" value="D"> D) Zardozi</label>
+          </div>
+        </div>
+        <div class="question">
+          <p>4. Who was the first Nawab of Awadh?</p>
+          <div class="options">
+            <label><input type="radio" name="q4" value="A"> A) Nawab Wajid Ali Shah</label>
+            <label><input type="radio" name="q4" value="B"> B) Nawab Asaf-ud-Daula</label>
+            <label><input type="radio" name="q4" value="C"> C) Nawab Saadat Khan</label>
+            <label><input type="radio" name="q4" value="D"> D) Nawab Shuja-ud-Daula</label>
+          </div>
+        </div>
+        <div class="question">
+          <p>5. Which river flows through Lucknow?</p>
+          <div class="options">
+            <label><input type="radio" name="q5" value="A"> A) Yamuna</label>
+            <label><input type="radio" name="q5" value="B"> B) Ganga</label>
+            <label><input type="radio" name="q5" value="C"> C) Tapti</label>
+            <label><input type="radio" name="q5" value="D"> D) Gomti</label>
+          </div>
+        </div>
+        <div class="question">
+          <p>6. What is the famous sweet dish of Lucknow?</p>
+          <div class="options">
+            <label><input type="radio" name="q6" value="A"> A) Jalebi</label>
+            <label><input type="radio" name="q6" value="B"> B) Rasgulla</label>
+            <label><input type="radio" name="q6" value="C"> C) Kulfi</label>
+            <label><input type="radio" name="q6" value="D"> D) Tunde ke Kabab</label>
+          </div>
+        </div>
+        <div class="question">
+          <p>7. Which British residency in Lucknow was famously besieged during the Indian Rebellion of 1857?</p>
+          <div class="options">
+            <label><input type="radio" name="q7" value="A"> A) Kaiserbagh Palace</label>
+            <label><input type="radio" name="q7" value="B"> B) Dilkusha Kothi</label>
+            <label><input type="radio" name="q7" value="C"> C) Chhattar Manzil</label>
+            <label><input type="radio" name="q7" value="D"> D) Residency</label>
+          </div>
+        </div>
+        <div class="question">
+          <p>8. Which famous poet was associated with Lucknow's cultural heritage?</p>
+          <div class="options">
+            <label><input type="radio" name="q8" value="A"> A) Kabir Das</label>
+            <label><input type="radio" name="q8" value="B"> B) Amir Khusro</label>
+            <label><input type="radio" name="q8" value="C"> C) Mir Taqi Mir</label>
+            <label><input type="radio" name="q8" value="D"> D) Mirza Ghalib</label>
+          </div>
+        </div>
+        <div class="question">
+          <p>9. What is the traditional attire for men in Lucknow?</p>
+          <div class="options">
+            <label><input type="radio" name="q9" value="A"> A) Kurta-Pajama</label>
+            <label><input type="radio" name="q9" value="B"> B) Dhoti-Kurta</label>
+            <label><input type="radio" name="q9" value="C"> C) Sherwani</label>
+            <label><input type="radio" name="q9" value="D"> D) Lungi</label>
+          </div>
+        </div>
+        <div class="question">
+          <p>10. Which festival is celebrated with great enthusiasm in Lucknow, showcasing its vibrant culture?</p>
+          <div class="options">
+            <label><input type="radio" name="q10" value="A"> A) Diwali</label>
+            <label><input type="radio" name="q10" value="B"> B) Holi</label>
+            <label><input type="radio" name="q10" value="C"> C) Eid-ul-Fitr</label>
+            <label><input type="radio" name="q10" value="D"> D) Lucknow Mahotsav</label>
+          </div>
+        </div>
+    
+        <button type="submit" class="submit-btn" style="padding: 10px 20px;  background-color: #007bff; color: #fff; border: none; border-radius: 4px; cursor: pointer;">Submit</button>
+    
+        <!-- <button type="submit" class="submit-btn">Submit</button> -->
+      </form>
 
-            
-        </form>
+
+
+
     </div>
 
  
@@ -222,10 +352,11 @@
             <div class="row g-5">
                 <div class="col-md-6 col-lg-6 col-xl-3">
                     <div class="footer-item d-flex flex-column">
-                        <h4 class="text-white mb-4"><i class="fas fa-star-of-life me-3"></i>Wander Wise</h4>
+                     <img src="{% static 'img/logof.png' %}" alt="WanderWise">
+                        <!-- <h4 class="text-white mb-4"><i class="fas fa-star-of-life me-3"></i>Wander Wise</h4> -->
                         <p>At WanderWise, we're passionate about connecting travelers with local guides who bring destinations to life.
                         </p>
-                        <div class="d-flex align-items-center">
+                        <div class="d-flex align-items-center"> 
                             <i class="fas fa-share fa-2x text-white me-2"></i>
                             <a class="btn-square btn btn-primary text-white rounded-circle mx-1" href=""><i class="fab fa-facebook-f"></i></a>
                             <a class="btn-square btn btn-primary text-white rounded-circle mx-1" href=""><i class="fab fa-twitter"></i></a>
@@ -288,33 +419,38 @@
     <!-- Your existing JavaScript code goes here -->
 
     <script>
-      document.getElementById('quizForm').addEventListener('submit', function(e) {
-          e.preventDefault();
-  
-          // Check if guide details are filled out
-          const languagesKnown = document.getElementById('languagesKnown').value.trim();
-          const placesKnown = document.getElementById('placesKnown').value.trim();
-          const govtId = document.getElementById('govtId').value.trim();
-  
-          // Check if at least six questions are answered correctly
-          let score = 0;
-          const answers = ['A', 'A', 'B', 'B', 'D', 'B', 'D', 'C', 'C', 'D']; // Correct answers
-          for (let i = 1; i <= 10; i++) {
-              const selectedOption = document.querySelector(`input[name=q${i}]:checked`);
-              if (selectedOption && selectedOption.value === answers[i - 1]) {
-                  score++;
-              }
+        function completeTest() {
+            // Perform actions to complete the test
+            // Show toaster notification upon completion
+            var myToast = new bootstrap.Toast(document.getElementById('toaster'));
+            myToast.show();
+        }
+
+
+        document.getElementById('quizForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      let score = 0;
+      const answers = ['A', 'A', 'B', 'B', 'D', 'B', 'D', 'C', 'C', 'D']; // Update with correct answers
+      for (let i = 1; i <= 10; i++) {
+        const selectedOption = document.querySelector(`input[name=q${i}]:checked`);
+        if (selectedOption) {
+          if (selectedOption.value === answers[i - 1]) {
+            score++;
           }
-  
-          // Enable submit button if conditions are met, else display message
-          if (languagesKnown && placesKnown && govtId && score >= 6) {
-              document.querySelector('.submit-btn').style.display = 'block';
-             // document.getElementById('quizForm').reset(); // Reset the form
-          } else {
-              alert('Please fill out guide details and answer at least six questions correctly to submit.');
-          }
-      });
-  </script>
-  
+        }
+      }
+
+    // Check if score is 6 or above
+    if (score >= 6) {
+      // Redirect to the next page
+      window.location.href = '/next_page_url'; // Replace 'next_page_url' with the actual URL
+    } else {
+      // Retry or show a message
+      alert('You need to score 6 or above to proceed. Please retry.');
+    }
+  });
+            
+        
+    </script>
 </body>
 </html>
