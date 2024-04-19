@@ -6,8 +6,9 @@ from django.db.models import Avg
 from .utils import calculate_quiz_score  # Import the function to calculate quiz score
 from .models import Profile,Guide
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login as auth_login ,logout as auth_logout # Renaming the login function
+from django.contrib.auth import authenticate, login as auth_login ,logout as django_logout # Renaming the login function
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
 
 
 def index(request):
@@ -147,9 +148,14 @@ def visitor(request):
         return redirect('login')
     
 def logout(request):
-    auth_logout(request)  # Logout the user
-    return redirect('index') 
+    django_logout(request)  # Use Django's logout function to logout the user
+# Create an HttpResponse object with a no-cache response header
+    response = HttpResponse("You have been logged out.")
+    response['Cache-Control'] = 'no-cache, no-store, must-revalidate'  # HTTP 1.1.
+    response['Pragma'] = 'no-cache'  # HTTP 1.0.
+    response['Expires'] = '0'  # Proxies.
 
+    return response
 @login_required
 def exam(request):
     if request.method == 'POST':

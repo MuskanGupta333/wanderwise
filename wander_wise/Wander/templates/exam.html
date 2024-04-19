@@ -185,7 +185,7 @@ body {
     <h1 style="text-align: center !important;">Guide Details Form</h1>
      <h2>Welcome, {{ user.first_name }}</h2>
 
-    <form id="guideForm" class="details" action="/submit_guide_details" method="POST">
+    <!-- <form id="guideForm" class="details" action="/submit_guide_details" method="POST">
       <div class="form-group">
         <label for="languagesKnown">Languages Known:</label>
         <div class="col-xl-6">
@@ -207,7 +207,7 @@ body {
           <option value="3">Lucknow Zoo</option>
           <option value="4">Rumi Darwaza</option>
           <option value="5">Hazratganj</option>
-          <!-- Add more options as needed -->
+          
         </select>
       </div>
       </div>
@@ -218,7 +218,7 @@ body {
           <option value="" disabled selected>Select ID Type</option>
           <option value="PAN">PAN Card</option>
           <option value="Aadhar">Aadhar Card</option>
-          <!-- Add more options as needed -->
+          
         </select>
       </div>
       </div>
@@ -230,7 +230,105 @@ body {
       </div>
       </div>
         
+    </form> -->
+
+    <form id="guideForm" class="details" action="/submit_guide_details" method="POST">
+      <div class="form-group">
+        <label style=" font-size: 1.3rem;font-weight: 500;color: black">Languages Known:</label>
+        <div class="col-xl-6">
+          <div>
+            <input type="checkbox" id="language_Hindi" name="languagesKnown[]" value="Hindi">
+            <label for="language_Hindi">Hindi</label>
+          </div>
+          <div>
+            <input type="checkbox" id="language_English" name="languagesKnown[]" value="English">
+            <label for="language_English">English</label>
+          </div>
+          <div>
+            <input type="checkbox" id="language_Hindi" name="languagesKnown[]" value="Hindi">
+            <label for="language_Hindi">Urdu</label>
+          </div>
+          <div>
+            <input type="checkbox" id="language_English" name="languagesKnown[]" value="English">
+            <label for="language_English">Arabi</label>
+          </div>
+          <div>
+            <input type="checkbox" id="language_Hindi" name="languagesKnown[]" value="Hindi">
+            <label for="language_Hindi">Korean</label>
+          </div>
+          <div>
+            <input type="checkbox" id="language_English" name="languagesKnown[]" value="English">
+            <label for="language_English">Japanese</label>
+          </div>
+          <div>
+            <input type="checkbox" id="language_Hindi" name="languagesKnown[]" value="Hindi">
+            <label for="language_Hindi">French</label>
+          </div>
+          <div>
+            <input type="checkbox" id="language_English" name="languagesKnown[]" value="English">
+            <label for="language_English">Spanish</label>
+          </div>
+          <!-- Add more checkboxes for languages as needed -->
+        </div>
+        <div id="selectedLanguages"></div> <!-- To display selected languages -->
+      </div>
+    
+      <div class="form-group">
+        <label style=" font-size: 1.3rem;font-weight: 500;color: black">Places Known:</label>
+        <div class="col-xl-6">
+          <div>
+            <input type="checkbox" id="place_BaraImambara" name="placesKnown[]" value="Bara Imambara">
+            <label for="place_BaraImambara">Bara Imambara</label>
+          </div>
+          <div>
+            <input type="checkbox" id="place_ChotaImambara" name="placesKnown[]" value="Chota Imambara">
+            <label for="place_ChotaImambara">Chota Imambara</label>
+          </div>
+          <div>
+            <input type="checkbox" id="place_BaraImambara" name="placesKnown[]" value="Bara Imambara">
+            <label for="place_BaraImambara">Rumi Darwaza</label>
+          </div>
+          <div>
+            <input type="checkbox" id="place_ChotaImambara" name="placesKnown[]" value="Chota Imambara">
+            <label for="place_ChotaImambara">Lucknow Zoo</label>
+          </div>
+          <div>
+            <input type="checkbox" id="place_ChotaImambara" name="placesKnown[]" value="Chota Imambara">
+            <label for="place_ChotaImambara">Residency</label>
+          </div>
+          <!-- Add more checkboxes for places as needed -->
+        </div>
+        <div id="selectedPlaces"></div> <!-- To display selected places -->
+      </div>
+    
+      <div class="form-group">
+        <label for="govtIdType" style=" font-size: 1.3rem;font-weight: 500;color: black">Valid Government ID Type:</label>
+        <div class="col-xl-6">
+          <select id="govtIdType" class="form-select py-3 border-primary bg-transparent" name="govtIdType" required>
+            <option value="" disabled selected>Select ID Type</option>
+            <option value="PAN">PAN Card</option>
+            <option value="Aadhar">Aadhar Card</option>
+            <!-- Add more options as needed -->
+          </select>
+        </div>
+      </div>
+    
+      <div class="form-group">
+        <div class="col-xl-6"> 
+          <label for="govtIdNo" style=" font-size: 1.3rem;font-weight: 500;color: black">ID Number:</label>
+          <input type="text" style="color: #8d8d8d !important;" class="form-control py-3 border-primary bg-transparent text-white" id="govt_id" name="govtIdNo" required>
+          <div id="govtIdError" style="color: red;"></div> <!-- Error message for validation -->
+        </div>
+      </div>
+    
     </form>
+
+
+
+
+
+    
+
   </div>
 </div>
     <!--ENd Guide Details-->
@@ -452,7 +550,59 @@ body {
     }
   });
             
-        
+  function showSelectedLanguages() {
+    const selectedLanguages = document.querySelectorAll('input[name="languagesKnown[]"]:checked');
+    const selectedLanguagesDiv = document.getElementById('selectedLanguages');
+    selectedLanguagesDiv.innerHTML = '';
+    selectedLanguages.forEach(language => {
+      const label = document.createElement('label');
+      label.textContent = language.value;
+      selectedLanguagesDiv.appendChild(label);
+      selectedLanguagesDiv.appendChild(document.createElement('br'));
+    });
+  }
+
+  // Function to display selected places
+  function showSelectedPlaces() {
+    const selectedPlaces = document.querySelectorAll('input[name="placesKnown[]"]:checked');
+    const selectedPlacesDiv = document.getElementById('selectedPlaces');
+    selectedPlacesDiv.innerHTML = '';
+    selectedPlaces.forEach(place => {
+      const label = document.createElement('label');
+      label.textContent = place.value;
+      selectedPlacesDiv.appendChild(label);
+      selectedPlacesDiv.appendChild(document.createElement('br'));
+    });
+  }
+
+  // Event listeners for checkboxes
+  const languageCheckboxes = document.querySelectorAll('input[name="languagesKnown[]"]');
+  languageCheckboxes.forEach(checkbox => {
+    checkbox.addEventListener('change', showSelectedLanguages);
+  });
+
+  const placeCheckboxes = document.querySelectorAll('input[name="placesKnown[]"]');
+  placeCheckboxes.forEach(checkbox => {
+    checkbox.addEventListener('change', showSelectedPlaces);
+  });
+
+  // Validation for PAN and Aadhar cards
+  const govtIdInput = document.getElementById('govt_id');
+  const govtIdTypeSelect = document.getElementById('govtIdType');
+  const govtIdError = document.getElementById('govtIdError');
+
+  govtIdInput.addEventListener('input', function() {
+    const govtIdType = govtIdTypeSelect.value;
+    const govtIdValue = govtIdInput.value;
+    if (govtIdType === 'PAN' && !/^([A-Z]){5}([0-9]){4}([A-Z]){1}$/.test(govtIdValue)) {
+      govtIdError.textContent = 'Invalid PAN Card number';
+    } else if (govtIdType === 'Aadhar' && !/^\d{12}$/.test(govtIdValue)) {
+      govtIdError.textContent = 'Invalid Aadhar Card number';
+    } else {
+      govtIdError.textContent = '';
+    }
+  });
+
     </script>
 </body>
 </html>
