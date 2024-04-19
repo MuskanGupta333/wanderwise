@@ -22,6 +22,7 @@ from django.contrib.auth.models import User  # Import the User model
 
 def __str__(self):
         return self.email '''
+
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     phone = models.CharField(max_length=15)
@@ -32,8 +33,10 @@ class Profile(models.Model):
     state = models.CharField(max_length=100)
     country = models.CharField(max_length=100)
     address = models.CharField(max_length=255)
+
 def __str__(self):
         return self.user.username
+
 class Guide(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='guide', null=True)  # Allow null temporarily
     languages_known = models.CharField(max_length=100)
