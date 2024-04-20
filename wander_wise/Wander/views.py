@@ -1,3 +1,4 @@
+from django.views import View
 from django.shortcuts import render, redirect
 from django.contrib import messages
 #from .models import User,Guide
@@ -9,6 +10,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login as auth_login ,logout as django_logout # Renaming the login function
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
+from .forms import ExamForm
 
 
 def index(request):
@@ -159,9 +161,10 @@ def logout(request):
 @login_required
 def exam(request):
     if request.method == 'POST':
-        languages_known = request.POST.get('languagesKnown')
-        places_known = request.POST.get('placesKnown')
-        govt_id = request.POST.get('govtId')
+        languages_known = request.POST.get('languagesKnown[]')
+        places_known = request.POST.get('placesKnown[]')
+        govtIdType = request.POST.get('govtIdType')
+        govt_id = request.POST.get('govtIdNo')
         quiz_score = calculate_quiz_score(request.POST)  # You need to implement this function
 
         # Create a new Guide instance associated with the logged-in user and save it to the database
@@ -169,11 +172,12 @@ def exam(request):
             user=request.user,  # Associate the guide with the logged-in user
             languages_known=languages_known,
             places_known=places_known,
+            govtIdType=govtIdType,
             govt_id=govt_id,
             quiz_score=quiz_score
         )
         guide.save()  # Call .save() to persist data to the database
-        return redirect('guideinterface')  # Redirect to a success page
+        return redirect('guideinterface') # Redirect to a success page
 
     try:
         guide = Guide.objects.get(user=request.user)
@@ -185,6 +189,17 @@ def exam(request):
 
     # If the user hasn't completed the exam or hasn't scored 6 or more, render the exam page
     return render(request, 'exam.html')
+
+# class exam(View):
+#     def get(self,request):
+#         form = ExamForm()
+#         return render(request,'templates/exam.html',{'form':form})
+    
+#     def post(self,request):
+#         form = ExamForm(request.POST,request.FILES)
+#         if form.is_valid():
+#             form.save()
+#             return render(request,'templates/exam.html',{'form':form})
 
 def guideinterface(request):
     user = request.user
@@ -217,3 +232,5 @@ def guideinterface(request):
         messages.error(request, 'Access denied!')
         return redirect('login')
 
+
+  

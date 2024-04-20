@@ -20,11 +20,16 @@ class Profile(models.Model):
 def __str__(self):
         return self.user.username
 
+govtIdType_choice=(
+     ('PAN Card','PAN Card'),
+     ('Aadhar Card','Aadhar Card')
+)
 class Guide(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='guide', null=True)  # Allow null temporarily
-    languages_known = models.CharField(max_length=100)
-    places_known = models.CharField(max_length=100)
-    govt_id = models.CharField(max_length=100)
+    languages_known = models.CharField(max_length=100,default='')
+    places_known = models.CharField(max_length=100,default='')
+    govtIdType = models.CharField(choices=govtIdType_choice ,max_length=20)
+    govt_id = models.CharField(max_length=100,default='')
     quiz_score = models.IntegerField(default=0)  # Default value for quiz score
 
     def __str__(self):

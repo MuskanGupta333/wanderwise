@@ -119,7 +119,14 @@ body {
     padding: 20px;
     border: 2px solid rgb(51, 51, 51);
   }
-
+  .error-msg {
+            color: red;
+            font-size: 12px;
+        }
+  .checkbox-label {
+            display: inline-block;
+            margin-right: 10px;
+        }
 
     </style>
 
@@ -232,7 +239,8 @@ body {
         
     </form> -->
 
-    <form id="guideForm" class="details" action="/submit_guide_details" method="POST">
+    <form id="guideForm" class="details"  method="POST">
+      {% csrf_token %}
       <div class="form-group">
         <label style=" font-size: 1.3rem;font-weight: 500;color: black">Languages Known:</label>
         <div class="col-xl-6">
@@ -245,27 +253,27 @@ body {
             <label for="language_English">English</label>
           </div>
           <div>
-            <input type="checkbox" id="language_Hindi" name="languagesKnown[]" value="Hindi">
+            <input type="checkbox" id="language_Hindi" name="languagesKnown[]" value="Urdu">
             <label for="language_Hindi">Urdu</label>
           </div>
           <div>
-            <input type="checkbox" id="language_English" name="languagesKnown[]" value="English">
+            <input type="checkbox" id="language_English" name="languagesKnown[]" value="Arabi">
             <label for="language_English">Arabi</label>
           </div>
           <div>
-            <input type="checkbox" id="language_Hindi" name="languagesKnown[]" value="Hindi">
+            <input type="checkbox" id="language_Hindi" name="languagesKnown[]" value="Korean">
             <label for="language_Hindi">Korean</label>
           </div>
           <div>
-            <input type="checkbox" id="language_English" name="languagesKnown[]" value="English">
+            <input type="checkbox" id="language_English" name="languagesKnown[]" value="Japanese">
             <label for="language_English">Japanese</label>
           </div>
           <div>
-            <input type="checkbox" id="language_Hindi" name="languagesKnown[]" value="Hindi">
+            <input type="checkbox" id="language_Hindi" name="languagesKnown[]" value="French">
             <label for="language_Hindi">French</label>
           </div>
           <div>
-            <input type="checkbox" id="language_English" name="languagesKnown[]" value="English">
+            <input type="checkbox" id="language_English" name="languagesKnown[]" value="Spanish">
             <label for="language_English">Spanish</label>
           </div>
           <!-- Add more checkboxes for languages as needed -->
@@ -285,15 +293,15 @@ body {
             <label for="place_ChotaImambara">Chota Imambara</label>
           </div>
           <div>
-            <input type="checkbox" id="place_BaraImambara" name="placesKnown[]" value="Bara Imambara">
+            <input type="checkbox" id="place_Rumi Darwaza" name="placesKnown[]" value="Rumi Darwaza">
             <label for="place_BaraImambara">Rumi Darwaza</label>
           </div>
           <div>
-            <input type="checkbox" id="place_ChotaImambara" name="placesKnown[]" value="Chota Imambara">
+            <input type="checkbox" id="place_Lucknow Zoo" name="placesKnown[]" value="Lucknow Zoo">
             <label for="place_ChotaImambara">Lucknow Zoo</label>
           </div>
           <div>
-            <input type="checkbox" id="place_ChotaImambara" name="placesKnown[]" value="Chota Imambara">
+            <input type="checkbox" id="place_Residency" name="placesKnown[]" value="Residency">
             <label for="place_ChotaImambara">Residency</label>
           </div>
           <!-- Add more checkboxes for places as needed -->
@@ -304,11 +312,11 @@ body {
       <div class="form-group">
         <label for="govtIdType" style=" font-size: 1.3rem;font-weight: 500;color: black">Valid Government ID Type:</label>
         <div class="col-xl-6">
-          <select id="govtIdType" class="form-select py-3 border-primary bg-transparent" name="govtIdType" required>
-            <option value="" disabled selected>Select ID Type</option>
+          <select id="govtIdType" class="form-select py-3 border-primary bg-transparent" name="govtIdType" required onchange="checkGovtIdType()">
+            <option value=""selected>Select ID Type</option>
             <option value="PAN">PAN Card</option>
             <option value="Aadhar">Aadhar Card</option>
-            <!-- Add more options as needed -->
+            
           </select>
         </div>
       </div>
@@ -316,30 +324,22 @@ body {
       <div class="form-group">
         <div class="col-xl-6"> 
           <label for="govtIdNo" style=" font-size: 1.3rem;font-weight: 500;color: black">ID Number:</label>
-          <input type="text" style="color: #8d8d8d !important;" class="form-control py-3 border-primary bg-transparent text-white" id="govt_id" name="govtIdNo" required>
+          <input type="text" style="color: #8d8d8d !important;" class="form-control py-3 border-primary bg-transparent text-white" id="govtIdNo" name="govtIdNo" required>
           <div id="govtIdError" style="color: red;"></div> <!-- Error message for validation -->
         </div>
       </div>
     
-    </form>
-
-
-
-
-
-    
+  
+   
 
   </div>
 </div>
     <!--ENd Guide Details-->
 
-    <form id="guideForm" method="POST">
-      {% csrf_token %}
-
     <!-- Test Completion Form -->
     <div class="qcontainer">
-      <form id="quizForm">
-       
+      
+        {% csrf_token %}
         <!-- Add questions and options here -->
         <div class="question">
           <p>1. What is the nickname of Lucknow?</p>
@@ -439,13 +439,7 @@ body {
         <!-- <button type="submit" class="submit-btn">Submit</button> -->
       </form>
 
-
-
-
     </div>
-
- 
-
 
     <div class="container-fluid footer py-5 wow fadeIn" data-wow-delay="0.2s">
         <div class="container py-5">
@@ -519,6 +513,8 @@ body {
     <!-- Your existing JavaScript code goes here -->
 
     <script>
+
+
         function completeTest() {
             // Perform actions to complete the test
             // Show toaster notification upon completion
@@ -527,7 +523,7 @@ body {
         }
 
 
-        document.getElementById('quizForm').addEventListener('submit', function(e) {
+        document.getElementById('guideForm').addEventListener('submit', function(e) {
       e.preventDefault();
       let score = 0;
       const answers = ['A', 'A', 'B', 'B', 'D', 'B', 'D', 'C', 'C', 'D']; // Update with correct answers
@@ -543,66 +539,83 @@ body {
     // Check if score is 6 or above
     if (score >= 6) {
       // Redirect to the next page
-      window.location.href = '/next_page_url'; // Replace 'next_page_url' with the actual URL
+      window.location.href = 'guideinterface.html'; // Replace 'next_page_url' with the actual URL
     } else {
       // Retry or show a message
       alert('You need to score 6 or above to proceed. Please retry.');
     }
   });
+
+  let languages_known = [];
+// Loop through each checked checkbox and add its value to the array
+$('input[name="languagesKnown[]"]:checked').each(function(){
+  languages_known.push(this.value);
+});
+
             
-  function showSelectedLanguages() {
-    const selectedLanguages = document.querySelectorAll('input[name="languagesKnown[]"]:checked');
-    const selectedLanguagesDiv = document.getElementById('selectedLanguages');
-    selectedLanguagesDiv.innerHTML = '';
-    selectedLanguages.forEach(language => {
-      const label = document.createElement('label');
-      label.textContent = language.value;
-      selectedLanguagesDiv.appendChild(label);
-      selectedLanguagesDiv.appendChild(document.createElement('br'));
-    });
-  }
+  // function showSelectedLanguages() {
+  //   const selectedLanguages = document.querySelectorAll('input[name="languagesKnown[]"]:checked');
+  //   const selectedLanguagesDiv = document.getElementById('selectedLanguages');
+  //   selectedLanguagesDiv.innerHTML = '';
+  //   selectedLanguages.forEach(language => {
+  //     const label = document.createElement('label');
+  //     label.textContent = language.value;
+  //     selectedLanguagesDiv.appendChild(label);
+  //     selectedLanguagesDiv.appendChild(document.createElement('br'));
+  //   });
+  // }
 
   // Function to display selected places
-  function showSelectedPlaces() {
-    const selectedPlaces = document.querySelectorAll('input[name="placesKnown[]"]:checked');
-    const selectedPlacesDiv = document.getElementById('selectedPlaces');
-    selectedPlacesDiv.innerHTML = '';
-    selectedPlaces.forEach(place => {
-      const label = document.createElement('label');
-      label.textContent = place.value;
-      selectedPlacesDiv.appendChild(label);
-      selectedPlacesDiv.appendChild(document.createElement('br'));
-    });
-  }
+  // function showSelectedPlaces() {
+  //   const selectedPlaces = document.querySelectorAll('input[name="placesKnown[]"]:checked');
+  //   const selectedPlacesDiv = document.getElementById('selectedPlaces');
+  //   selectedPlacesDiv.innerHTML = '';
+  //   selectedPlaces.forEach(place => {
+  //     const label = document.createElement('label');
+  //     label.textContent = place.value;
+  //     selectedPlacesDiv.appendChild(label);
+  //     selectedPlacesDiv.appendChild(document.createElement('br'));
+  //   });
+  // }
 
   // Event listeners for checkboxes
-  const languageCheckboxes = document.querySelectorAll('input[name="languagesKnown[]"]');
-  languageCheckboxes.forEach(checkbox => {
-    checkbox.addEventListener('change', showSelectedLanguages);
-  });
+  // const languageCheckboxes = document.querySelectorAll('input[name="languagesKnown[]"]');
+  // languageCheckboxes.forEach(checkbox => {
+  //   checkbox.addEventListener('change', showSelectedLanguages);
+  // });
 
-  const placeCheckboxes = document.querySelectorAll('input[name="placesKnown[]"]');
-  placeCheckboxes.forEach(checkbox => {
-    checkbox.addEventListener('change', showSelectedPlaces);
-  });
+  // const placeCheckboxes = document.querySelectorAll('input[name="placesKnown[]"]');
+  // placeCheckboxes.forEach(checkbox => {
+  //   checkbox.addEventListener('change', showSelectedPlaces);
+  // });
 
-  // Validation for PAN and Aadhar cards
-  const govtIdInput = document.getElementById('govt_id');
-  const govtIdTypeSelect = document.getElementById('govtIdType');
-  const govtIdError = document.getElementById('govtIdError');
+  document.getElementById('govtIdType').addEventListener('change', checkGovtIdType);
+    document.getElementById('govtIdNo').addEventListener('input', checkGovtIdNo);
 
-  govtIdInput.addEventListener('input', function() {
-    const govtIdType = govtIdTypeSelect.value;
-    const govtIdValue = govtIdInput.value;
-    if (govtIdType === 'PAN' && !/^([A-Z]){5}([0-9]){4}([A-Z]){1}$/.test(govtIdValue)) {
-      govtIdError.textContent = 'Invalid PAN Card number';
-    } else if (govtIdType === 'Aadhar' && !/^\d{12}$/.test(govtIdValue)) {
-      govtIdError.textContent = 'Invalid Aadhar Card number';
-    } else {
-      govtIdError.textContent = '';
+    function checkGovtIdType() {
+        const govtIdType = document.getElementById('govtIdType').value;
+        const govtIdNo = document.getElementById('govtIdNo');
+        const govtIdError = document.getElementById('govtIdError');
+        
+        if (govtIdType === 'PAN') {
+            govtIdNo.setAttribute('pattern', '[A-Z]{5}[0-9]{4}[A-Z]{1}');
+            govtIdError.textContent = 'Invalid PAN Card number.';
+        } else if (govtIdType === 'Aadhar') {
+            govtIdNo.setAttribute('pattern', '[2-9]{1}[0-9]{3}[0-9]{4}[0-9]{4}');
+            govtIdError.textContent = 'Invalid Aadhar Card number.';
+        }
+        checkGovtIdNo(); // Check ID number validation after changing ID type
     }
-  });
 
+    function checkGovtIdNo() {
+        const govtIdNo = document.getElementById('govtIdNo');
+        const govtIdError = document.getElementById('govtIdError');
+        if (!govtIdNo.checkValidity()) {
+            govtIdError.textContent = 'Please enter a valid ID number.';
+        } else {
+            govtIdError.textContent = '';
+        }
+    }
     </script>
 </body>
 </html>

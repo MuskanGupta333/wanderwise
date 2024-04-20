@@ -92,12 +92,19 @@
             padding: 20px;
         }
         .dashboard {
-            width: 250px;
+            width: 350px;
             color: white;
             background-color: #15b9d9;
             padding: 20px;
+            
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
+
+        .dashboard h1{
+            font-size: 34px;
+            color: white;
+        }
+
         .dashboard h2 {
             color: white;
             margin-bottom: 20px;
@@ -214,10 +221,13 @@
         
     <div class="vertical" >
         <div class="dashboard">
-            <h2>Dashboard</h2>
-            <h2>Hello, {{ user.first_name }} </h2>
+            <h1>Dashboard</h1>
 
             <hr>
+            <h2>Hello, {{ user.first_name }} {{ user.last_name}} </h2>
+            <h2>Your details:</h3>
+            <h2>E-mail:{{user.email}}</h3>
+            <h2>Phone no.: {{rofile.phone}}</h3>
             <p>Last Visited Place: Lucknow Zoo</p>
             <p>Last Visited Date: April 10, 2024</p>
             <p>Next Scheduled Visit: May 15, 2024</p>
