@@ -236,11 +236,6 @@
             <div class="main-content">
                 <h1>Plan your next visit with us 😊 </h1>
                 <form class="guide-form" id="guideForm">
-                    <label for="city">Select City:</label>
-                    <select id="city" name="city">
-                        <option value="">Select City</option>
-                        <option value="1">Lucknow</option>
-                    </select>
                     <label for="places">Select Place:</label>
                     <select id="places" name="places">
                         <option value="">Select Place</option>
@@ -249,11 +244,9 @@
                         <option value="3">Chota Imambara</option>
                         <option value="4">Rumi Darwaza</option>
                     </select>
-                    <label for="visitDate">Select From Date & Time:</label>
-                    <input type="datetime-local" id="fvisitDate" name="fvisitDate">
-                    <label for="visitDate">Select To Date & Time:</label>
-                    <input type="datetime-local" id="tvisitDate" name="tvisitDate">
-                    <button type="submit">Generate Requests</button>
+                    <label for="visitDate">Select Date & Time:</label>
+                    <input type="datetime-local" id="visitDate" name="visitDate">
+                    <button type="submit">Show Available Guides</button>
                 </form>
                 <div id="guideList" style="display: none;">
                     <h2>Available Guides</h2>
