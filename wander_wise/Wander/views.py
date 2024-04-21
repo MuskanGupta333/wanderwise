@@ -5,12 +5,12 @@ from django.contrib import messages
 #from django.contrib.auth.hashers import make_password, check_password #make_password
 from django.db.models import Avg
 from .utils import calculate_quiz_score  # Import the function to calculate quiz score
-from .models import Profile,Guide
+from .models import Profile,Guide,VisitPlan
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login as auth_login ,logout as django_logout # Renaming the login function
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
-from .forms import ExamForm
+
 
 
 def index(request):
@@ -161,14 +161,14 @@ def logout(request):
 @login_required
 def exam(request):
     if request.method == 'POST':
-        languages_known = request.POST.get('languagesKnown[]')
-        places_known = request.POST.get('placesKnown[]')
+        languages_known = request.POST.get('languages_known')
+        places_known = request.POST.get('places_known')
         govtIdType = request.POST.get('govtIdType')
-        govt_id = request.POST.get('govtIdNo')
+        govt_id = request.POST.get('govt_id')
         quiz_score = calculate_quiz_score(request.POST)  # You need to implement this function
 
         # Create a new Guide instance associated with the logged-in user and save it to the database
-        guide = Guide.objects.create(
+        guide_instance = Guide.objects.create(
             user=request.user,  # Associate the guide with the logged-in user
             languages_known=languages_known,
             places_known=places_known,
@@ -232,5 +232,40 @@ def guideinterface(request):
         messages.error(request, 'Access denied!')
         return redirect('login')
 
+def Visitplan(request):
+    if request.method == 'POST':
+        print("Form submitted successfully!")  # Debugging statement
 
-  
+        city = request.POST.get('city')
+        place = request.POST.get('place')
+        from_date_time = request.POST.get('from_date_time')
+        to_date_time = request.POST.get('to_date_time')
+
+        print("City:", city)  # Debugging statement
+        print("Place:", place)  # Debugging statement
+        print("From Date & Time:", from_date_time)  # Debugging statement
+        print("To Date & Time:", to_date_time)  # Debugging statement
+
+        # Validate form data
+        if not city or not place or not from_date_time or not to_date_time:
+            return HttpResponse("All fields are required.", status=400)  # Bad request
+
+        try:
+            # Create a VisitPlan object
+            visit_plan_instance = VisitPlan.objects.create(
+                user=request.user,
+                city=city,
+                place=place,
+                from_date_time=from_date_time,
+                to_date_time=to_date_time
+            )
+            # Return success message
+            return HttpResponse("Visit Plan submitted successfully!")
+        except Exception as e:
+            # Handle database integrity error
+            return HttpResponse(f"An error occurred: {str(e)}", status=500)  # Internal Server Error
+
+    else:
+        # If the request method is not POST, handle it accordingly (e.g., render a form)
+        return render(request, 'visitor.html')
+

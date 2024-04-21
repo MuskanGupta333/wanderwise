@@ -235,14 +235,16 @@
         <div class="container">
             <div class="main-content">
                 <h1>Plan your next visit with us 😊 </h1>
-                <form class="guide-form" id="guideForm">
+                <form class="guide-form" id="guideForm" method="post" action="{% url 'Visitplan' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="user" value="{{ request.user.id }}">
                     <label for="city">Select City:</label>
                     <select id="city" name="city">
                         <option value="">Select City</option>
                         <option value="1">Lucknow</option>
                     </select>
                     <label for="places">Select Place:</label>
-                    <select id="places" name="places">
+                    <select id="places" name="place">
                         <option value="">Select Place</option>
                         <option value="1">Lucknow Zoo</option>
                         <option value="2">Bara Imambara</option>
@@ -250,9 +252,10 @@
                         <option value="4">Rumi Darwaza</option>
                     </select>
                     <label for="visitDate">Select From Date & Time:</label>
-                    <input type="datetime-local" id="fvisitDate" name="fvisitDate">
+                    <input type="datetime-local" id="fvisitDate" name="from_date_time">
                     <label for="visitDate">Select To Date & Time:</label>
-                    <input type="datetime-local" id="tvisitDate" name="tvisitDate">
+                    <input type="datetime-local" id="tvisitDate" name="to_date_time">
+
                     <button type="submit">Generate Requests</button>
                 </form>
                 <div id="guideList" style="display: none;">
@@ -337,28 +340,34 @@
         <script src="../../static/js/main.js"></script>
          
         <script>
-            document.getElementById('guideForm').addEventListener('submit', function(e) {
-                e.preventDefault();
-                const place = document.getElementById('places').value;
-                const date = document.getElementById('visitDate').value;
-                if (place && date) {
-                    // Simulate fetching available guides (replace with actual data fetching logic)
-                    const guides = ['Guide 1', 'Guide 2', 'Guide 3', 'Guide 4'];
-                    const guideList = document.getElementById('guideList');
-                    const guidesUl = document.getElementById('guides');
-                    guidesUl.innerHTML = ''; // Clear previous list
-                    guides.forEach(guide => {
-                        const li = document.createElement('li');
-                        li.textContent = guide;
-                        guidesUl.appendChild(li);
+            document.addEventListener('DOMContentLoaded', function() {
+                var submitBtn = document.getElementById('submitBtn');
+                submitBtn.addEventListener('click', function() {
+                    // Fetch form data
+                    var formData = new FormData(document.getElementById('guideForm'));
+        
+                    // Send form data using fetch API
+                    fetch("{% url 'visitor' %}", {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'X-CSRFToken': document.querySelector('input[name="csrfmiddlewaretoken"]').value
+                        }
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            console.log("Visit Plan submitted successfully!");
+                            // You can redirect to a success page or do other actions here
+                        } else {
+                            console.error("Error submitting form:", response.statusText);
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Error submitting form:", error);
                     });
-                    guideList.style.display = 'block'; // Show available guides
-                } else {
-                    alert('Please select both a place and a date.');
-                }
+                });
             });
         </script>
-        
 
     </body>
 
