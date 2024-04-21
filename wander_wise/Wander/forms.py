@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from .models import Guide  # Import the Guide model
+from .models import VisitPlan
 
 
 class UserLoginForm(forms.Form):
@@ -16,7 +17,7 @@ class UserSignUpForm(UserCreationForm):
         fields = ['first_name', 'last_name', 'email', 'password1', 'password2']
 
 
-class ExamForm(forms.ModelForm):
+class Guide(forms.ModelForm):
 
     class Meta:
         model = Guide  # Use the Guide model since the exam is for becoming a guide
@@ -41,3 +42,13 @@ class ExamForm(forms.ModelForm):
     #     govt_id = self.cleaned_data['govt_id']
     #     # Validate government ID here if needed
     #     return govt_id
+    class VisitPlan(forms.ModelForm):
+        class Meta:
+           model = VisitPlan
+           fields = ['city', 'place', 'from_date_time', 'to_date_time']
+           widgets = {
+            'from_date_time': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
+            'to_date_time': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
+        }
+
+   
