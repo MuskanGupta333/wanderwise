@@ -27,7 +27,7 @@
     <!-- Template Stylesheet -->
     <link href="../../static/css/style.css" rel="stylesheet">
 
-
+    
 
 <style>
 
@@ -129,6 +129,26 @@
         .guide-form button:hover {
             background-color: #0056b3;
         }
+        
+        table{
+            background-color: #fff;
+            margin-top: 30px;
+        }
+        th {
+            color:black;
+            background-color: #000000;
+        }
+
+        tr:nth-child(even) {
+            color: #fff;
+            background-color: #15b9d9;
+        }
+
+        tr:hover {
+            background-color: #ddd;
+        }
+
+       
 </style>
 
 </head>
@@ -190,6 +210,8 @@
     <div class="vertical" >
         <div class="dashboard">
             <h2>Dashboard</h2>
+            <h2>Hello, {{ user.first_name }} {{ user.last_name}} </h2>
+
             <hr>
             <p>Last Visited Place: Lucknow Zoo</p>
             <p>Last Visited Date: April 10, 2024</p>
@@ -198,23 +220,33 @@
         <div class="container">
             <div class="main-content">
                 <h1>Kindly look into the requests and select your next customer 😊 </h1>
-                <!-- <form class="guide-form" id="guideForm">
-                    <label for="places">Select Place:</label>
-                    <select id="places" name="places">
-                        <option value="">Select Place</option>
-                        <option value="1">Lucknow Zoo</option>
-                        <option value="2">Bara Imambara</option>
-                        <option value="3">Chota Imambara</option>
-                        <option value="4">Rumi Darwaza</option>
-                    </select>
-                    <label for="visitDate">Select Date & Time:</label>
-                    <input type="datetime-local" id="visitDate" name="visitDate">
-                    <button type="submit">Show Available Guides</button>
-                </form>
-                <div id="guideList" style="display: none;">
-                    <h2>Available Guides</h2>
-                    <ul id="guides"></ul>
-                </div> -->
+                <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th scope="col">User</th>
+                        <th scope="col">City</th>
+                        <th scope="col">Place</th>
+                        <th scope="col">From</th>
+                        <th scope="col">To</th>
+                        <th scope="col">Request Date-Time</th>
+                        <!-- Add more headers as needed -->
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for visit_plan in visit_plans %}
+                      <tr>
+                        <td>{{ visit_plan.user.username }}</td>
+                        <td>{{ visit_plan.get_city_display }}</td>
+                        <td>{{ visit_plan.get_place_display }}</td>
+                        <td>{{ visit_plan.from_date_time }}</td>
+                        <td>{{ visit_plan.to_date_time }}</td>
+                        <td>{{ visit_plan.insertDateTime }}</td>
+                        <!-- Add more fields as needed -->
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                  
             </div>
         </div>
     </div>
