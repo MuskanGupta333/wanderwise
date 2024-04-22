@@ -218,7 +218,8 @@ def guideinterface(request):
                     'qualified_users': qualified_users,
                     'avg_quiz_score': avg_quiz_score,
                 }
-                return render(request, 'guideinterface.html', context)
+                visit_plans = VisitPlan.objects.all()
+                return render(request, 'guideinterface.html', {'visit_plans': visit_plans})
             else:
                 # Redirect to the exam page if the user's quiz score is less than 6
                 messages.error(request, 'Please complete the exam!')
