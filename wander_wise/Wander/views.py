@@ -5,11 +5,11 @@ from django.contrib import messages
 #from django.contrib.auth.hashers import make_password, check_password #make_password
 from django.db.models import Avg
 from .utils import calculate_quiz_score  # Import the function to calculate quiz score
-from .models import Profile,Guide,VisitPlan
+from .models import Profile,Guide,VisitPlan,RateBit
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login as auth_login ,logout as django_logout # Renaming the login function
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
+from django.http import HttpResponse,HttpResponseBadRequest
 
 
 
@@ -270,3 +270,40 @@ def Visitplan(request):
         # If the request method is not POST, handle it accordingly (e.g., render a form)
         return render(request, 'visitor.html')
 
+def submitamount(request):
+    if request.method == 'POST':
+        # Check CSRF token
+        if not request.POST.get('csrfmiddlewaretoken'):
+            return HttpResponseBadRequest("CSRF token missing or invalid.")
+
+        # Get data from POST request
+        visit_plan_id = request.POST.get('visit_plan_id')
+        guide_id = request.POST.get('guide_id')
+        rate_amount = request.POST.get('rate_amount')
+
+        # Validate form data
+        if not (visit_plan_id and guide_id and rate_amount):
+            return HttpResponseBadRequest("Missing required data.")
+
+        # Get the visit plan and guide objects
+        try:
+            visit_plan = VisitPlan.objects.get(id=visit_plan_id)
+            guide = User.objects.get(id=guide_id)
+        except VisitPlan.DoesNotExist:
+            return HttpResponseBadRequest("Invalid visit plan ID.")
+        except User.DoesNotExist:
+            return HttpResponseBadRequest("Invalid guide ID.")
+
+        # Create and save the RateBit instance
+        try:
+            rate_bit = RateBit.objects.create(
+                visit_plan=visit_plan,
+                guide=guide,
+                rate_amount=rate_amount
+            )
+            return HttpResponse("Rate amount submitted successfully.")
+        except Exception as e:
+            return HttpResponseBadRequest(f"Failed to submit rate amount: {e}")
+
+    else:
+        return HttpResponseBadRequest("Only POST requests are allowed for this endpoint.")

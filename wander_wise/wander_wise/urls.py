@@ -39,6 +39,8 @@ urlpatterns = [
     path('logout/', views.logout, name='logout'),
     #path('', include("django.contrib.auth.urls")),
     path('Visitplan/', views.Visitplan, name='Visitplan'),
+    path('submitamount/', views.submitamount, name='submitamount'),
+
 
 
 

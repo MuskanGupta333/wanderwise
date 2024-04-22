@@ -229,6 +229,7 @@
                         <th scope="col">From</th>
                         <th scope="col">To</th>
                         <th scope="col">Request Date-Time</th>
+                        <th scope="col">Amount</th>
                         <!-- Add more headers as needed -->
                       </tr>
                     </thead>
@@ -241,6 +242,16 @@
                         <td>{{ visit_plan.from_date_time }}</td>
                         <td>{{ visit_plan.to_date_time }}</td>
                         <td>{{ visit_plan.insertDateTime }}</td>
+                        <td>
+                            <form method="post" action="{% url 'submitamount'%}">
+                                {% csrf_token %}
+                                <input type="hidden" name="visit_plan_id" value="{{ visit_plan.pk }}">
+                                <input type="hidden" name="guide_id" value="{{ user.id }}">
+                                <input type="number" name="rate_amount" placeholder="Rate">
+                                <button type="submit">Send Rate</button>
+                            </form>
+                        </td>
+            
                         <!-- Add more fields as needed -->
                       </tr>
                       {% endfor %}

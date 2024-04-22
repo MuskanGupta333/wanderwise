@@ -84,3 +84,11 @@ class VisitPlan(models.Model):
          ('3','Rumi Darwaza'),
          ('4','Lucknow Zoo'),
          ('5','Residency'),'''
+class RateBit(models.Model):
+    visit_plan = models.ForeignKey('VisitPlan', on_delete=models.CASCADE)
+    guide = models.ForeignKey(User, on_delete=models.CASCADE)
+    rate_amount = models.DecimalField(max_digits=10, decimal_places=2)  # Decimal field to store the rate amount
+    insert_datetime = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return f"Rate for Visit Plan ID: {self.visit_plan.id} by {self.guide.username}"
