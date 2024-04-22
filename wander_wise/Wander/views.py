@@ -151,13 +151,7 @@ def visitor(request):
     
 def logout(request):
     django_logout(request)  # Use Django's logout function to logout the user
-# Create an HttpResponse object with a no-cache response header
-    response = HttpResponse("You have been logged out.")
-    response['Cache-Control'] = 'no-cache, no-store, must-revalidate'  # HTTP 1.1.
-    response['Pragma'] = 'no-cache'  # HTTP 1.0.
-    response['Expires'] = '0'  # Proxies.
-
-    return response
+    return redirect('index')
 @login_required
 def exam(request):
     if request.method == 'POST':
