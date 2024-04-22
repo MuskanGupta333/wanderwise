@@ -261,7 +261,38 @@
                 <div id="guideList" style="display: none;">
                     <h2>Available Guides</h2>
                     <ul id="guides"></ul>
-                </div>
+                    </div>
+                    {% if rate_responses %}
+                <h2>Your Rate Responses for Visit Requests</h2>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">City</th>
+                                <th scope="col">Place</th>
+                                <th scope="col">From</th>
+                                <th scope="col">To</th>
+                               <th scope="col">Guide Username</th>
+                             <th scope="col">Rate Amount</th>
+                          <th scope="col">Insert Date-Time</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for rate_response in rate_responses %}
+                            <tr>
+                                <td>{{ rate_response.visit_plan.city }}</td>
+                                <td>{{ rate_response.visit_plan.place }}</td>
+                                <td>{{ rate_response.visit_plan.from_date_time }}</td>
+                                <td>{{ rate_response.visit_plan.to_date_time }}</td>
+                                <td>{{ rate_response.rate_amount }}</td>
+                                <td>{{ rate_response.insert_datetime }}</td>
+                                <td>{{ rate_response.guide.username }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    {% else %}
+               <p>No rate responses available.</p>
+                {% endif %}
             </div>
         </div>
     </div>
