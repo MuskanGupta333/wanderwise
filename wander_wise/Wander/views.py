@@ -146,7 +146,7 @@ def visitor(request):
         #Fetch profile
       
         # Fetch rate responses for the visit plans
-        rate_responses = RateBit.objects.filter(visit_plan__in=visit_plans)
+        rate_responses = RateBit.objects.filter(visit_plan__in=visit_plans).order_by('-insert_datetime')
 
         context = {
             'user': user,
@@ -220,7 +220,7 @@ def guideinterface(request):
                     'qualified_users': qualified_users,
                     'avg_quiz_score': avg_quiz_score,
                 }
-                visit_plans = VisitPlan.objects.all()
+                visit_plans = VisitPlan.objects.filter(isBooked=False).order_by('-insertDateTime')
                 return render(request, 'guideinterface.html', {'visit_plans': visit_plans})
             else:
                 # Redirect to the exam page if the user's quiz score is less than 6
@@ -309,3 +309,20 @@ def submitamount(request):
 
     else:
         return HttpResponseBadRequest("Only POST requests are allowed for this endpoint.")
+
+
+def book_guide(request):
+    if request.method == 'POST':
+        visit_plan_id = request.POST.get('visit_plan_id')
+        try:
+            visit_plan = VisitPlan.objects.get(pk=visit_plan_id)
+            if not visit_plan.isBooked:
+                visit_plan.isBooked = True
+                visit_plan.save()
+                return HttpResponse("Guide booked successfully!")
+            else:
+                return HttpResponse("Guide is already booked!", status=400)
+        except VisitPlan.DoesNotExist:
+            return HttpResponse("Visit plan does not exist!", status=400)
+    else:
+        return HttpResponse("Invalid request!", status=400)
