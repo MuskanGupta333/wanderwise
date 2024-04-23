@@ -80,7 +80,7 @@ WSGI_APPLICATION = 'wander_wise.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'otherdb',
+        'NAME': 'Wanderwisedb',
         'USER': 'root',
         'PASSWORD': 'pass123',
         'HOST': 'localhost',

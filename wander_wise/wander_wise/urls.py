@@ -40,6 +40,8 @@ urlpatterns = [
     #path('', include("django.contrib.auth.urls")),
     path('Visitplan/', views.Visitplan, name='Visitplan'),
     path('submitamount/', views.submitamount, name='submitamount'),
+    path('book_guide/', views.book_guide, name='book_guide'),
+
 
 
 

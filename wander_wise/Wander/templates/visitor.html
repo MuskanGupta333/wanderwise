@@ -98,7 +98,6 @@
             color: white;
             background-color: #15b9d9;
             padding: 20px;
-            
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
@@ -316,11 +315,13 @@
                                 <th scope="col">Rate Amount</th>
                                 <th scope="col">Insert Date-Time</th>
                                <th scope="col">Guide Username</th>
+                               <th scope="col">Book Desired Guide</th> <!-- Added a new column for the action -->
+
                             
                             </tr>
                         </thead>
                         <tbody>
-                            {% for rate_response in rate_responses %}
+                            {% for rate_response in rate_responses%}
                             <tr>
                                 <td></td>
                                 <td>{{ rate_response.visit_plan.city }}</td>
@@ -330,6 +331,17 @@
                                 <td>{{ rate_response.rate_amount }}</td>
                                 <td>{{ rate_response.insert_datetime }}</td>
                                 <td>{{ rate_response.guide.username }}</td>
+                                <td>
+                                    {% if not rate_response.visit_plan.isBooked %}
+                                    <form method="post" action="{% url 'book_guide' %}">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="visit_plan_id" value="{{ rate_response.visit_plan.pk }}">
+                                        <button type="submit" class="btn btn-primary">Book Guide</button>
+                                    </form>
+                                    {% else %}
+                                    <span class="text-success">Guide Booked</span>
+                                    {% endif %}
+                                </td>
                             </tr>
                             {% endfor %}
                         </tbody>
