@@ -264,12 +264,15 @@
 
             <hr>
             <h2>Hello, {{ user.first_name }} {{ user.last_name}} </h2>
-            <h2>Your details:</h3>
-            <h2>E-mail:{{user.email}}</h3>
-            <h2>Phone no.: {{Profile.phone}}</h3>
+            <p>My Plans:</p>
+            {% for rate_response in booked_guides%} 
+            
+            <p>Next Scheduled Visit: {{rate_response.visit_plan.from_date_time}} - {{rate_response.visit_plan.to_date_time}}</p>
+            <p>Visit Place:{{rate_response.visit_plan.place}}</p>
+            <p>Guide Name:{{rate_response.guide.first_name}}</p>
+            {% endfor %}
             <p>Last Visited Place: Lucknow Zoo</p>
             <p>Last Visited Date: April 10, 2024</p>
-            <p>Next Scheduled Visit: May 15, 2024</p>
         </div>
         <div class="container">
             <div class="main-content">
@@ -316,7 +319,7 @@
                                 <th scope="col">Rate Amount</th>
                                 <th scope="col">Insert Date-Time</th>
                                <th scope="col">Guide Username</th>
-                               <th scope="col">Book Desired Guide</th> <!-- Added a new column for the action -->
+                               <th scope="col">Book a Guide</th> <!-- Added a new column for the action -->
 
                             
                             </tr>

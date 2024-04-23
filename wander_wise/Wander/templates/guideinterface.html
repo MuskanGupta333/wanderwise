@@ -226,9 +226,15 @@
 
             <hr>
             <h2>Hello, {{ user.first_name }} {{ user.last_name}} </h2>
+            <p>Bookings:</p>
+            {% for rate_response in booked_guides%}  
+            <p>Next Scheduled Visit: {{rate_response.visit_plan.from_date_time}} - {{rate_response.visit_plan.to_date_time}}</p>
+            <p>Visit Place:{{rate_response.visit_plan.place}}</p>
+            <p>Visitor Name:{{rate_response.visit_plan.first_name}}</p>
+            {% endfor %}
             <p>Last Visited Place: Lucknow Zoo</p>
             <p>Last Visited Date: April 10, 2024</p>
-            <p>Next Scheduled Visit: May 15, 2024</p>
+            
         </div>
         <div class="container">
             <div class="main-content">
