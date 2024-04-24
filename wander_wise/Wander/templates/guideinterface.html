@@ -78,11 +78,15 @@
             padding: 20px;
         }
         .dashboard {
-            width: 250px;
+            width: 350px;
             color: white;
             background-color: #15b9d9;
             padding: 20px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .dashboard h1{
+            font-size: 34px;
+            color: white;
         }
         .dashboard h2 {
             margin-bottom: 20px;
@@ -162,6 +166,58 @@
         content: counter(rowNumber);
         counter-increment: rowNumber;
     }
+
+    #dashboard_content {
+    width:100%;
+    height: 80%;
+    display: none;
+    background-color:  rgba(255, 255, 255, 0.5); /* White background */
+    border-radius: 10px; /* Rounded corners */
+    padding: 20px; /* Add padding for content spacing */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+}
+
+/* Style for dashboard content */
+#dashboard_content h1 {
+    color: #333; /* Text color */
+}
+
+#dashboard_content h2 {
+    color: #555; /* Text color */
+}
+
+/* Style for buttons inside the dashboard */
+#dashboard_content button {
+    margin-right: 10px; /* Add spacing between buttons */
+}
+
+.dash-buttons{
+    width:23%;
+    padding: 60px 0;
+    border:none;
+    font-size: x-large;
+    border-radius: 10px; 
+    color: rgb(255, 255, 255);
+    /* font-weight: bold; */
+}
+.dash-buttons:hover{
+    border:4px solid #fcfcfc;
+    transition: all;
+    color: white;
+    font-weight: bolder;
+}
+#myModal{
+    width:100%;
+}
+
+
+.close-btn {
+            cursor: pointer;
+            font-size: 20px;
+            
+            float: right;
+        }
+
 </style>
 
 </head>
@@ -221,36 +277,195 @@
     
     
     <div class="vertical" >
-        <div class="dashboard">
-            <h2>Dashboard</h2>
+        <div class="dashboard sidebar">
+            
             <button style="border: none; background-color: transparent;" onclick="showDashboard()"><h1><i class="fas fa-fw fa-tachometer-alt"></i>
                 Dashboard</h1></button> 
             <hr>
             <h2>Hello, {{ user.first_name }} {{ user.last_name}} </h2>
-            <p>Bookings:</p>
-
-
-            {% for visit in booked_visits %}  
-            <p>Next Scheduled Visit: {{rate_response.visit_plan.from_date_time}} - {{rate_response.visit_plan.to_date_time}}</p>
-            <p>Visit Place:{{rate_response.visit_plan.place}}</p>
-            <p>Visitor Name:{{rate_response.visit_plan.first_name}}</p>
-
-            {% with rate=visit.ratebit_set.first %}
-              {% if rate %}
-              <p>Rate Amount: {{ rate.rate_amount }}</p>
-              {% else %}
-              <p>No rate available</p>
-              {% endif %}
-            {% endwith %}
             <hr>
-            {% endfor %}
+
    
             <p>Last Visited Place: Lucknow Zoo</p>
             <p>Last Visited Date: April 10, 2024</p>
             
         </div>
         <div class="container">
-            <div class="main-content">
+            <div id="dashboard_content" >
+                <button type="button"  class="btn btn-outline-dark close-btn" onclick="closeDashboard()">X</button>
+                <h1 style="color: white;">Welcome {{user.first_name}} ,  to your dashboard</h1>
+
+                <hr style="color: whitesmoke; height: 3px; width: 100%;">
+                <div id="dashboardOptions">
+                    <button type="button" style="background: linear-gradient(90deg, rgba(17,184,0,1) 0%, rgba(69,255,0,1) 48%, rgba(87,255,67,1) 100%);" class="dash-buttons" data-toggle="modal" data-target="#myModal">My Plans</button>
+                     <!-- Modal -->
+                 <div id="myModal"  class="modal fade" role="dialog">
+                   <div class="modal-dialog modal-lg" >
+      
+                     <!-- Modal content-->
+                      <div class="modal-content" style="background: linear-gradient(90deg, rgba(18,185,0,1) 0%, rgba(44,255,0,1) 48%, rgba(139,255,125,1) 100%);">
+                        <div class="modal-header">
+                        <h1 class="modal-title">My Plans</h1>
+                        <button type="button" class="close btn btn-outline-dark close-btn" data-dismiss="modal">&times;</button>
+              
+                        </div>
+                        <div class="modal-body">
+              
+                        <!--table-->
+                        <div class="status">
+     
+                            <table class="table table-striped row-counter">
+                                <thead>
+                                    <tr>
+                                        <th>Next Booking:</th>
+                                        <th scope="col">From Date-Time</th>
+                                        <th scope="col">To Date-Time</th>
+                                        <th scope="col">Visit Place:</th>
+                                        <th scope="col">Visitor Name:</th>
+                                        <th scope="col">Rate Amount:</th>
+                                       
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for visit in booked_visits %} 
+                                    <tr>
+                                        <td></td>
+                                        <td>{{visit.from_date_time}} </td>
+                                        <td>{{visit.to_date_time}}</td>
+                                        <td>{{visit.place}}</td>
+                                        <td>{{visit.user.first_name}} {{visit.user.last_name}}</td>
+                                        <td>
+                                            {% with rate=visit.ratebit_set.first %}
+                                            {% if rate %}
+                                            <p>Rate Amount: {{ rate.rate_amount }}</p>
+                                            {% else %}
+                                            <p>No rate available</p>
+                                            {% endif %}
+                                            {% endwith %}
+                                        </td>
+                                    </tr>
+                                    
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                            
+
+
+
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-dark close-btn" data-dismiss="modal">Close</button>
+                        </div>
+
+          </div>
+      
+        </div>
+      </div>
+                    
+      <button type="button" style="background: linear-gradient(90deg, rgba(255,82,14,1) 0%, rgba(255,50,50,1) 28%, rgba(255,107,107,1) 100%);" class="dash-buttons" data-toggle="modal" data-target="#history">History</button>
+      <!-- Modal content-->
+      <!-- Modal -->
+<div id="history" class="modal fade" role="dialog">
+<div class="modal-dialog">
+
+<!-- Modal content-->
+<div class="modal-content" style="background: linear-gradient(90deg, rgba(255,82,14,1) 0%, rgba(255,50,50,1) 28%, rgba(255,107,107,1) 100%);">
+<div class="modal-header">
+ <h1 class="modal-title">History</h1>
+<button type="button" class="close btn btn-outline-dark close-btn" data-dismiss="modal">&times;</button>
+
+</div>
+<div class="modal-body" style="color:#fff">
+ <p><b>Last Visited Place:</b> Lucknow Zoo</p>
+ <p><b>Last Visited Date: </b>April 10, 2024</p>
+</div>
+<div class="modal-footer">
+<button type="button" class="btn btn-outline-dark close-btn" data-dismiss="modal">Close</button>
+</div>
+</div>
+
+</div>
+</div>
+
+<button type="button" style="background: linear-gradient(90deg, rgba(255,145,0,1) 0%, rgba(255,196,0,1) 50%, rgba(251,255,68,1) 100%);" class="dash-buttons" data-toggle="modal" data-target="#feedback">Feedback</button>
+      <!-- Modal content-->
+      <!-- Modal -->
+<div id="feedback" class="modal fade" role="dialog">
+<div class="modal-dialog">
+
+<!-- Modal content-->
+<div class="modal-content" style="background: linear-gradient(90deg, rgba(255,145,0,1) 0%, rgba(255,196,0,1) 50%, rgba(251,255,68,1) 100%);">
+<div class="modal-header">
+ <h1 class="modal-title">Feedback</h1>
+<button type="button" class="close btn btn-outline-dark close-btn" data-dismiss="modal">&times;</button>
+
+</div>
+<div class="modal-body">
+ <form action="#" method="POST" style="max-width: 500px; margin: 0 auto; background-color: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+     <label for="name" style="display: block; margin-bottom: 10px;">Your Name:</label>
+     <input type="text" id="name" name="name" style="width: 100%; padding: 10px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 5px;" required>
+
+     <label for="email" style="display: block; margin-bottom: 10px;">Your Email:</label>
+     <input type="email" id="email" name="email" style="width: 100%; padding: 10px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 5px;" required>
+
+     <label for="feedback" style="display: block; margin-bottom: 10px;">Your Feedback:</label>
+     <textarea id="feedback" name="feedback" rows="5" style="width: 100%; padding: 10px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 5px;" required></textarea>
+
+     <label for="rating" style="display: block; margin-bottom: 10px;">Rating:</label>
+     <div style="font-size: 24px;">
+         <span style="cursor: pointer;" onclick="setRating(1)">★</span>
+         <span style="cursor: pointer;" onclick="setRating(2)">★</span>
+         <span style="cursor: pointer;" onclick="setRating(3)">★</span>
+         <span style="cursor: pointer;" onclick="setRating(4)">★</span>
+         <span style="cursor: pointer;" onclick="setRating(5)">★</span>
+     </div>
+
+     <button type="submit" style="background-color: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; margin-top: 20px;">Submit Feedback</button>
+ </form>
+
+</div>
+<div class="modal-footer">
+<button type="button" class="btn btn-outline-dark close-btn" data-dismiss="modal">Close</button>
+</div>
+</div>
+
+</div>
+</div>
+
+
+<button type="button" style="background: linear-gradient(90deg, rgba(124,0,163,1) 0%, rgba(189,68,227,1) 50%, rgba(239,206,250,1) 100%);" class="dash-buttons" data-toggle="modal" data-target="#explore">Explore</button>
+      <!-- Modal content-->
+      <!-- Modal -->
+<div id="explore" class="modal fade" role="dialog">
+<div class="modal-dialog">
+
+<!-- Modal content-->
+<div class="modal-content" style="background: linear-gradient(90deg, rgba(124,0,163,1) 0%, rgba(189,68,227,1) 50%, rgba(239,206,250,1) 100%);">
+<div class="modal-header">
+ <h1 class="modal-title">Explore</h1>
+<button type="button" class="close btn btn-outline-dark close-btn" data-dismiss="modal">&times;</button>
+
+</div>
+<div class="modal-body">
+<p>Some text in the modal.</p>
+</div>
+<div class="modal-footer">
+<button type="button" class="btn btn-outline-dark close-btn" data-dismiss="modal">Close</button>
+</div>
+</div>
+
+</div>
+</div>
+
+
+ </div>
+
+
+            </div>
+
+
+            <div class="main-content" id="main-content">
                 <h1>Kindly look into the requests and select your next customer 😊 </h1>
                 <table class="table table-striped row-counter">
                     <thead>
@@ -374,9 +589,16 @@
 
     <!-- Template Javascript -->
     <script src="../../static/js/main.js"></script>
+
+    <!--for nav-->
     
-    <!-- Your additional JavaScript code goes here -->
-    <script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+    
+      <!-- Your additional JavaScript code goes here -->
+      <script>
         function showDashboard() {
             document.getElementById('main-content').style.display = 'none';
             // document.body.style.backgroundColor = '#f0f0f0 ';
@@ -396,5 +618,6 @@
     
     
     </script>
+  
 </body>
 </html>
