@@ -10,6 +10,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login as auth_login ,logout as django_logout # Renaming the login function
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse,HttpResponseBadRequest
+from django.db.models import F
 
 
 
@@ -216,12 +217,19 @@ def guideinterface(request):
                 qualified_emails = [g.user.email for g in qualified_guides if g.user and g.user.email]
                 # Fetch qualified users with emails
                 qualified_users = User.objects.filter(email__in=qualified_emails)
+
+
+                #Fetch booked
+                booked_visits = VisitPlan.objects.filter(isBooked=True)
+                
                 context = {
                     'qualified_users': qualified_users,
                     'avg_quiz_score': avg_quiz_score,
+                    'booked_visits':booked_visits,
+                    'guide':guide
                 }
                 visit_plans = VisitPlan.objects.filter(isBooked=False).order_by('-insertDateTime')
-                return render(request, 'guideinterface.html', {'visit_plans': visit_plans})
+                return render(request, 'guideinterface.html', {'visit_plans': visit_plans,**context})
             else:
                 # Redirect to the exam page if the user's quiz score is less than 6
                 messages.error(request, 'Please complete the exam!')

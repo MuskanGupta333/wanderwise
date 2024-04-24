@@ -67,11 +67,11 @@
            
             display: flex;
             min-height: 100vh;
-
-            background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(197, 218, 238, 0.9)), url("{% static 'img/bg3.jpg' %}");
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
+            background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,0,106,1) 50%, rgba(0,209,251,1) 100%);
+            /* background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(197, 218, 238, 0.9)), url("{% static 'img/bg3.jpg' %}"); */
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: cover;
         }
         .container {
             flex-grow: 1;
@@ -223,15 +223,28 @@
     <div class="vertical" >
         <div class="dashboard">
             <h2>Dashboard</h2>
-
+            <button style="border: none; background-color: transparent;" onclick="showDashboard()"><h1><i class="fas fa-fw fa-tachometer-alt"></i>
+                Dashboard</h1></button> 
             <hr>
             <h2>Hello, {{ user.first_name }} {{ user.last_name}} </h2>
             <p>Bookings:</p>
-            {% for rate_response in booked_guides%}  
+
+
+            {% for visit in booked_visits %}  
             <p>Next Scheduled Visit: {{rate_response.visit_plan.from_date_time}} - {{rate_response.visit_plan.to_date_time}}</p>
             <p>Visit Place:{{rate_response.visit_plan.place}}</p>
             <p>Visitor Name:{{rate_response.visit_plan.first_name}}</p>
+
+            {% with rate=visit.ratebit_set.first %}
+              {% if rate %}
+              <p>Rate Amount: {{ rate.rate_amount }}</p>
+              {% else %}
+              <p>No rate available</p>
+              {% endif %}
+            {% endwith %}
+            <hr>
             {% endfor %}
+   
             <p>Last Visited Place: Lucknow Zoo</p>
             <p>Last Visited Date: April 10, 2024</p>
             
@@ -364,6 +377,19 @@
     
     <!-- Your additional JavaScript code goes here -->
     <script>
+        function showDashboard() {
+            document.getElementById('main-content').style.display = 'none';
+            // document.body.style.backgroundColor = '#f0f0f0 ';
+            document.getElementById('dashboard_content').style.display = 'block';
+            
+        }
+
+        function closeDashboard() {
+            document.getElementById('dashboard_content').style.display = 'none';
+            document.getElementById('main-content').style.display = 'block';
+            // document.body.style.backgroundColor = '';
+        }
+
         function approveRequest() {
             // Perform actions to approve the request
         }
