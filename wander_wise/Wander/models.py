@@ -55,7 +55,10 @@ class VisitPlan(models.Model):
         ('3', 'Chota Imambara'),
         ('4', 'Rumi Darwaza'),
     ]
-
+    PAYMENT_CHOICES = [
+        ('Cash', 'Cash'),
+        ('Online', 'Online'),
+    ]
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     city = models.CharField(max_length=100, choices=CITY_CHOICES)
     place = models.CharField(max_length=100, choices=PLACE_CHOICES)
@@ -64,26 +67,15 @@ class VisitPlan(models.Model):
     isActive = models.BooleanField(default=True)  # New field for active status
     isBooked = models.BooleanField(default=False)  # New field for booking status
     insertDateTime = models.DateTimeField(default=timezone.now)  # New field for insertion datetime
+    isPaid = models.BooleanField(default=False)  # New field for payment status
+    isCompleted = models.BooleanField(default=False)  # New field for completion status
+    modeOfPayment = models.CharField(max_length=10, choices=PAYMENT_CHOICES, default='')
+    
 
     def __str__(self):
         return f"Visit Plan for {self.get_place_display()} in {self.get_city_display()}" 
     
-    ''' LANGUAGE_CHOICES =[
-         ('Hindi','Hindi'),
-         ('English','English'),
-         ('Urdu','Urdu'),
-         ('Arabi','Arabi'),
-         ('Korean','Korean'),
-         ('Japanese','Japanese'),
-         ('French','French'),
-         ('Spanish','Spanish'),
-    ]
-    PLACES_CHOICES=[
-         ('1','Bara Imambara'),
-         ('2','Chota Imambara'),
-         ('3','Rumi Darwaza'),
-         ('4','Lucknow Zoo'),
-         ('5','Residency'),'''
+    
 class RateBit(models.Model):
     visit_plan = models.ForeignKey('VisitPlan', on_delete=models.CASCADE)
     guide = models.ForeignKey(User, on_delete=models.CASCADE)

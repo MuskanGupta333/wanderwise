@@ -11,6 +11,7 @@ from django.contrib.auth import authenticate, login as auth_login ,logout as dja
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse,HttpResponseBadRequest
 from django.db.models import F
+from django.shortcuts import get_object_or_404
 
 
 
@@ -334,3 +335,25 @@ def book_guide(request):
             return HttpResponse("Visit plan does not exist!", status=400)
     else:
         return HttpResponse("Invalid request!", status=400)
+    
+def payment(request):
+    if request.method == 'POST':
+        mode_of_payment = request.POST.get('modeOfPayment')
+        is_completed = request.POST.get('isCompleted') == 'true'
+
+        # Assuming you have a way to identify the visit plan, for example, its ID
+        visit_plan_id = request.POST.get('visitPlanId')  # Add a hidden input field in your form to store visit plan ID
+
+        try:
+            visit_plan = VisitPlan.objects.get(id=visit_plan_id)
+            # Update the visit plan fields
+            visit_plan.modeOfPayment = mode_of_payment
+            visit_plan.isCompleted = is_completed
+            visit_plan.save()
+            
+            # Optionally, you can add a message to be displayed after successful submission
+            return HttpResponse("Payment details updated successfully!")
+        except VisitPlan.DoesNotExist:
+            return HttpResponse("Visit plan does not exist!")
+    
+    return HttpResponse("Invalid request method.")
