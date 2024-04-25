@@ -313,7 +313,8 @@
               
                         <!--table-->
                         <div class="status">
-     
+                            {% if booked_visits %}
+
                             <table class="table table-striped row-counter">
                                 <thead>
                                     <tr>
@@ -327,7 +328,9 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+
                                     {% for visit in booked_visits %} 
+
                                     <tr>
                                         <td></td>
                                         <td>{{visit.from_date_time}} </td>
@@ -344,8 +347,12 @@
                                             {% endwith %}
                                         </td>
                                     </tr>
-                                    
-                                    {% endfor %}
+                                 {% endfor %}
+                                 {% else %}
+                                  <tr>
+                            <td colspan="6">No plans</td>
+                                     </tr>
+                                {% endif %}
                                 </tbody>
                             </table>
                         </div>
