@@ -240,6 +240,13 @@
     margin-right: 10px; /* Add spacing between buttons */
 }
 
+.button-layer{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+        }
+
+
 .dash-buttons{
     width:23%;
     padding: 60px 0;
@@ -251,7 +258,7 @@
 }
 .dash-buttons:hover{
     border:4px solid #fcfcfc;
-    transition: all;
+    transition: ease-in 0.2s;
     color: white;
     font-weight: bolder;
 }
@@ -276,6 +283,30 @@
             padding: 20px; /* Add padding for content spacing */
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
         }
+
+        .emoji-rating span {
+            font-size: 24px;
+            cursor: pointer;
+            padding-right: 5px;
+        }
+        .emoji-rating span.selected {
+            color: #ffcc00; /* Change this color to your desired color */
+        }
+        .travel-tips{
+            margin-top: 2%;
+            width:49%;
+            height:fit-content;
+            background-color:  rgba(255, 255, 255, 0.3); /* White background */
+            border-radius: 10px; /* Rounded corners */
+            padding: 20px; /* Add padding for content spacing */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+        }
+        .static-content{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+        }
+
         </style>
         
     </head>
@@ -408,7 +439,7 @@
                 <h1 style="color: white;">Welcome {{user.first_name}} ,  to your dashboard</h1>
 
                 <hr style="color: whitesmoke; height: 3px; width: 100%;">
-                <div id="dashboardOptions">
+                <div id="dashboardOptions" class="button-layer">
                     <!-- <button id="myPlansBtn" class="btn btn-primary">My Plans</button> -->
                     <!-- <span class="close-btn" onclick="closeDashboard()">x</span> -->
         <button type="button" style="background: linear-gradient(90deg, rgba(17,184,0,1) 0%, rgba(69,255,0,1) 48%, rgba(87,255,67,1) 100%);" class="dash-buttons" data-toggle="modal" data-target="#myModal">My Plans</button>
@@ -475,7 +506,7 @@
                      <!-- Modal content-->
                      <!-- Modal -->
     <div id="history" class="modal fade" role="dialog">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
       
           <!-- Modal content-->
           <div class="modal-content" style="background: linear-gradient(90deg, rgba(255,82,14,1) 0%, rgba(255,50,50,1) 28%, rgba(255,107,107,1) 100%);">
@@ -500,7 +531,7 @@
                      <!-- Modal content-->
                      <!-- Modal -->
     <div id="feedback" class="modal fade" role="dialog">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
       
           <!-- Modal content-->
           <div class="modal-content" style="background: linear-gradient(90deg, rgba(255,145,0,1) 0%, rgba(255,196,0,1) 50%, rgba(251,255,68,1) 100%);">
@@ -511,22 +542,22 @@
             </div>
             <div class="modal-body">
                 <form action="#" method="POST" style="max-width: 500px; margin: 0 auto; background-color: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
-                    <label for="name" style="display: block; margin-bottom: 10px;">Your Name:</label>
+                    <!-- <label for="name" style="display: block; margin-bottom: 10px;">Your Name:</label>
                     <input type="text" id="name" name="name" style="width: 100%; padding: 10px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 5px;" required>
             
                     <label for="email" style="display: block; margin-bottom: 10px;">Your Email:</label>
                     <input type="email" id="email" name="email" style="width: 100%; padding: 10px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 5px;" required>
-            
+             -->
                     <label for="feedback" style="display: block; margin-bottom: 10px;">Your Feedback:</label>
                     <textarea id="feedback" name="feedback" rows="5" style="width: 100%; padding: 10px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 5px;" required></textarea>
-            
+                    
                     <label for="rating" style="display: block; margin-bottom: 10px;">Rating:</label>
-                    <div style="font-size: 24px;">
-                        <span style="cursor: pointer;" onclick="setRating(1)">★</span>
-                        <span style="cursor: pointer;" onclick="setRating(2)">★</span>
-                        <span style="cursor: pointer;" onclick="setRating(3)">★</span>
-                        <span style="cursor: pointer;" onclick="setRating(4)">★</span>
-                        <span style="cursor: pointer;" onclick="setRating(5)">★</span>
+                    <div class="emoji-rating" onclick="setRating(event)">
+                        <span data-value="1">😞</span> <!-- Very Poor -->
+                        <span data-value="2">😕</span> <!-- Poor -->
+                        <span data-value="3">😊</span> <!-- Good -->
+                        <span data-value="4">😄</span> <!-- Very Good -->
+                        <span data-value="5">😍</span> <!-- Excellent -->
                     </div>
             
                     <button type="submit" style="background-color: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; margin-top: 20px;">Submit Feedback</button>
@@ -546,7 +577,7 @@
                      <!-- Modal content-->
                      <!-- Modal -->
     <div id="explore" class="modal fade" role="dialog">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
       
           <!-- Modal content-->
           <div class="modal-content" style="background: linear-gradient(90deg, rgba(124,0,163,1) 0%, rgba(189,68,227,1) 50%, rgba(239,206,250,1) 100%);">
@@ -565,10 +596,36 @@
       
         </div>
       </div>
-     
-      
+            
+            </div>
+              <div class="static-content">
+                <!-- linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,0,106,1) 50%, rgba(0,209,251,1) 100%) ; -->
+                <div class="travel-tips " style="background: transparent">
+                    <h2 style="color: white;">Travel Tips :</h2>
+                    <hr style="color: whitesmoke; height: 3px; width: 100%;">
+                    <ul style="color:#000000; font-size: large; font-weight: bold;">
+                        <li>Stay hydrated and carry a reusable water bottle.</li>
+                        <li>Keep emergency contacts and important documents handy.</li>
+                        <li>Try local cuisine for an authentic culinary experience.</li>
+                        <li>Pack light to stay mobile and avoid unnecessary hassle.</li>
+                        <li>Stay alert and mindful of your surroundings for safety.</li>
+                        <li>Capture memories but also take time to enjoy the moment.</li>
+                    </ul>
                 </div>
-                
+                <div class="travel-tips">
+                    <h2 style="color: white;">Travel Tips :</h2>
+                    <hr style="color: whitesmoke; height: 3px; width: 100%;">
+                    <ul style="color:#000000; font-size: large; font-weight: bold;">
+                        <li>Stay hydrated and carry a reusable water bottle.</li>
+                        <li>Keep emergency contacts and important documents handy.</li>
+                        <li>Try local cuisine for an authentic culinary experience.</li>
+                        <li>Pack light to stay mobile and avoid unnecessary hassle.</li>
+                        <li>Stay alert and mindful of your surroundings for safety.</li>
+                        <li>Capture memories but also take time to enjoy the moment.</li>
+                    </ul>
+                </div>
+            </div>
+
             </div>
 
 
@@ -762,21 +819,13 @@
         }
 
 
-        let rating = 0;
-
-        function setRating(value) {
-            rating = value;
-            // Update the visual feedback of the rating
-            let stars = document.querySelectorAll('#rating > span');
-            stars.forEach((star, index) => {
-                if (index < value) {
-                    star.innerHTML = '★';
-                    star.style.color = 'gold';
-                } else {
-                    star.innerHTML = '☆';
-                    star.style.color = '#ccc';
-                }
-            });
+        function setRating(event) {
+            const selectedEmoji = event.target;
+            if (selectedEmoji.tagName === 'SPAN') {
+                const value = selectedEmoji.getAttribute('data-value');
+                console.log('Selected Rating:', value);
+                // You can add further logic here, like updating the UI to reflect the selected rating.
+            }
         }
 
             document.addEventListener('DOMContentLoaded', function() {

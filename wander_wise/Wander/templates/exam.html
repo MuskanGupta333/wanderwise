@@ -48,7 +48,10 @@
 body {
     font-family: Arial, sans-serif;
     /* margin: 20px; */
-    background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.9)), url("{% static 'img/youtube.jpg' %}");
+    /* background: rgb(255,0,146); */
+    background: linear-gradient(319deg, rgba(255,0,146,1) 0%, rgba(255,0,44,1) 49%, rgba(141,0,255,1) 100%);
+
+    /* background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.9)), url("{% static 'img/youtube.jpg' %}"); */
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -110,14 +113,14 @@ body {
 }
  
   .details_card {
-    
+    color: aliceblue;
     margin: auto;
     width: 200vh;
     max-width: 1000px; /* Adjust the width as needed */
-    background-color:  whitesmoke;
+    background-color:  rgba(245, 245, 245, 0.5) ;
     border-radius: 30px;
     padding: 20px;
-    border: 2px solid rgb(51, 51, 51);
+    border: none;
   }
   .error-msg {
             color: red;
@@ -189,8 +192,8 @@ body {
     <!--Guide Details-->
 <div class="fcontainer">
 <div class="details_card">
-    <h1 style="text-align: center !important;">Guide Details Form</h1>
-     <h2>Welcome, {{ user.first_name }}</h2>
+    <h1 style="text-align: center !important; color: aliceblue;">Guide Details Form</h1>
+     <h2 style="color: aliceblue;">Welcome, {{ user.first_name }}</h2>
 
     <!-- <form id="guideForm" class="details" action="/submit_guide_details" method="POST">
       <div class="form-group">
@@ -312,7 +315,7 @@ body {
       <div class="form-group">
         <label for="govtIdType" style=" font-size: 1.3rem;font-weight: 500;color: black">Valid Government ID Type:</label>
         <div class="col-xl-6">
-          <select id="govtIdType" class="form-select py-3 border-primary bg-transparent" name="govtIdType" required onchange="checkGovtIdType()">
+          <select id="govtIdType" style="color: black !important; border-color: aliceblue !important;" class="form-select py-3 border-primary bg-transparent" name="govtIdType" required onchange="checkGovtIdType()">
             <option value=""selected>Select ID Type</option>
             <option value="PAN">PAN Card</option>
             <option value="Aadhar">Aadhar Card</option>
@@ -324,7 +327,7 @@ body {
       <div class="form-group">
         <div class="col-xl-6"> 
           <label for="govtIdNo" style=" font-size: 1.3rem;font-weight: 500;color: black">ID Number:</label>
-          <input type="text" style="color: #8d8d8d !important;" class="form-control py-3 border-primary bg-transparent text-white" id="govtIdNo" name="govt_id" required>
+          <input type="text" style="color: black !important; border-color: aliceblue !important;" class="form-control py-3 border-primary bg-transparent text-white" id="govtIdNo" name="govt_id" required>
           <div id="govtIdError" style="color: red;"></div> <!-- Error message for validation -->
         </div>
       </div>
