@@ -55,10 +55,12 @@ class VisitPlan(models.Model):
         ('3', 'Chota Imambara'),
         ('4', 'Rumi Darwaza'),
     ]
+    
     PAYMENT_CHOICES = [
         ('Cash', 'Cash'),
         ('Online', 'Online'),
     ]
+
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     city = models.CharField(max_length=100, choices=CITY_CHOICES)
     place = models.CharField(max_length=100, choices=PLACE_CHOICES)
@@ -69,8 +71,7 @@ class VisitPlan(models.Model):
     insertDateTime = models.DateTimeField(default=timezone.now)  # New field for insertion datetime
     isPaid = models.BooleanField(default=False)  # New field for payment status
     isCompleted = models.BooleanField(default=False)  # New field for completion status
-    modeOfPayment = models.CharField(max_length=10, choices=PAYMENT_CHOICES, default='')
-    
+    modeOfPayment = models.CharField(max_length=10, choices=PAYMENT_CHOICES, default='none')
 
     def __str__(self):
         return f"Visit Plan for {self.get_place_display()} in {self.get_city_display()}" 
@@ -84,3 +85,4 @@ class RateBit(models.Model):
 
     def __str__(self):
         return f"Rate for Visit Plan ID: {self.visit_plan.id} by {self.guide.username}"
+    
