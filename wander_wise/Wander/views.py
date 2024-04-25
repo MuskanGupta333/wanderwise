@@ -357,3 +357,19 @@ def payment(request):
             return HttpResponse("Visit plan does not exist!")
     
     return HttpResponse("Invalid request method.")
+
+def payment_confirm(request):
+    if request.method == 'POST':
+        visit_plan_id = request.POST.get('pay_confirm')
+        try:
+            visit_plan = VisitPlan.objects.get(pk=visit_plan_id)
+            if not visit_plan.isPaid:
+                visit_plan.isPaid = True
+                visit_plan.save()
+                return HttpResponse("Paid successfully!")
+            else:
+                return HttpResponse("not paid!", status=400)
+        except VisitPlan.DoesNotExist:
+            return HttpResponse("Visit plan does not exist!", status=400)
+    else:
+        return HttpResponse("Invalid request!", status=400)

@@ -367,7 +367,15 @@
                                             {% endif %}
                                             {% endwith %}
                                         </td>
+                                        {% if visit.isCompleted %}
+                                        <form action="{% url 'payment_confirm' %}" method="post">
+                                            {% csrf_token %}
+                                        <input type="hidden" id="visitPlanId" name="pay_confirm" value="{{ visit.pk }}">
                                         <td><button type="submit" class="btn btn-outline-dark"> Confirm</button></td>
+                                        </form> 
+                                        {% else %}
+                                        <td>Not paid</td>
+                                        {% endif %}
                                     </tr>
                                  {% endfor %}
                                  {% else %}s
