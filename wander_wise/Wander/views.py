@@ -220,7 +220,7 @@ def guideinterface(request):
 
 
                 #Fetch booked
-                booked_visits = VisitPlan.objects.filter(isBooked=True)
+                booked_visits = VisitPlan.objects.filter(isBooked=True, ratebit__guide=user)
                 
                 context = {
                     'qualified_users': qualified_users,
