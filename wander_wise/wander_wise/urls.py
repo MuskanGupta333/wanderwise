@@ -41,6 +41,9 @@ urlpatterns = [
     path('Visitplan/', views.Visitplan, name='Visitplan'),
     path('submitamount/', views.submitamount, name='submitamount'),
     path('book_guide/', views.book_guide, name='book_guide'),
+    path('payment/', views.payment, name='payment'),
+
+
 
 
 
