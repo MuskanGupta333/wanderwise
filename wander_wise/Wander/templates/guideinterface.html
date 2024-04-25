@@ -190,6 +190,11 @@
 #dashboard_content button {
     margin-right: 10px; /* Add spacing between buttons */
 }
+.button-layer{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+        }
 
 .dash-buttons{
     width:23%;
@@ -202,7 +207,7 @@
 }
 .dash-buttons:hover{
     border:4px solid #fcfcfc;
-    transition: all;
+    transition: ease-in-out 0.2s;
     color: white;
     font-weight: bolder;
 }
@@ -216,6 +221,21 @@
             font-size: 20px;
             
             float: right;
+        }
+
+        .travel-tips{
+            margin-top: 2%;
+            width:49%;
+            height:fit-content;
+            background-color:  rgba(255, 255, 255, 0.3); /* White background */
+            border-radius: 10px; /* Rounded corners */
+            padding: 20px; /* Add padding for content spacing */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+        }
+        .static-content{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
         }
 
 </style>
@@ -296,7 +316,7 @@
                 <h1 style="color: white;">Welcome {{user.first_name}} ,  to your dashboard</h1>
 
                 <hr style="color: whitesmoke; height: 3px; width: 100%;">
-                <div id="dashboardOptions">
+                <div id="dashboardOptions" class="button-layer">
                     <button type="button" style="background: linear-gradient(90deg, rgba(17,184,0,1) 0%, rgba(69,255,0,1) 48%, rgba(87,255,67,1) 100%);" class="dash-buttons" data-toggle="modal" data-target="#myModal">My Plans</button>
                      <!-- Modal -->
                  <div id="myModal"  class="modal fade" role="dialog">
@@ -324,6 +344,7 @@
                                         <th scope="col">Visit Place:</th>
                                         <th scope="col">Visitor Name:</th>
                                         <th scope="col">Rate Amount:</th>
+                                        <th scope="col">Confirm Payment:</th>
                                        
                                     </tr>
                                 </thead>
@@ -346,11 +367,12 @@
                                             {% endif %}
                                             {% endwith %}
                                         </td>
+                                        <td><button type="submit" class="btn btn-outline-dark"> Confirm</button></td>
                                     </tr>
                                  {% endfor %}
-                                 {% else %}
+                                 {% else %}s
                                   <tr>
-                            <td colspan="6">No plans</td>
+                            <td colspan="6" ><h3 style="color: #fff;">Kindly look in the requests and provide your suitable rate for the desired visit so that the vistor can book you.</h3></td>
                                      </tr>
                                 {% endif %}
                                 </tbody>
@@ -410,23 +432,17 @@
 </div>
 <div class="modal-body">
  <form action="#" method="POST" style="max-width: 500px; margin: 0 auto; background-color: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
-     <label for="name" style="display: block; margin-bottom: 10px;">Your Name:</label>
-     <input type="text" id="name" name="name" style="width: 100%; padding: 10px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 5px;" required>
-
-     <label for="email" style="display: block; margin-bottom: 10px;">Your Email:</label>
-     <input type="email" id="email" name="email" style="width: 100%; padding: 10px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 5px;" required>
-
-     <label for="feedback" style="display: block; margin-bottom: 10px;">Your Feedback:</label>
-     <textarea id="feedback" name="feedback" rows="5" style="width: 100%; padding: 10px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 5px;" required></textarea>
-
-     <label for="rating" style="display: block; margin-bottom: 10px;">Rating:</label>
-     <div style="font-size: 24px;">
-         <span style="cursor: pointer;" onclick="setRating(1)">★</span>
-         <span style="cursor: pointer;" onclick="setRating(2)">★</span>
-         <span style="cursor: pointer;" onclick="setRating(3)">★</span>
-         <span style="cursor: pointer;" onclick="setRating(4)">★</span>
-         <span style="cursor: pointer;" onclick="setRating(5)">★</span>
-     </div>
+    <label for="feedback" style="display: block; margin-bottom: 10px;">Your Feedback:</label>
+    <textarea id="feedback" name="feedback" rows="5" style="width: 100%; padding: 10px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 5px;" required></textarea>
+    
+    <label for="rating" style="display: block; margin-bottom: 10px;">Rating:</label>
+    <div class="emoji-rating" onclick="setRating(event)">
+        <span data-value="1">😞</span> <!-- Very Poor -->
+        <span data-value="2">😕</span> <!-- Poor -->
+        <span data-value="3">😊</span> <!-- Good -->
+        <span data-value="4">😄</span> <!-- Very Good -->
+        <span data-value="5">😍</span> <!-- Excellent -->
+    </div>
 
      <button type="submit" style="background-color: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; margin-top: 20px;">Submit Feedback</button>
  </form>
@@ -455,7 +471,7 @@
 
 </div>
 <div class="modal-body">
-<p>Some text in the modal.</p>
+<h2>some content</h2>
 </div>
 <div class="modal-footer">
 <button type="button" class="btn btn-outline-dark close-btn" data-dismiss="modal">Close</button>
@@ -467,7 +483,33 @@
 
 
  </div>
-
+ <div class="static-content">
+    <!-- linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,0,106,1) 50%, rgba(0,209,251,1) 100%) ; -->
+    <div class="travel-tips " >
+        <h2 style="color: white;">Do's ✅ </h2>
+        <hr style="color: whitesmoke; height: 3px; width: 100%;">
+        <ul style="color:#000000; font-size: large; font-weight: bold;">
+            <li>Have a deep understanding of the locations you guide tourists to.</li>
+            <li>Arrive on time and be ready to start tours promptly.</li>
+            <li>Communicate clearly and effectively with tourists, using appropriate language.</li>
+            <li>Prioritize the safety and well-being of tourists during tours.</li>
+            <li>Be well-versed in the history, culture, and local attractions.</li>
+            <li>Offer recommendations for places to eat, visit, and shop.</li>
+        </ul>
+    </div>
+    <div class="travel-tips">
+        <h2 style="color: white;">Don'ts ❌  </h2>
+        <hr style="color: whitesmoke; height: 3px; width: 100%;">
+        <ul style="color:#000000; font-size: large; font-weight: bold;">
+            <li>Avoid providing inaccurate or misleading information to tourists.</li>
+            <li>Allow tourists enough time to explore and enjoy each attraction.</li>
+            <li>Avoid overwhelming tourists with too much information.</li>
+            <li>Don't disrespect tourists, regardless of their background.</li>
+            <li>Don't Ignore Safety or warnings that can put tourists at risk.</li>
+            <li>Don't Violate Rules and adhere to local regulations .</li>
+        </ul>
+    </div>
+</div>
 
             </div>
 
