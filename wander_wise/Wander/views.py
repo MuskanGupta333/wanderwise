@@ -12,6 +12,8 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse,HttpResponseBadRequest
 from django.db.models import F
 from django.shortcuts import get_object_or_404
+from django.core.mail import send_mail
+
 
 
 
@@ -271,6 +273,28 @@ def Visitplan(request):
                 from_date_time=from_date_time,
                 to_date_time=to_date_time
             )
+            try:
+    # Get all guide users from the database
+                 guides = Guide.objects.all()
+
+            # Get the email address of the guide
+                 recipient_list = [guide.user.username for guide in guides]
+
+            # Compose the email message
+                 subject = 'New Visit Request'
+                 message = 'A new visit request has been generated. Please check your dashboard.'
+                 from_email = 'shuklamentos@gmail.com'
+
+            # Send email notifications to guides
+                 try:
+                     send_mail(subject, message, from_email, recipient_list)
+                     print("Email sent successfully.")  # Debugging statement
+                 except Exception as e:
+                     print("Error sending email:", str(e))  # Debugging statement
+
+            except Exception as e:
+                    print("Error:", str(e))  # Debugging statement
+
             # Return success message
             return HttpResponse("Visit Plan submitted successfully!")
         except Exception as e:
@@ -312,6 +336,26 @@ def submitamount(request):
                 guide=guide,
                 rate_amount=rate_amount
             )
+            try:
+              # Get the visitor user who submitted the visit request
+                 visitor = visit_plan.user
+            # Get the email address of the guide
+                 recipient_list = [visitor.username]
+
+            # Compose the email message
+                 subject = 'Payment Response from Guide'
+                 message = f'You have a payment response from a guide for your visit request. Please check the website for details.'
+                 from_email = 'shuklamentos@gmail.com'
+
+            # Send email notifications to guides
+                 try:
+                     send_mail(subject, message, from_email, recipient_list)
+                     print("Email sent successfully.")  # Debugging statement
+                 except Exception as e:
+                     print("Error sending email:", str(e))  # Debugging statement
+
+            except Exception as e:
+                    print("Error:", str(e))  # Debugging statement
             return HttpResponse("Rate amount submitted successfully.")
         except Exception as e:
             return HttpResponseBadRequest(f"Failed to submit rate amount: {e}")
@@ -373,3 +417,4 @@ def payment_confirm(request):
             return HttpResponse("Visit plan does not exist!", status=400)
     else:
         return HttpResponse("Invalid request!",status=400)
+    

@@ -80,7 +80,7 @@ WSGI_APPLICATION = 'wander_wise.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'Wanderwisedb',
+        'NAME': 'Wanderdb',
         'USER': 'root',
         'PASSWORD': 'pass123',
         'HOST': 'localhost',
@@ -147,3 +147,10 @@ LOGIN_REDIRECT_URL = '/accounts/profile/'  # Or any other URL you want to redire
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'shuklamentos@gmail.com'
+EMAIL_HOST_PASSWORD = 'xqem uodo knhh citc'
