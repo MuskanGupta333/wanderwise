@@ -461,7 +461,7 @@
             
             <!--table-->
         <div class="status">
-     
+            {% if rate_responses %}
             <table class="table table-striped row-counter">
                 <thead>
                     <tr>
@@ -475,7 +475,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% if rate_responses %}
+                    
                             
                     {% for rate_response in rate_responses %} 
                     {% if rate_response.visit_plan.isBooked %}
@@ -538,14 +538,15 @@
 
                         </td>
                     </tr>
-                    {% endif %}
-                    {% endfor %}
+                      {% endif %}
+                     {% endfor %}
+                    {% else %}
+                   <p>No plans yet</p>
+                   {% endif %}
                 </tbody>
             </table>
         </div>
-            {% else %}
-       <p>No plans yet</p>
-        {% endif %}
+            
   
 
           </div>
