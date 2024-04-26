@@ -372,4 +372,4 @@ def payment_confirm(request):
         except VisitPlan.DoesNotExist:
             return HttpResponse("Visit plan does not exist!", status=400)
     else:
-        return HttpResponse("Invalid request!", status=400)
+        return HttpResponse("Invalid request!",status=400)
