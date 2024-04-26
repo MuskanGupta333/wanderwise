@@ -289,7 +289,9 @@
             cursor: pointer;
             padding-right: 5px;
         }
-        .emoji-rating span.selected {
+        .emoji-rating span:hover {
+            font-size: 34px;
+            transition: ease-in-out 0.5s;
             color: #ffcc00; /* Change this color to your desired color */
         }
         .travel-tips{
@@ -484,8 +486,12 @@
                         <td>{{rate_response.visit_plan.place}}</td>
                         <td>{{rate_response.guide.first_name}} {{rate_response.guide.last_name}}</td>
                         <td>
+                            {% if rate_response.visit_plan.isCompleted %}
+                            <p>Paid</p>
+                            {% else %}
                             <button type="button"  class="btn btn-outline-dark" data-toggle="modal" data-target="#pay">Pay</button>
-                     <!-- Modal content-->
+                            
+                            <!-- Modal content-->
                      <!-- Modal -->
                               <div id="pay" class="modal fade" role="dialog">
                                <div class="modal-dialog modal-lg">
@@ -527,10 +533,7 @@
       
                                </div>
                               </div>
-
-
-
-
+                              {% endif %}
 
 
                         </td>
