@@ -405,6 +405,37 @@ def payment_confirm(request):
             if not visit_plan.isPaid:
                 visit_plan.isPaid = True
                 visit_plan.save()
+                try:
+              # Get the visitor user who submitted the visit request
+                 visitor = visit_plan.user
+            # Get the email address of the guide
+                 recipient_list = [visitor.username]
+
+            # Compose the email message
+                 subject = 'Come Visit Us Again!'
+                 message = """
+We hope this message finds you well.
+
+Thank you for choosing WanderWise for your recent trip. We trust that your experience was enjoyable and memorable.
+
+Your feedback matters greatly to us! We invite you to share your thoughts about your trip by providing feedback on our website. Your valuable insights will help us improve our services and ensure that future visits are even more fulfilling.
+
+As a token of appreciation for your time, we would like to extend a special invitation for you to visit us again. Whether it's exploring new destinations or revisiting your favorite spots, we're here to make every journey exceptional for you.
+
+We look forward to welcoming you back soon!
+"""
+
+                 from_email = 'shuklamentos@gmail.com'
+
+            # Send email notifications to guides
+                 try:
+                    send_mail(subject, message, from_email, recipient_list)
+                    print("Email sent successfully.")  # Debugging statement
+                 except Exception as e:
+                    print("Error sending email:", str(e))  # Debugging statement
+
+                except Exception as e:
+                    print("Error:", str(e))  # Debugging statement
                 return redirect('guideinterface')
             else:
                 return HttpResponse("not paid!", status=400)
