@@ -57,7 +57,7 @@
     background-attachment: fixed;
            }
            .footer {
-    background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)), url(img/bg3.jpg);
+    background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9));
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -541,7 +541,9 @@
                       {% endif %}
                      {% endfor %}
                     {% else %}
-                   <p>No plans yet</p>
+                    <tr>
+                    <td colspan="6" ><h3 style="color: #fff;">Kindly generate request for the place you want to visit.</h3></td>
+                    </tr>
                    {% endif %}
                 </tbody>
             </table>
@@ -572,8 +574,52 @@
              
             </div>
             <div class="modal-body" style="color:#fff">
-                <p><b>Last Visited Place:</b> Lucknow Zoo</p>
-                <p><b>Last Visited Date: </b>April 10, 2024</p>
+                <!-- <p><b>Last Visited Place:</b> Lucknow Zoo</p>
+                <p><b>Last Visited Date: </b>April 10, 2024</p> -->
+
+
+                <div class="status">
+                    {% if rate_responses %}
+                    
+                    {% for rate_response in rate_responses %} 
+                    {% if rate_response.visit_plan.isPaid %}
+                    <table class="table table-striped row-counter">
+                        <thead>
+                            <tr>
+                                <th>Next Visit:</th>
+                                <th scope="col">From Date-Time</th>
+                                <th scope="col">To Date-Time</th>
+                                <th scope="col">Visit Place:</th>
+                                <th scope="col">Guide Name:</th>
+                                <th scope="col">Rate Amount:</th>
+                                <th scope="col">Confirm Payment:</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+               
+                            <tr>
+                                <td></td>
+                                <td>{{rate_response.visit_plan.from_date_time}} </td>
+                                <td>{{rate_response.visit_plan.to_date_time}}</td>
+                                <td>{{rate_response.visit_plan.place}}</td>
+                                <td>{{rate_response.guide.first_name}} {{rate_response.guide.last_name}}</td>
+                                <td>{{rate_response.rate_amount}}</td>
+                                <td>Paid</td>
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+                    {% else %}
+                    <p>History is Empty.</p>
+                     {% endif %}
+                      {% endfor %}
+                    {% endif %}
+                </div>
+
+
+
+
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-outline-dark close-btn" data-dismiss="modal">Close</button>
@@ -629,7 +675,7 @@
       </div>
        
       
-      <button type="button" style="background: linear-gradient(90deg, rgba(124,0,163,1) 0%, rgba(189,68,227,1) 50%, rgba(239,206,250,1) 100%);" class="dash-buttons" data-toggle="modal" data-target="#explore">Explore</button>
+      <button type="button" style="background: linear-gradient(90deg, rgba(124,0,163,1) 0%, rgba(189,68,227,1) 50%, rgba(239,206,250,1) 100%);" class="dash-buttons" data-toggle="modal" data-target="#explore">Transaction</button>
                      <!-- Modal content-->
                      <!-- Modal -->
     <div id="explore" class="modal fade" role="dialog">
@@ -638,7 +684,7 @@
           <!-- Modal content-->
           <div class="modal-content" style="background: linear-gradient(90deg, rgba(124,0,163,1) 0%, rgba(189,68,227,1) 50%, rgba(239,206,250,1) 100%);">
             <div class="modal-header">
-                <h1 class="modal-title">Explore</h1>
+                <h1 class="modal-title">Transaction</h1>
               <button type="button" class="close btn btn-outline-dark close-btn" data-dismiss="modal">&times;</button>
               
             </div>
