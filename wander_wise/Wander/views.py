@@ -1,8 +1,6 @@
 from django.views import View
 from django.shortcuts import render, redirect
 from django.contrib import messages
-#from .models import User,Guide
-#from django.contrib.auth.hashers import make_password, check_password #make_password
 from django.db.models import Avg
 from .utils import calculate_quiz_score  # Import the function to calculate quiz score
 from .models import Profile,Guide,VisitPlan,RateBit
@@ -10,8 +8,6 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login as auth_login ,logout as django_logout # Renaming the login function
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse,HttpResponseBadRequest
-from django.db.models import F
-from django.shortcuts import get_object_or_404
 from django.core.mail import send_mail
 
 
@@ -410,7 +406,7 @@ def payment_confirm(request):
             if not visit_plan.isPaid:
                 visit_plan.isPaid = True
                 visit_plan.save()
-                return HttpResponse("Paid successfully!")
+                return redirect('guideinterface')
             else:
                 return HttpResponse("not paid!", status=400)
         except VisitPlan.DoesNotExist:
