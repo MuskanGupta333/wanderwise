@@ -296,7 +296,7 @@ def Visitplan(request):
                     print("Error:", str(e))  # Debugging statement
 
             # Return success message
-            return HttpResponse("Visit Plan submitted successfully!")
+            return redirect('visitor')
         except Exception as e:
             # Handle database integrity error
             return HttpResponse(f"An error occurred: {str(e)}", status=500)  # Internal Server Error
@@ -356,7 +356,7 @@ def submitamount(request):
 
             except Exception as e:
                     print("Error:", str(e))  # Debugging statement
-            return HttpResponse("Rate amount submitted successfully.")
+            return redirect('guideinterface')
         except Exception as e:
             return HttpResponseBadRequest(f"Failed to submit rate amount: {e}")
 
@@ -372,7 +372,7 @@ def book_guide(request):
             if not visit_plan.isBooked:
                 visit_plan.isBooked = True
                 visit_plan.save()
-                return HttpResponse("Guide booked successfully!")
+                return redirect('visitor')
             else:
                 return HttpResponse("Guide is already booked!", status=400)
         except VisitPlan.DoesNotExist:
@@ -396,7 +396,7 @@ def payment(request):
             visit_plan.save()
             
             # Optionally, you can add a message to be displayed after successful submission
-            return HttpResponse("Payment details updated successfully!")
+            return redirect('visitor')
         except VisitPlan.DoesNotExist:
             return HttpResponse("Visit plan does not exist!")
     
