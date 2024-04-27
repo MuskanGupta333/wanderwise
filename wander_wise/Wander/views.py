@@ -145,9 +145,12 @@ def visitor(request):
         booked_guides = RateBit.objects.filter(visit_plan__isBooked=True)
         # Fetch rate responses for the visit plans
         rate_responses = RateBit.objects.filter(visit_plan__in=visit_plans).order_by('-insert_datetime')
+        #guide contact
+        profile = Profile.objects.get(user=user)
 
         context = {
             'user': user,
+            'profile':profile,
             'booked_guides':booked_guides,
             'rate_responses': rate_responses
         }
