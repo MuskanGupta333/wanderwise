@@ -408,7 +408,7 @@
       <!-- Modal content-->
       <!-- Modal -->
 <div id="history" class="modal fade" role="dialog">
-<div class="modal-dialog">
+<div class="modal-dialog modal-lg">
 
 <!-- Modal content-->
 <div class="modal-content" style="background: linear-gradient(90deg, rgba(255,82,14,1) 0%, rgba(255,50,50,1) 28%, rgba(255,107,107,1) 100%);">
@@ -418,8 +418,61 @@
 
 </div>
 <div class="modal-body" style="color:#fff">
- <p><b>Last Visited Place:</b> Lucknow Zoo</p>
- <p><b>Last Visited Date: </b>April 10, 2024</p>
+ <!-- <p><b>Last Visited Place:</b> Lucknow Zoo</p>
+ <p><b>Last Visited Date: </b>April 10, 2024</p> -->
+
+ {% if booked_visits %}
+ {% for visit in booked_visits %} 
+ {% if visit.isPaid %}
+ <table class="table table-striped row-counter">
+     <thead>
+         <tr>
+             <th>Booking:</th>
+             <th scope="col">From Date-Time</th>
+             <th scope="col">To Date-Time</th>
+             <th scope="col">Visit Place:</th>
+             <th scope="col">Visitor Name:</th>
+             <th scope="col">Rate Amount:</th>
+             <th scope="col">Confirm Payment:</th>
+            
+         </tr>
+     </thead>
+     <tbody>
+
+         <!-- {% for visit in booked_visits %}  -->
+
+         <tr>
+             <td></td>
+             <td>{{visit.from_date_time}} </td>
+             <td>{{visit.to_date_time}}</td>
+             <td>{{visit.place}}</td>
+             <td>{{visit.user.first_name}} {{visit.user.last_name}}</td>
+             <td>
+                 {% with rate=visit.ratebit_set.first %}
+                 {% if rate %}
+                 <p>Rate Amount: {{ rate.rate_amount }}</p>
+                 {% else %}
+                 <p>No rate available</p>
+                 {% endif %}
+                 {% endwith %}
+             </td>
+             <td>Paid</td>
+              </tr>
+              <!-- {% endfor %} -->
+            </tbody>
+         </table>
+       {% else %}
+       <p>History is Empty.</p>
+     {% endif %}
+     {% endfor %}
+     {% endif %}
+    
+
+
+
+
+
+
 </div>
 <div class="modal-footer">
 <button type="button" class="btn btn-outline-dark close-btn" data-dismiss="modal">Close</button>
@@ -469,21 +522,23 @@
 </div>
 
 
-<button type="button" style="background: linear-gradient(90deg, rgba(124,0,163,1) 0%, rgba(189,68,227,1) 50%, rgba(239,206,250,1) 100%);" class="dash-buttons" data-toggle="modal" data-target="#explore">Explore</button>
+<button type="button" style="background: linear-gradient(90deg, rgba(124,0,163,1) 0%, rgba(189,68,227,1) 50%, rgba(239,206,250,1) 100%);" class="dash-buttons" data-toggle="modal" data-target="#explore">About Us</button>
       <!-- Modal content-->
       <!-- Modal -->
 <div id="explore" class="modal fade" role="dialog">
-<div class="modal-dialog">
+<div class="modal-dialog modal-lg">
 
 <!-- Modal content-->
 <div class="modal-content" style="background: linear-gradient(90deg, rgba(124,0,163,1) 0%, rgba(189,68,227,1) 50%, rgba(239,206,250,1) 100%);">
 <div class="modal-header">
- <h1 class="modal-title">Explore</h1>
+ <h1 class="modal-title">About us</h1>
 <button type="button" class="close btn btn-outline-dark close-btn" data-dismiss="modal">&times;</button>
 
 </div>
 <div class="modal-body">
-<h2>some content</h2>
+<div class="about-content" style="background: rgba(255, 255, 255, 0.5); margin: 7px; border-radius: 10px;">
+<p style="color: #000000;">Our team is composed of travel enthusiasts, technology experts, and industry professionals who are dedicated to providing a seamless and personalized experience for both travelers and guides. We carefully vet each guide on our platform to ensure they possess the knowledge, professionalism, and enthusiasm needed to enhance your travel experience.</p>
+</div>
 </div>
 <div class="modal-footer">
 <button type="button" class="btn btn-outline-dark close-btn" data-dismiss="modal">Close</button>
@@ -553,7 +608,7 @@
                         <td>{{ visit_plan.to_date_time }}</td>
                         <td>{{ visit_plan.insertDateTime }}</td>
                         <td>
-                            <form method="post" action="{% url 'submitamount'%}">
+                            <form method="post" action="{% url 'submitamount'%}" onsubmit="return RateSubmitSuccess();">
                                 {% csrf_token %}
                                 <input type="hidden" name="visit_plan_id" value="{{ visit_plan.pk }}">
                                 <input type="hidden" name="guide_id" value="{{ user.id }}">
@@ -562,7 +617,7 @@
                                 <div class="input-group mb-3" >
                                     <input type="number" class="form-control"  name="rate_amount" placeholder="Rate" aria-label="Rate" aria-describedby="basic-addon2">
                                     <div class="input-group-append">
-                                      <button class="btn btn-outline-secondary" style="border: 1px solid black; border-radius: 0 10px 10px 0 ; color: black; " onmouseover="this.style.backgroundColor='#15b9d9';" onmouseout="this.style.backgroundColor='';" type="submit">Send Rate</button>
+                                      <button class="btn btn-outline-secondary" style="border: 1px solid black; border-radius: 0 10px 10px 0 ; color: black; " onmouseover="this.style.backgroundColor='#15b9d9';" onmouseout="this.style.backgroundColor='';" type="submit" >Send Rate</button>
                                     </div>
                                   </div>
                             </form>
@@ -672,11 +727,15 @@
             document.getElementById('main-content').style.display = 'block';
             // document.body.style.backgroundColor = '';
         }
-
-        function approveRequest() {
-            // Perform actions to approve the request
+        
+        function RateSubmitSuccess() {
+        // Display the message box
+        alert("Rate Sent Succesfully!");
+        // Return true to allow form submission
+        return true;
         }
-    
+
+        
     
     </script>
   

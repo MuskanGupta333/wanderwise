@@ -11,8 +11,6 @@ from django.http import HttpResponse,HttpResponseBadRequest
 from django.core.mail import send_mail
 
 
-
-
 def index(request):
     return render(request, 'index.html')
 def login(request):
@@ -292,6 +290,7 @@ def Visitplan(request):
                     print("Error:", str(e))  # Debugging statement
 
             # Return success message
+
             return redirect('visitor')
         except Exception as e:
             # Handle database integrity error

@@ -1,5 +1,6 @@
 {% load static %}
 
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -676,7 +677,7 @@
       </div>
        
       
-      <button type="button" style="background: linear-gradient(90deg, rgba(124,0,163,1) 0%, rgba(189,68,227,1) 50%, rgba(239,206,250,1) 100%);" class="dash-buttons" data-toggle="modal" data-target="#explore">Transaction</button>
+      <button type="button" style="background: linear-gradient(90deg, rgba(124,0,163,1) 0%, rgba(189,68,227,1) 50%, rgba(239,206,250,1) 100%);" class="dash-buttons" data-toggle="modal" data-target="#explore">About Us</button>
                      <!-- Modal content-->
                      <!-- Modal -->
     <div id="explore" class="modal fade" role="dialog">
@@ -685,12 +686,14 @@
           <!-- Modal content-->
           <div class="modal-content" style="background: linear-gradient(90deg, rgba(124,0,163,1) 0%, rgba(189,68,227,1) 50%, rgba(239,206,250,1) 100%);">
             <div class="modal-header">
-                <h1 class="modal-title">Transaction</h1>
+                <h1 class="modal-title">About Us</h1>
               <button type="button" class="close btn btn-outline-dark close-btn" data-dismiss="modal">&times;</button>
               
             </div>
             <div class="modal-body">
-              <p>Some text in the modal.</p>
+                <div class="about-content" style="background: rgba(255, 255, 255, 0.5); margin: 7px; border-radius: 10px;">
+                    <p style="color: #000000;">Our team is composed of travel enthusiasts, technology experts, and industry professionals who are dedicated to providing a seamless and personalized experience for both travelers and guides. We carefully vet each guide on our platform to ensure they possess the knowledge, professionalism, and enthusiasm needed to enhance your travel experience.</p>
+                    </div>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-outline-dark close-btn" data-dismiss="modal">Close</button>
@@ -736,7 +739,8 @@
             <div class="main-content" id="main-content">
                <div class="form-panel">
                 <h1>Plan your next visit with us 😊 </h1>
-                <form class="guide-form" id="guideForm" method="post" action="{% url 'Visitplan' %}" >
+                
+                <form class="guide-form" id="guideForm" method="post" action="{% url 'Visitplan' %}" onsubmit="return visitplansuccess();" >
                     {% csrf_token %}
                     <input type="hidden" name="user" value="{{ request.user.id }}">
                     <label for="city">Select City:</label>
@@ -759,6 +763,8 @@
                     <button type="submit" class="btn btn-primary btn-lg btn-block" style="width: fit-content;">Generate Requests</button>
                     
                 </form>
+                
+
                </div>
                     {% if rate_responses %}
 
@@ -980,6 +986,16 @@
             document.getElementById("fvisitDate").value = fromDate;
             document.getElementById("tvisitDate").value = toDate;
         });
+
+      
+    function visitplansuccess() {
+        // Display the message box
+        alert("Request Submitted Succesfully!");
+        // Return true to allow form submission
+        return true;
+    }
+
+
 
         document.getElementById('visitPlanForm').addEventListener('submit', function(event) {
         event.preventDefault(); // Prevent the default form submission
