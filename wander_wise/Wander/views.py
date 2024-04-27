@@ -217,8 +217,6 @@ def guideinterface(request):
                 qualified_emails = [g.user.email for g in qualified_guides if g.user and g.user.email]
                 # Fetch qualified users with emails
                 qualified_users = User.objects.filter(email__in=qualified_emails)
-
-
                 #Fetch booked
                 booked_visits = VisitPlan.objects.filter(isBooked=True, ratebit__guide=user)
                 
@@ -226,7 +224,7 @@ def guideinterface(request):
                     'qualified_users': qualified_users,
                     'avg_quiz_score': avg_quiz_score,
                     'booked_visits':booked_visits,
-                    'guide':guide
+                    'guide':guide,
                 }
                 visit_plans = VisitPlan.objects.filter(isBooked=False).order_by('-insertDateTime')
                 return render(request, 'guideinterface.html', {'visit_plans': visit_plans,**context})

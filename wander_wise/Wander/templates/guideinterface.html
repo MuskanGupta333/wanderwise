@@ -422,8 +422,6 @@
  <p><b>Last Visited Date: </b>April 10, 2024</p> -->
 
  {% if booked_visits %}
- {% for visit in booked_visits %} 
- {% if visit.isPaid %}
  <table class="table table-striped row-counter">
      <thead>
          <tr>
@@ -439,8 +437,8 @@
      </thead>
      <tbody>
 
-         <!-- {% for visit in booked_visits %}  -->
-
+         {% for visit in booked_visits %}
+         {% if visit.isPaid %}
          <tr>
              <td></td>
              <td>{{visit.from_date_time}} </td>
@@ -457,15 +455,14 @@
                  {% endwith %}
              </td>
              <td>Paid</td>
-              </tr>
-              <!-- {% endfor %} -->
+         </tr>
+         {% endif %}
+         {% endfor %} 
             </tbody>
          </table>
-       {% else %}
-       <p>History is Empty.</p>
-     {% endif %}
-     {% endfor %}
-     {% endif %}
+         {% else %}
+    <p>History is Empty.</p>
+    {% endif %}
     
 
 
