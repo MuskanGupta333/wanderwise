@@ -472,6 +472,7 @@
                         <th scope="col">Visit Place:</th>
                         <th scope="col">Guide Name:</th>
                         <th scope="col">Guide's Contact:</th>
+                        <th scope="col">Rate:</th>
                         <th scope="col">Confirm Payment:</th>
                        
                     </tr>
@@ -488,6 +489,7 @@
                         <td>{{rate_response.visit_plan.place}}</td>
                         <td>{{rate_response.guide.first_name}} {{rate_response.guide.last_name}}</td>
                         <td>{{rate_response.guide.profile.phone}}</td>
+                        <td>{{rate_response.rate_amount}} </td>
                         <td>
                             {% if rate_response.visit_plan.isCompleted %}
                             <p>Paid</p>
@@ -586,8 +588,7 @@
                 <div class="status">
                     {% if rate_responses %}
                     
-                    {% for rate_response in rate_responses %} 
-                    {% if rate_response.visit_plan.isPaid %}
+                   
                     <table class="table table-striped row-counter">
                         <thead>
                             <tr>
@@ -602,7 +603,8 @@
                             </tr>
                         </thead>
                         <tbody>
-               
+                            {% for rate_response in rate_responses %} 
+                            {% if rate_response.visit_plan.isPaid %}
                             <tr>
                                 <td></td>
                                 <td>{{rate_response.visit_plan.from_date_time}} </td>
@@ -612,19 +614,16 @@
                                 <td>{{rate_response.rate_amount}}</td>
                                 <td>Paid</td>
                             </tr>
-                            
+                            {% endif %}
+                            {% endfor %}
                         </tbody>
                     </table>
                    
-                     {% endif %}
-                      {% endfor %}
+                    
                       {% else %}
                       <p>History is Empty.</p>
                     {% endif %}
                 </div>
-
-
-
 
             </div>
             <div class="modal-footer">
