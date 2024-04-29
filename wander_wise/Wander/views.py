@@ -218,7 +218,7 @@ def guideinterface(request):
                 # Fetch qualified users with emails
                 qualified_users = User.objects.filter(email__in=qualified_emails)
                 #Fetch booked
-                booked_visits = VisitPlan.objects.filter(isBooked=True, ratebit__guide=user)
+                booked_visits = VisitPlan.objects.filter(isBooked=True, ratebit__guide=user).distinct()
                 
                 context = {
                     'qualified_users': qualified_users,
@@ -340,7 +340,7 @@ def submitamount(request):
 
             # Compose the email message
                  subject = 'Payment Response from Guide'
-                 message = f'You have a payment response from a guide for your visit request. Please check the website for details.'
+                 message = f'Hi {visitor.first_name},\n\nYou have a payment response from {guide.first_name} {guide.last_name} for your visit request with details:\n\nVisit Plan ID: {visit_plan_id}\nVisit Place:{visit_plan.place}\nRate Amount: {rate_amount}\n\nPlease check the website for more details.\n\nBest regards,\nWanderwise Team'
                  from_email = 'shuklamentos@gmail.com'
 
             # Send email notifications to guides
