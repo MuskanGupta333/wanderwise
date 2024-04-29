@@ -447,6 +447,7 @@ We look forward to welcoming you back soon!
     
 
 def submit_feedback(request):
+    user = request.user
     if request.method == 'POST':
         if request.user.is_authenticated:
             feedback_text = request.POST.get('feedback', '')
@@ -460,7 +461,10 @@ def submit_feedback(request):
             )
 
             # Redirect to a thank you page or any other page you want to display after submission
-            return redirect('guideinterface')
+            if user.is_authenticated and user.profile.user_type == 'Guide':
+                 return redirect('guideinterface')
+            else:
+                 return redirect('visitor')
         else:
             # Handle the case when the user is not authenticated
             return HttpResponse('no user') # Redirect to the login page
