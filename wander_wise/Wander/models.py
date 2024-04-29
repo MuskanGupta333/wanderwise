@@ -86,3 +86,21 @@ class RateBit(models.Model):
     def __str__(self):
         return f"Rate for Visit Plan ID: {self.visit_plan.id} by {self.guide.username}"
     
+class Feedback(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)  # Add the user field
+    feedback = models.TextField()
+    rating_choices = [
+        ('Very Poor', '😞'),  # Very Poor
+        ('Poor', '😕'),        # Poor
+        ('Good', '😊'),        # Good
+        ('Very Good', '😄'),   # Very Good
+        ('Excellent', '😍')    # Excellent
+    ]
+    rating = models.CharField(max_length=20, choices=rating_choices)
+
+    # Additional fields can be added here if needed, like name and email
+
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Feedback #{self.id} - {self.rating}"

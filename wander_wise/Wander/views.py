@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.db.models import Avg
 from .utils import calculate_quiz_score  # Import the function to calculate quiz score
-from .models import Profile,Guide,VisitPlan,RateBit
+from .models import Profile,Guide,VisitPlan,RateBit,Feedback
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login as auth_login ,logout as django_logout # Renaming the login function
 from django.contrib.auth.decorators import login_required
@@ -445,3 +445,25 @@ We look forward to welcoming you back soon!
     else:
         return HttpResponse("Invalid request!",status=400)
     
+
+def submit_feedback(request):
+    if request.method == 'POST':
+        if request.user.is_authenticated:
+            feedback_text = request.POST.get('feedback', '')
+            rating = request.POST.get('rating', '')
+
+            # Create a new Feedback object and save it to the database
+            feedback = Feedback.objects.create(
+                user=request.user,
+                feedback=feedback_text,
+                rating=rating
+            )
+
+            # Redirect to a thank you page or any other page you want to display after submission
+            return HttpResponse('Succesful')
+        else:
+            # Handle the case when the user is not authenticated
+            return HttpResponse('no user') # Redirect to the login page
+
+    # If the request method is not POST, render the feedback form template
+    return render(request, 'feedback_form.html')  # Replace 'feedback_form.html' with the actual template name
