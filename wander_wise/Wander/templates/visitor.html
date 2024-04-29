@@ -390,46 +390,47 @@
             
             <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                        aria-expanded="true" aria-controls="collapseTwo">
-                        <h2><i class="fas fa-fw fa-chevron-right"></i></i>
-                        My Plans</h2>
-                    </a>
-                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                        <div class="bg-white py-2 collapse-inner rounded text-dark inside-nav">
-                            {% if rate_responses %}
-                            
-                            {% for rate_response in rate_responses %} 
-                            {% if rate_response.visit_plan.isBooked %}
-                            <h6 class="collapse-header">Plan :</h6>
-                            <p><b>Next Scheduled Visit:</b> {{rate_response.visit_plan.from_date_time}} - {{rate_response.visit_plan.to_date_time}}</p>
-                            <p><b>Visit Place:</b>{{rate_response.visit_plan.place}}</p>
-                            <p><b>Guide Name:</b>{{rate_response.guide.first_name}} {{rate_response.guide.last_name}}</p>
-                            {% endif %}
-                            {% endfor %}
-                            {% else %}
-                            <p>No plans yet</p>
-                            {% endif %}
-                        </div>
-                    </div>
-                </li>
-                <hr>
 
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsehis"
                         aria-expanded="true" aria-controls="collapsehis">
                         <h2><i class="fas fa-fw fa-chevron-right"></i></i>
-                        History</h2>
+                        Trip Checklists</h2>
                     </a>
                     <div id="collapsehis" class="collapse" aria-labelledby="headinghis" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded text-dark">
-                            <p><b>Last Visited Place:</b> Lucknow Zoo</p>
-                            <p><b>Last Visited Date: </b>April 10, 2024</p>
+                            <ul>
+                                <li>Valid passport with necessary visas</li>
+                                <li>Travel insurance documents</li>
+                                <li>Flight/train tickets</li>
+                                <li>Hotel reservations</li>
+                                <li>Local currency and credit/debit cards</li>
+                                <li>Travel itinerary</li>
+                                <li>Emergency contacts and important phone numbers</li>
+                                <li>Medications and prescriptions</li>
+                                <li>Travel-sized toiletries</li>
+                                <li>Comfortable clothing and footwear</li>
+                                <li>Travel adapters and chargers</li>
+                                <li>Camera or smartphone for capturing memories</li>
+                                <li>Snacks and water for the journey</li>
+                            </ul>
                         </div>
                     </div>
                 </li>
                 <hr>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                        aria-expanded="true" aria-controls="collapseTwo">
+                        <h2><i class="fas fa-fw fa-chevron-right"></i></i>
+                        Contact us</h2>
+                    </a>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded text-dark inside-nav">
+                            <p>Phone no.: +91-7985172459</p>
+                            <p>Email : wanderwise@gmail.com</p>
+                        </div>
+                    </div>
+                </li>
             </ul> 
         </div>
     
