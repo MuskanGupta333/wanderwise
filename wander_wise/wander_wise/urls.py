@@ -43,6 +43,8 @@ urlpatterns = [
     path('book_guide/', views.book_guide, name='book_guide'),
     path('payment/', views.payment, name='payment'),
     path('payment_confirm/', views.payment_confirm, name='payment_confirm'),
+    path('submit_feedback/', views.submit_feedback, name='submit_feedback'),
+
 
 
 
