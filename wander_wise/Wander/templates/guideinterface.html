@@ -223,6 +223,19 @@
             float: right;
         }
 
+        .emoji-rating label {
+            font-size: 24px;
+            cursor: pointer;
+            padding-right: 5px;
+        }
+        
+        .emoji-rating input[type="radio"] {
+        display: none;
+        }
+        .emoji-rating input[type="radio"]:checked + label {
+        font-size: 40px;
+        }
+
         .travel-tips{
             margin-top: 2%;
             width:49%;
@@ -306,8 +319,49 @@
             <hr>
 
    
-            <p>Last Visited Place: Lucknow Zoo</p>
-            <p>Last Visited Date: April 10, 2024</p>
+            <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar" >
+
+
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsehis"
+                        aria-expanded="true" aria-controls="collapsehis">
+                        <h2><i class="fas fa-fw fa-chevron-right"></i></i>
+                        Trip Checklists</h2>
+                    </a>
+                    <div id="collapsehis" class="collapse" aria-labelledby="headinghis" data-parent="#accordionSidebar" >
+                        <div class="py-2 collapse-inner rounded text-dark" style="background-color: #ffffff85;">
+                            <ul >
+                                <li>Be Kind</li>
+                                <li>Be Humble</li>
+                                <li>Be Patient</li>
+                                <li>Destination knowledge</li>
+                                <li>Weather preparations</li>
+                                <li>Emergency contacts</li>
+                                <li>Cultural sensitivity</li>
+                                <li>Navigation tools</li>
+                                <li>Food safety and recommendations</li>
+                                <li>Eco-friendly practices</li>
+                                <li>Medications and prescriptions</li>
+                                <li>Emergency action plan</li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+                <hr>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                        aria-expanded="true" aria-controls="collapseTwo">
+                        <h2><i class="fas fa-fw fa-chevron-right"></i></i>
+                        Contact us</h2>
+                    </a>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                        <div class=" py-2 collapse-inner rounded text-dark inside-nav" style="background-color: #ffffff85;">
+                            <p><b>Phone no.:</b> +91-7985172459</p>
+                            <p><b>Email :</b> wanderwise@gmail.com</p>
+                        </div>
+                    </div>
+                </li>
+            </ul>
             
         </div>
         <div class="container">
@@ -493,21 +547,29 @@
 
 </div>
 <div class="modal-body">
- <form action="#" method="POST" style="max-width: 500px; margin: 0 auto; background-color: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
-    <label for="feedback" style="display: block; margin-bottom: 10px;">Your Feedback:</label>
-    <textarea id="feedback" name="feedback" rows="5" style="width: 100%; padding: 10px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 5px;" required></textarea>
-    
-    <label for="rating" style="display: block; margin-bottom: 10px;">Rating:</label>
-    <div class="emoji-rating" onclick="setRating(event)">
-        <span data-value="1">😞</span> <!-- Very Poor -->
-        <span data-value="2">😕</span> <!-- Poor -->
-        <span data-value="3">😊</span> <!-- Good -->
-        <span data-value="4">😄</span> <!-- Very Good -->
-        <span data-value="5">😍</span> <!-- Excellent -->
-    </div>
+    <form id="feedbackForm" action="{%url 'submit_feedback'%}" method="POST" style="max-width: 500px; margin: 0 auto; background-color: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+        {% csrf_token %}
 
-     <button type="submit" style="background-color: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; margin-top: 20px;">Submit Feedback</button>
- </form>
+        <label for="feedback" style="display: block; margin-bottom: 10px;">Your Feedback:</label>
+        <textarea id="feedback" name="feedback" rows="5" style="width: 100%; padding: 10px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 5px;" required></textarea>
+                    
+        
+        <div class="emoji-rating">
+            <input type="radio" id="veryPoor" name="rating" value="Very Poor">
+            <label for="veryPoor">😞</label>
+            <input type="radio" id="poor" name="rating" value="Poor">
+            <label for="poor">😕</label>
+            <input type="radio" id="good" name="rating" value="Good">
+            <label for="good">😊</label>
+            <input type="radio" id="veryGood" name="rating" value="Very Good">
+            <label for="veryGood">😄</label>
+            <input type="radio" id="excellent" name="rating" value="Excellent">
+            <label for="excellent">😍</label>
+        </div>
+            
+        <button type="submit" style="background-color: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; margin-top: 20px;">Submit Feedback</button>
+    </form>
+
 
 </div>
 <div class="modal-footer">

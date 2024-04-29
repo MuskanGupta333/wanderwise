@@ -460,7 +460,7 @@ def submit_feedback(request):
             )
 
             # Redirect to a thank you page or any other page you want to display after submission
-            return HttpResponse('Succesful')
+            return redirect('guideinterface')
         else:
             # Handle the case when the user is not authenticated
             return HttpResponse('no user') # Redirect to the login page

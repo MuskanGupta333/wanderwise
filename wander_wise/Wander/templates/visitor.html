@@ -284,17 +284,20 @@
             padding: 20px; /* Add padding for content spacing */
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
         }
-
-        .emoji-rating span {
+        
+        .emoji-rating label {
             font-size: 24px;
             cursor: pointer;
             padding-right: 5px;
         }
-        .emoji-rating span:hover {
-            font-size: 34px;
-            transition: ease-in-out 0.5s;
-            color: #ffcc00; /* Change this color to your desired color */
+        
+        .emoji-rating input[type="radio"] {
+        display: none;
         }
+        .emoji-rating input[type="radio"]:checked + label {
+        font-size: 40px;
+        }
+        
         .travel-tips{
             margin-top: 2%;
             width:49%;
@@ -388,7 +391,7 @@
             <hr>
             
             
-            <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+            <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar" >
 
 
                 <li class="nav-item">
@@ -397,9 +400,9 @@
                         <h2><i class="fas fa-fw fa-chevron-right"></i></i>
                         Trip Checklists</h2>
                     </a>
-                    <div id="collapsehis" class="collapse" aria-labelledby="headinghis" data-parent="#accordionSidebar">
-                        <div class="bg-white py-2 collapse-inner rounded text-dark">
-                            <ul>
+                    <div id="collapsehis" class="collapse" aria-labelledby="headinghis" data-parent="#accordionSidebar" >
+                        <div class="py-2 collapse-inner rounded text-dark" style="background-color: #ffffff85;">
+                            <ul >
                                 <li>Valid passport with necessary visas</li>
                                 <li>Travel insurance documents</li>
                                 <li>Flight/train tickets</li>
@@ -425,7 +428,7 @@
                         Contact us</h2>
                     </a>
                     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                        <div class="bg-white py-2 collapse-inner rounded text-dark inside-nav">
+                        <div class=" py-2 collapse-inner rounded text-dark inside-nav" style="background-color: #ffffff85;">
                             <p>Phone no.: +91-7985172459</p>
                             <p>Email : wanderwise@gmail.com</p>
                         </div>
@@ -655,14 +658,18 @@
                     <label for="feedback" style="display: block; margin-bottom: 10px;">Your Feedback:</label>
                     <textarea id="feedback" name="feedback" rows="5" style="width: 100%; padding: 10px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 5px;" required></textarea>
                                 
-                    <label for="rating" style="display: block; margin-bottom: 10px;">Rating:</label>
-                    <input type="hidden" id="selectedRating" name="rating" value="" required>
+                    
                     <div class="emoji-rating">
-                        <span class="rating-option" data-value="Very Poor">😞</span> <!-- Very Poor -->
-                        <span class="rating-option" data-value="Poor">😕</span> <!-- Poor -->
-                        <span class="rating-option" data-value="Good">😊</span> <!-- Good -->
-                        <span class="rating-option" data-value="Very Good">😄</span> <!-- Very Good -->
-                        <span class="rating-option" data-value="Excellent">😍</span> <!-- Excellent -->
+                        <input type="radio" id="veryPoor" name="rating" value="Very Poor">
+                        <label for="veryPoor">😞</label>
+                        <input type="radio" id="poor" name="rating" value="Poor">
+                        <label for="poor">😕</label>
+                        <input type="radio" id="good" name="rating" value="Good">
+                        <label for="good">😊</label>
+                        <input type="radio" id="veryGood" name="rating" value="Very Good">
+                        <label for="veryGood">😄</label>
+                        <input type="radio" id="excellent" name="rating" value="Excellent">
+                        <label for="excellent">😍</label>
                     </div>
                         
                     <button type="submit" style="background-color: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; margin-top: 20px;">Submit Feedback</button>
@@ -928,15 +935,6 @@
             // document.body.style.backgroundColor = '';
         }
 
-
-        function setRating(event) {
-            const selectedEmoji = event.target;
-            if (selectedEmoji.tagName === 'SPAN') {
-                const value = selectedEmoji.getAttribute('data-value');
-                console.log('Selected Rating:', value);
-                // You can add further logic here, like updating the UI to reflect the selected rating.
-            }
-        }
 
             document.addEventListener('DOMContentLoaded', function() {
                 var submitBtn = document.getElementById('submitBtn');
