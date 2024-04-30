@@ -164,6 +164,7 @@ def logout(request):
 @login_required
 def exam(request):
     if request.method == 'POST':
+        print("exam submitted successfully!") 
         languages_known = request.POST.get('languages_known')
         places_known = request.POST.get('places_known')
         govtIdType = request.POST.get('govtIdType')

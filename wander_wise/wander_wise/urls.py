@@ -19,7 +19,9 @@ from django.urls import path
 from Wander import views
 #from django.views.generic import TemplateView
 
-
+admin.site.site_header = "WanderWise Admin"
+admin.site.site_title = "Wanderwise"
+admin.site.index_title = "Welcome to Wanderwise"
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -44,12 +46,6 @@ urlpatterns = [
     path('payment/', views.payment, name='payment'),
     path('payment_confirm/', views.payment_confirm, name='payment_confirm'),
     path('submit_feedback/', views.submit_feedback, name='submit_feedback'),
-
-
-
-
-
-
 
 
 ]

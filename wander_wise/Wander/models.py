@@ -19,8 +19,8 @@ class Profile(models.Model):
     country = models.CharField(max_length=100)
     address = models.CharField(max_length=255)
 
-def __str__(self):
-        return self.user.username
+    def __str__(self):
+        return f"User #{self.user.first_name} - {self.user.username}"
 
 
 class Guide(models.Model):
@@ -41,7 +41,7 @@ class Guide(models.Model):
     
 
     def __str__(self):
-        return self.user.username  # Return the email of the associated user or "No User" if user is
+        return f"User #{self.user.first_name} - {self.user.username}"  # Return the email of the associated user or "No User" if user is
     
 
 class VisitPlan(models.Model):
@@ -103,4 +103,4 @@ class Feedback(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"Feedback #{self.id} - {self.rating}"
+        return f"Feedback #{self.user.first_name} - {self.rating}"

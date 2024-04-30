@@ -195,54 +195,7 @@ body {
     <h1 style="text-align: center !important; color: aliceblue;">Guide Details Form</h1>
      <h2 style="color: aliceblue;">Welcome, {{ user.first_name }}</h2>
 
-    <!-- <form id="guideForm" class="details" action="/submit_guide_details" method="POST">
-      <div class="form-group">
-        <label for="languagesKnown">Languages Known:</label>
-        <div class="col-xl-6">
-        <select id="languages_Known" class="form-select py-3 border-primary bg-transparent" name="languagesKnown" required>
-          <option value="" disabled selected>Select Language</option>
-          <option value="Hindi">Hindi</option>
-          <option value="English">English</option>
-        </select>
-      </div>
-      </div>
-      <div class="form-group">
-        <label for="placesKnown">Places Known:</label>
-        <div class="col-xl-6">
-        <select id="places_Known "  class="form-select py-3 border-primary bg-transparent" name="placesKnown" required>
-          <option value="" disabled selected>Select Place</option>
-          
-          <option value="1">Bara Imambara</option>
-          <option value="2">Chota Imambara</option>
-          <option value="3">Lucknow Zoo</option>
-          <option value="4">Rumi Darwaza</option>
-          <option value="5">Hazratganj</option>
-          
-        </select>
-      </div>
-      </div>
-      <div class="form-group">
-        <label for="govtIdType">Valid Government ID Type:</label>
-        <div class="col-xl-6">
-        <select id="govtIdType " class="form-select py-3 border-primary bg-transparent" name="govtIdType" required>
-          <option value="" disabled selected>Select ID Type</option>
-          <option value="PAN">PAN Card</option>
-          <option value="Aadhar">Aadhar Card</option>
-          
-        </select>
-      </div>
-      </div>
-
-      <div class="form-group">
-      <div class="col-xl-6"> 
-        <label for="govtIdNo">ID Number:</label>
-        <input type="text" style="color: #8d8d8d !important;" class="form-control py-3 border-primary bg-transparent text-white" id="govt_id" name="govtIdNo" required>
-      </div>
-      </div>
-        
-    </form> -->
-
-    <form id="guideForm" class="details"  method="POST">
+    <form id="guideForm" class="details"  method="POST" action="{% url 'exam' %}">
       {% csrf_token %}
       <div class="form-group">
         <label style=" font-size: 1.3rem;font-weight: 500;color: black">Languages Known:</label>
