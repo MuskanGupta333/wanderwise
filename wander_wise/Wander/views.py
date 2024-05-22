@@ -35,7 +35,7 @@ def login(request):
                 # Similarly, you can access profile attributes like profile.phone, profile.gender, etc.
                 
                 if profile.user_type.lower() == 'visiter':
-                    messages.success(request, 'Logged in as visitor!')
+                    # messages.success(request, 'Logged in as visitor!')
                     auth_login(request, user)  # Log in the user
 
                     return redirect('visitor')  # Redirect to visitor dashboard
@@ -43,7 +43,7 @@ def login(request):
                     if hasattr(profile, 'guide'):  # Check if Guide profile exists
                         guide = profile.guide  # Retrieve the associated guide profile
                         if guide.quiz_score >= 6:  # If the user is a guide and already scored 6 or more
-                            messages.success(request, 'Logged in as guide!')
+                            # messages.success(request, 'Logged in as guide!')
                             auth_login(request, user)  # Log in the user
                             return redirect('guideinterface')
                         else:
@@ -52,7 +52,7 @@ def login(request):
 
                             return redirect('exam')
                     else:
-                        messages.success(request, 'Please complete the exam!')
+                        #messages.success(request, 'Please complete the exam!')
                         auth_login(request, user)  # Log in the user
 
                         return redirect('exam')
